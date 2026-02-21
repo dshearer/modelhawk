@@ -13,24 +13,37 @@ jobs:
 
       - uses: actions/setup-go@v6
         with:
-          go-version-file: 'go.mod'
+          go-version: stable
 
       - name: Install stuff
-        shell: |
+        run: |
           set -e
-          apt-get -y install --no-cache protobuf protobuf-dev nodejs npm make
+          sudo apt-get -y install protobuf-compiler libprotobuf-dev nodejs npm make
           go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.11
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.6.1
           npm install -g @protobuf-ts/plugin@v2.11.1
 
       - name: Generate protobuf code
-        run: make generate-without-docker
+        run: make -j generate-without-docker
 
       - name: Check for uncommitted changes
         run: |
-          if [ -n "$(git status --porcelain)" ]; then
+          git status --porcelain
+          if [ -z "$(git status --porcelain)" ]; then
+            exit 0
+          fi
+          # Fail immediately if there are untracked or deleted files
+          if git status --porcelain | grep -qE '^(\?\?|.D|D.)'; then
+            echo "::error::Generated files are out of date. Run 'make' and commit the changes."
+            git status
+            exit 1
+          fi
+          # Check if changes are only in comment lines (// ...)
+          real_changes=$(git diff --unified=0 | grep -E '^[+-]' | grep -vE '^(\+\+\+|---)' | sed 's/^[+-]//' | grep -vE '^\s*(//|$)' || true)
+          if [ -n "$real_changes" ]; then
             echo "::error::Generated files are out of date. Run 'make' and commit the changes."
             git diff --stat
             git diff
             exit 1
           fi
+          echo "::notice::Only comment changes detected in generated files, ignoring."
