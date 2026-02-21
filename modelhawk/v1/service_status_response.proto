@@ -4,6 +4,6 @@ package modelhawk.v1;
 option go_package = "github.com/dshearer/modelhawk/v1";
 
 message ServiceStatusResponse {
-  int32 result = 1;
-  string msg = 2;
-  }
+  optional int32 result = 1;
+  optional string msg = 2;
+}

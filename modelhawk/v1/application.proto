@@ -9,5 +9,5 @@ option go_package = "github.com/dshearer/modelhawk/v1";
 //
 // The appropriate scope really depends on how you want to use ModelHawk.
 message Application {
-  string value = 1;
+  optional string value = 1;
 }

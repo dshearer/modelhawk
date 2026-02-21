@@ -7,8 +7,8 @@ import "application.proto";
 import "tool_arg.proto";
 
 message WantsToCallToolRequest {
-  Application app = 1;
-  string name = 2;
+  optional Application app = 1;
+  optional string name = 2;
   repeated ToolArg args = 3;
 }
 
@@ -18,8 +18,8 @@ message WantsToCallToolResponse {
     RESULT_PERMITTED = 1;
     RESULT_DENIED = 2;
   }
-  Result result = 1;
-  string details = 2;
+  optional Result result = 1;
+  optional string details = 2;
 }
 
 service PermissionService {

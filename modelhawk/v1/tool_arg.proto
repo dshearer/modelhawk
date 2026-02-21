@@ -4,6 +4,6 @@ package modelhawk.v1;
 option go_package = "github.com/dshearer/modelhawk/v1";
 
 message ToolArg {
-  string name = 1;
-  string value = 2;
+  optional string name = 1;
+  optional string value = 2;
 }
