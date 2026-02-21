@@ -1,0 +1,1 @@
+../../reference-impls/opencode-plugin/dist/index.js
