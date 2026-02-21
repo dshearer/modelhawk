@@ -13,7 +13,7 @@ jobs:
 
       - uses: actions/setup-go@v6
         with:
-          go-version: latest
+          go-version: stable
 
       - name: Install stuff
         run: |
