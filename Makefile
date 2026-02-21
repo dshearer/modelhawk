@@ -34,6 +34,7 @@ generate-go: docker-build $(PROTO_FILES)
 	@cp -R "${GO_OUT}"/* "$(REF_IMPL_GO_GEN)"
 
 generate-go-local:
+	@mkdir -p $(GO_OUT)
 	protoc \
 		-I $(PROTO_DIR) \
 		--go_out=$(GO_OUT) \
@@ -49,6 +50,7 @@ generate-ts: docker-build $(PROTO_FILES)
 	@cp -R "$(TS_OUT)"/* "$(REF_IMPL_TS_GEN)"
 
 generate-ts-local:
+	@mkdir -p $(TS_OUT)
 	protoc \
 		-I $(PROTO_DIR) \
 		--ts_out=$(TS_OUT) \
