@@ -18,26 +18,30 @@ type server struct {
 	pb.UnimplementedPermissionServiceServer
 }
 
+func makePointer[T any](v T) *T {
+	return &v
+}
+
 func (s *server) GiveToolInfo(ctx context.Context, req *pb.GiveToolInfoRequest) (*pb.ServiceStatusResponse, error) {
 	log.Printf("GiveToolInfo: app=%q tool=%q desc=%q args=%v", req.GetApp().GetValue(), req.GetName(), req.GetDesc(), req.GetArgs())
-	return &pb.ServiceStatusResponse{Result: 0, Msg: "ok"}, nil
+	return &pb.ServiceStatusResponse{Result: makePointer(int32(0)), Msg: makePointer("ok")}, nil
 }
 
 func (s *server) CalledTool(ctx context.Context, req *pb.CalledToolRequest) (*pb.ServiceStatusResponse, error) {
 	log.Printf("CalledTool: app=%q tool=%q args=%v", req.GetApp().GetValue(), req.GetName(), req.GetArgs())
-	return &pb.ServiceStatusResponse{Result: 0, Msg: "ok"}, nil
+	return &pb.ServiceStatusResponse{Result: makePointer(int32(0)), Msg: makePointer("ok")}, nil
 }
 
 func (s *server) GotToolResponse(ctx context.Context, req *pb.GotToolResponseRequest) (*pb.ServiceStatusResponse, error) {
 	log.Printf("GotToolResponse: app=%q tool=%q resp=%q", req.GetApp().GetValue(), req.GetName(), req.GetResp())
-	return &pb.ServiceStatusResponse{Result: 0, Msg: "ok"}, nil
+	return &pb.ServiceStatusResponse{Result: makePointer(int32(0)), Msg: makePointer("ok")}, nil
 }
 
 func (s *server) WantsToCallTool(ctx context.Context, req *pb.WantsToCallToolRequest) (*pb.WantsToCallToolResponse, error) {
 	log.Printf("WantsToCallTool: app=%q tool=%q args=%v", req.GetApp().GetValue(), req.GetName(), req.GetArgs())
 	return &pb.WantsToCallToolResponse{
-		Result:  pb.WantsToCallToolResponse_RESULT_PERMITTED,
-		Details: "permitted by default",
+		Result:  makePointer(pb.WantsToCallToolResponse_RESULT_PERMITTED),
+		Details: makePointer("permitted by default"),
 	}, nil
 }
 
