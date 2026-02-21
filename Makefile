@@ -1,7 +1,7 @@
 IMAGE           := modelhawk-proto
 PROTO_DIR       := modelhawk/v1
 PROTO_FILES     := $(wildcard $(PROTO_DIR)/*.proto)
-GO_OUT          := gen/go
+GO_OUT          := gen/go/v1
 TS_OUT          := gen/ts
 REF_IMPL_TS_GEN := reference-impls/opencode-plugin/src/modelhawk
 REF_IMPL_GO_GEN := reference-impls/server/modelhawk/v1

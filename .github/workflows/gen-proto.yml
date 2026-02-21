@@ -24,7 +24,7 @@ jobs:
           npm install -g @protobuf-ts/plugin@v2.11.1
 
       - name: Generate protobuf code
-        run: make generate-without-docker
+        run: make -j generate-without-docker
 
       - name: Check for uncommitted changes
         run: |
