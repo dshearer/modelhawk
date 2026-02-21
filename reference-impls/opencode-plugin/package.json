@@ -25,8 +25,16 @@
     "dist",
     "src/version.ts"
   ],
+  "scripts": {
+    "build": "bun build src/index.ts --outdir dist --target node",
+    "prepublishOnly": "bun run build",
+    "test": "bun test"
+  },
   "dependencies": {
-    "@opencode-ai/plugin": "1.0.85"
+    "@opencode-ai/plugin": "1.2.6",
+    "@protobuf-ts/grpc-transport": "^2.11.1",
+    "@protobuf-ts/runtime": "^2.11.1",
+    "@protobuf-ts/runtime-rpc": "^2.11.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
