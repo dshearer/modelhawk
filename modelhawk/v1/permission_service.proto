@@ -1,0 +1,27 @@
+syntax = "proto3";
+package modelhawk.v1;
+
+option go_package = "gen/go/modelhawk/v1;modelhawkv1";
+
+import "application.proto";
+import "tool_arg.proto";
+
+message WantsToCallToolRequest {
+  Application app = 1;
+  string name = 2;
+  repeated ToolArg args = 3;
+}
+
+message WantsToCallToolResponse {
+  enum Result {
+    RESULT_INVALID = 0;
+    RESULT_PERMITTED = 1;
+    RESULT_DENIED = 2;
+  }
+  Result result = 1;
+  string details = 2;
+}
+
+service PermissionService {
+  rpc WantsToCallTool(WantsToCallToolRequest) returns (WantsToCallToolResponse);
+}

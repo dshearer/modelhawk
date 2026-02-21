@@ -1,0 +1,13 @@
+syntax = "proto3";
+package modelhawk.v1;
+
+option go_package = "gen/go/modelhawk/v1;modelhawkv1";
+
+// An Application identifies a particular deployment of an AI-backed app/tool. Examples:
+// - A single chat session
+// - A deployment of claude on a particular computer (encompassing all its sessions)
+//
+// The appropriate scope really depends on how you want to use ModelHawk.
+message Application {
+  string value = 1;
+}

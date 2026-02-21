@@ -1,0 +1,9 @@
+syntax = "proto3";
+package modelhawk.v1;
+
+option go_package = "gen/go/modelhawk/v1;modelhawkv1";
+
+message ToolArg {
+  string name = 1;
+  string value = 2;
+}
