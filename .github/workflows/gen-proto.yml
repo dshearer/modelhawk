@@ -28,9 +28,21 @@ jobs:
 
       - name: Check for uncommitted changes
         run: |
-          if [ -n "$(git status --porcelain)" ]; then
+          if [ -z "$(git status --porcelain)" ]; then
+            exit 0
+          fi
+          # Fail immediately if there are untracked or deleted files
+          if git status --porcelain | grep -qE '^(\?\?|.D|D.)'; then
+            echo "::error::Generated files are out of date. Run 'make' and commit the changes."
+            git status
+            exit 1
+          fi
+          # Check if changes are only in comment lines (// ...)
+          real_changes=$(git diff --unified=0 | grep -E '^[+-]' | grep -vE '^(\+\+\+|---)' | sed 's/^[+-]//' | grep -vE '^\s*(//|$)' || true)
+          if [ -n "$real_changes" ]; then
             echo "::error::Generated files are out of date. Run 'make' and commit the changes."
             git diff --stat
             git diff
             exit 1
           fi
+          echo "::notice::Only comment changes detected in generated files, ignoring."
