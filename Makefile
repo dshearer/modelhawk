@@ -8,41 +8,51 @@ REF_IMPL_GO_GEN := reference-impls/server/modelhawk/v1
 
 DOCKER_RUN   := docker run --rm -v $(CURDIR):/workspace $(IMAGE)
 
-.PHONY: all generate generate-go generate-ts clean docker-build opencode-plugin install-opencode-plugin server ref-impls
+.PHONY: all generate generate-without-docker generate-go generate-go-local generate-ts generate-ts-local clean docker-build opencode-plugin install-opencode-plugin server ref-impls
 
 all: generate
 
 ref-impls: opencode-plugin server
+
 
 # --- Docker ---
 
 docker-build:
 	docker build -t $(IMAGE) .
 
+
 # --- Code Generation ---
 
 generate: generate-go generate-ts
 
+generate-without-docker: generate-go-local generate-ts-local
+
 generate-go: docker-build $(PROTO_FILES)
 	@mkdir -p $(GO_OUT)
-	$(DOCKER_RUN) protoc \
+	$(DOCKER_RUN) make generate-go-local
+	@mkdir -p "$(REF_IMPL_GO_GEN)"
+	@cp -R "${GO_OUT}"/* "$(REF_IMPL_GO_GEN)"
+
+generate-go-local:
+	protoc \
 		-I $(PROTO_DIR) \
 		--go_out=$(GO_OUT) \
 		--go_opt=paths=source_relative \
 		--go-grpc_out=$(GO_OUT) \
 		--go-grpc_opt=paths=source_relative \
 		$(PROTO_FILES)
-	@mkdir -p "$(REF_IMPL_GO_GEN)"
-	@cp -R "${GO_OUT}"/* "$(REF_IMPL_GO_GEN)"
 
 generate-ts: docker-build $(PROTO_FILES)
 	@mkdir -p $(TS_OUT)
-	$(DOCKER_RUN) protoc \
+	$(DOCKER_RUN) make generate-ts-local
+	@mkdir -p "$(REF_IMPL_TS_GEN)"
+	@cp -R "$(TS_OUT)"/* "$(REF_IMPL_TS_GEN)"
+
+generate-ts-local:
+	protoc \
 		-I $(PROTO_DIR) \
 		--ts_out=$(TS_OUT) \
 		$(PROTO_FILES)
-	@mkdir -p "$(REF_IMPL_TS_GEN)"
-	@cp -R "$(TS_OUT)"/* "$(REF_IMPL_TS_GEN)"
 
 
 # --- opencode-plugin ref impl ---
