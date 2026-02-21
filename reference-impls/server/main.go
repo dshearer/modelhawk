@@ -27,21 +27,21 @@ func (s *server) GiveToolInfo(ctx context.Context, req *pb.GiveToolInfoRequest) 
 	return &pb.ServiceStatusResponse{Result: makePointer(int32(0)), Msg: makePointer("ok")}, nil
 }
 
-func (s *server) CalledTool(ctx context.Context, req *pb.CalledToolRequest) (*pb.ServiceStatusResponse, error) {
-	log.Printf("CalledTool: app=%q tool=%q args=%v", req.GetApp().GetValue(), req.GetName(), req.GetArgs())
+func (s *server) WillCallTool(ctx context.Context, req *pb.WillCallToolRequest) (*pb.ServiceStatusResponse, error) {
+	log.Printf("WillCallTool: app=%q tool=%q args=%v", req.GetApp().GetValue(), req.GetToolName(), req.GetArgs())
 	return &pb.ServiceStatusResponse{Result: makePointer(int32(0)), Msg: makePointer("ok")}, nil
 }
 
-func (s *server) GotToolResponse(ctx context.Context, req *pb.GotToolResponseRequest) (*pb.ServiceStatusResponse, error) {
-	log.Printf("GotToolResponse: app=%q tool=%q resp=%q", req.GetApp().GetValue(), req.GetName(), req.GetResp())
+func (s *server) DidCallTool(ctx context.Context, req *pb.DidCallToolRequest) (*pb.ServiceStatusResponse, error) {
+	log.Printf("DidCallTool: app=%q tool=%q args=%v result=%q", req.GetApp().GetValue(), req.GetToolName(), req.GetArgs(), req.GetResult())
 	return &pb.ServiceStatusResponse{Result: makePointer(int32(0)), Msg: makePointer("ok")}, nil
 }
 
 func (s *server) WantsToCallTool(ctx context.Context, req *pb.WantsToCallToolRequest) (*pb.WantsToCallToolResponse, error) {
-	log.Printf("WantsToCallTool: app=%q tool=%q args=%v", req.GetApp().GetValue(), req.GetName(), req.GetArgs())
+	log.Printf("WantsToCallTool: app=%q tool=%q args=%v msgs=%v", req.GetApp().GetValue(), req.GetToolName(), req.GetArgs(), req.GetLastMessages())
 	return &pb.WantsToCallToolResponse{
-		Result:  makePointer(pb.WantsToCallToolResponse_RESULT_PERMITTED),
-		Details: makePointer("permitted by default"),
+		Permitted: makePointer(false),
+		Details:   makePointer("denied by default"),
 	}, nil
 }
 

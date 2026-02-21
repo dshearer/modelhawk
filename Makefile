@@ -8,9 +8,11 @@ REF_IMPL_GO_GEN := reference-impls/server/modelhawk/v1
 
 DOCKER_RUN   := docker run --rm -v $(CURDIR):/workspace $(IMAGE)
 
-.PHONY: all generate generate-go generate-ts clean docker-build opencode-plugin install-opencode-plugin server
+.PHONY: all generate generate-go generate-ts clean docker-build opencode-plugin install-opencode-plugin server ref-impls
 
 all: generate
+
+ref-impls: opencode-plugin server
 
 # --- Docker ---
 

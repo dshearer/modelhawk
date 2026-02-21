@@ -3,25 +3,26 @@ package modelhawk.v1;
 
 option go_package = "github.com/dshearer/modelhawk/v1";
 
-import "google/protobuf/timestamp.proto";
 import "application.proto";
 import "service_status_response.proto";
-import "tool_arg.proto";
+import "message.proto";
 
-message CalledToolRequest {
+message WillCallToolRequest {
   optional Application app = 1;
-  optional string name = 2;
-  repeated ToolArg args = 3;
+  optional string tool_name = 2;
+  map<string, string> args = 3;
+  repeated Message last_messages = 4;
 }
 
-message GotToolResponseRequest {
+message DidCallToolRequest {
   optional Application app = 1;
-  optional string name = 2;
-  optional string resp = 3;
-  optional google.protobuf.Timestamp time = 4;
+  optional string tool_name = 2;
+  map<string, string> args = 3;
+  optional string result = 4;
+  repeated Message last_messages = 5;
 }
 
 service NotifyService {
-  rpc CalledTool(CalledToolRequest) returns (ServiceStatusResponse);
-  rpc GotToolResponse(GotToolResponseRequest) returns (ServiceStatusResponse);
+  rpc WillCallTool(WillCallToolRequest) returns (ServiceStatusResponse);
+  rpc DidCallTool(DidCallToolRequest) returns (ServiceStatusResponse);
 }
