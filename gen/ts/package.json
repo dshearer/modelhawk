@@ -1,0 +1,42 @@
+{
+  "name": "@modelhawk/protobuf",
+  "version": "0.1.0",
+  "description": "Generated protobuf types and gRPC service clients for ModelHawk",
+  "author": {
+    "name": "C. Dylan Shearer",
+    "email": "dylan@nekonya.info"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@protobuf-ts/runtime": "^2.11.1",
+    "@protobuf-ts/runtime-rpc": "^2.11.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dshearer/modelhawk",
+    "directory": "gen/ts"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
