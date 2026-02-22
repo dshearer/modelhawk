@@ -9,7 +9,7 @@ option go_package = "github.com/dshearer/modelhawk/v1";
  * - A single chat session
  * - A deployment of claude on a particular computer (encompassing all its sessions)
  *
- * The appropriate scope really depends on how you want to use the security service that is monitoring the AI app.
+ * The appropriate scope really depends on how you want to use the security app that is monitoring the AI app.
 */
 message Application {
   optional string value = 1;

@@ -25,7 +25,7 @@ message GiveToolInfoResponse {
 }
 
 /**
- * InfoService is a service for telling the security service about configuration in the AI app that's being monitored.
+ * InfoService is a service for telling the security app about configuration in the AI app that's being monitored.
  */
 service InfoService {
   /// Tell the security tool about a tool that is available in a particular context.

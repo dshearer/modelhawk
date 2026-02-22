@@ -54,7 +54,7 @@ An Application identifies a particular deployment of an AI app. Examples:
 - A single chat session
 - A deployment of claude on a particular computer (encompassing all its sessions)
 
-The appropriate scope really depends on how you want to use the security service that is monitoring the AI app.
+The appropriate scope really depends on how you want to use the security app that is monitoring the AI app.
 
 
 | Field | Type | Label | Description |
@@ -142,7 +142,7 @@ The appropriate scope really depends on how you want to use the security service
 <a name="modelhawk-v1-InfoService"></a>
 
 ### InfoService
-InfoService is a service for telling the security service about configuration in the AI app that&#39;s being monitored.
+InfoService is a service for telling the security app about configuration in the AI app that&#39;s being monitored.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
@@ -269,12 +269,12 @@ A message sent from or to an AI model.
 <a name="modelhawk-v1-NotifyService"></a>
 
 ### NotifyService
-NotifyService is a service for telling the security service about stuff that has happened in the AI app that&#39;s being monitored.
+NotifyService is a service for telling the security app about stuff that has happened in the AI app that&#39;s being monitored.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| WillCallTool | [WillCallToolRequest](#modelhawk-v1-WillCallToolRequest) | [ServiceStatusResponse](#modelhawk-v1-ServiceStatusResponse) | WillCallTool can be called by the AI app to tell the security service that the AI model will call a tool. |
-| DidCallTool | [DidCallToolRequest](#modelhawk-v1-DidCallToolRequest) | [ServiceStatusResponse](#modelhawk-v1-ServiceStatusResponse) | DidCallTool can be called by the AI app to tell the security service that the AI model did call a tool. |
+| WillCallTool | [WillCallToolRequest](#modelhawk-v1-WillCallToolRequest) | [ServiceStatusResponse](#modelhawk-v1-ServiceStatusResponse) | WillCallTool can be called by the AI app to tell the security app that the AI model will call a tool. |
+| DidCallTool | [DidCallToolRequest](#modelhawk-v1-DidCallToolRequest) | [ServiceStatusResponse](#modelhawk-v1-ServiceStatusResponse) | DidCallTool can be called by the AI app to tell the security app that the AI model did call a tool. |
 
  
 
@@ -346,11 +346,11 @@ NotifyService is a service for telling the security service about stuff that has
 <a name="modelhawk-v1-PermissionService"></a>
 
 ### PermissionService
-PermissionService is a service that AI apps can use to ask the security service for permission to do stuff.
+PermissionService is a service that AI apps can use to ask the security app for permission to do stuff.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| WantsToCallTool | [WantsToCallToolRequest](#modelhawk-v1-WantsToCallToolRequest) | [WantsToCallToolResponse](#modelhawk-v1-WantsToCallToolResponse) | The AI app wants to call a tool. The security service can approve or deny it. |
+| WantsToCallTool | [WantsToCallToolRequest](#modelhawk-v1-WantsToCallToolRequest) | [WantsToCallToolResponse](#modelhawk-v1-WantsToCallToolResponse) | The AI app wants to call a tool. The security app can approve or deny it. |
 
  
 

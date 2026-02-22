@@ -16,7 +16,7 @@ import { MessageType } from "@protobuf-ts/runtime";
  * - A single chat session
  * - A deployment of claude on a particular computer (encompassing all its sessions)
  *
- * The appropriate scope really depends on how you want to use the security service that is monitoring the AI app.
+ * The appropriate scope really depends on how you want to use the security app that is monitoring the AI app.
  *
  * @generated from protobuf message modelhawk.v1.Application
  */
