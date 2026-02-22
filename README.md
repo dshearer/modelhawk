@@ -116,6 +116,31 @@ subgraph Mon["Monitoring Tool"]
 end
 ```
 
+## The Protocol
+
+It's quite simple.
+
+Messages are serialized with Protocol Buffers. They are defined [here](modelhawk/v1) ([docs](gen/docs/docs.md)).
+
+There are two roles:
+    - **AI app:** This is the thing that uses AI and that we want to monitor for bad behavior. It implements a ModelHawk client.
+    - **Security app:** This is the thing that monitors the AI app for bad behavior. It implements a ModelHawk server.
+
+The security app provides three services:
+    - [`NotifyService`](modelhawk/v1/notify_service.proto)
+    - [`PermissionService`](modelhawk/v1/permission_service.proto)
+    - [`InfoService`](modelhawk/v1/info_service.proto)
+
+The AI app can use `NotifyService` to tell the security app about events --- e.g., the AI model used a tool. The AI app uses `PermissionService` to
+ask the security app for permission for the AI model to do something.
+
+To avoid sending the same metadata multiple times, the AI app must use `InfoService` to tell the security app about tools before those tools are mentioned
+in other service calls.
+
+That's it!
+
+**NOTE:** At this time, ModelHawk focuses on tool usage. We will probably add more in the future.
+
 ## Example
 
 Suppose I run a team and I want to let my people use their favorite AI helpers (e.g. Claude CoWork) for their work. I want to prevent

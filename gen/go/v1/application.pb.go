@@ -26,7 +26,7 @@ const (
 // - A single chat session
 // - A deployment of claude on a particular computer (encompassing all its sessions)
 //
-// The appropriate scope really depends on how you want to use the security service that is monitoring the AI app.
+// The appropriate scope really depends on how you want to use the security app that is monitoring the AI app.
 type Application struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Value         *string                `protobuf:"bytes,1,opt,name=value,proto3,oneof" json:"value,omitempty"`

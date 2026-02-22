@@ -27,9 +27,9 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // *
-// PermissionService is a service that AI apps can use to ask the security service for permission to do stuff.
+// PermissionService is a service that AI apps can use to ask the security app for permission to do stuff.
 type PermissionServiceClient interface {
-	// / The AI app wants to call a tool. The security service can approve or deny it.
+	// / The AI app wants to call a tool. The security app can approve or deny it.
 	WantsToCallTool(ctx context.Context, in *WantsToCallToolRequest, opts ...grpc.CallOption) (*WantsToCallToolResponse, error)
 }
 
@@ -56,9 +56,9 @@ func (c *permissionServiceClient) WantsToCallTool(ctx context.Context, in *Wants
 // for forward compatibility.
 //
 // *
-// PermissionService is a service that AI apps can use to ask the security service for permission to do stuff.
+// PermissionService is a service that AI apps can use to ask the security app for permission to do stuff.
 type PermissionServiceServer interface {
-	// / The AI app wants to call a tool. The security service can approve or deny it.
+	// / The AI app wants to call a tool. The security app can approve or deny it.
 	WantsToCallTool(context.Context, *WantsToCallToolRequest) (*WantsToCallToolResponse, error)
 	mustEmbedUnimplementedPermissionServiceServer()
 }

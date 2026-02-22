@@ -11,7 +11,7 @@ import type { UnaryCall } from "@protobuf-ts/runtime-rpc";
 import type { RpcOptions } from "@protobuf-ts/runtime-rpc";
 /**
  * *
- * InfoService is a service for telling the security service about configuration in the AI app that's being monitored.
+ * InfoService is a service for telling the security app about configuration in the AI app that's being monitored.
  *
  * @generated from protobuf service modelhawk.v1.InfoService
  */
@@ -25,7 +25,7 @@ export interface IInfoServiceClient {
 }
 /**
  * *
- * InfoService is a service for telling the security service about configuration in the AI app that's being monitored.
+ * InfoService is a service for telling the security app about configuration in the AI app that's being monitored.
  *
  * @generated from protobuf service modelhawk.v1.InfoService
  */
