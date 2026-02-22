@@ -26,21 +26,20 @@ generate: generate-go generate-ts
 generate-without-docker: generate-go-local generate-ts-local
 
 generate-go: docker-build $(PROTO_FILES)
-	@mkdir -p $(GO_OUT)
 	$(DOCKER_RUN) make generate-go-local
 
 generate-go-local:
-	@mkdir -p $(GO_OUT)
+	@rm -rf "$(GO_OUT)"
+	@mkdir -p "$(GO_OUT)"
 	protoc \
-		-I $(PROTO_DIR) \
-		--go_out=$(GO_OUT) \
+		-I "$(PROTO_DIR)" \
+		"--go_out=$(GO_OUT)" \
 		--go_opt=paths=source_relative \
-		--go-grpc_out=$(GO_OUT) \
+		"--go-grpc_out=$(GO_OUT)" \
 		--go-grpc_opt=paths=source_relative \
 		$(PROTO_FILES)
 
 generate-ts: docker-build $(PROTO_FILES)
-	@mkdir -p $(TS_OUT)
 	$(DOCKER_RUN) make generate-ts-local
 
 generate-ts-local:
@@ -55,7 +54,7 @@ generate-ts-local:
 # --- opencode-plugin ref impl ---
 
 opencode-plugin : generate-ts
-	@cd gen/ts && npm i
+	@cd gen/ts && npm install
 	@cd gen/ts && npm run build
 	@cd reference-impls/opencode-plugin && bun install
 	@cd reference-impls/opencode-plugin && bun run build
