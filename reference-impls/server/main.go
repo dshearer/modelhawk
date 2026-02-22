@@ -24,17 +24,17 @@ func makePointer[T any](v T) *T {
 
 func (s *server) GiveToolInfo(ctx context.Context, req *pb.GiveToolInfoRequest) (*pb.ServiceStatusResponse, error) {
 	log.Printf("GiveToolInfo: app=%q tool=%q desc=%q args=%v", req.GetApp().GetValue(), req.GetName(), req.GetDesc(), req.GetArgs())
-	return &pb.ServiceStatusResponse{Result: makePointer(int32(0)), Msg: makePointer("ok")}, nil
+	return &pb.ServiceStatusResponse{Result: makePointer(pb.ServiceStatusResponse_RESULT_OK), Msg: makePointer("ok")}, nil
 }
 
 func (s *server) WillCallTool(ctx context.Context, req *pb.WillCallToolRequest) (*pb.ServiceStatusResponse, error) {
 	log.Printf("WillCallTool: app=%q tool=%q args=%v", req.GetApp().GetValue(), req.GetToolName(), req.GetArgs())
-	return &pb.ServiceStatusResponse{Result: makePointer(int32(0)), Msg: makePointer("ok")}, nil
+	return &pb.ServiceStatusResponse{Result: makePointer(pb.ServiceStatusResponse_RESULT_OK), Msg: makePointer("ok")}, nil
 }
 
 func (s *server) DidCallTool(ctx context.Context, req *pb.DidCallToolRequest) (*pb.ServiceStatusResponse, error) {
 	log.Printf("DidCallTool: app=%q tool=%q args=%v result=%q", req.GetApp().GetValue(), req.GetToolName(), req.GetArgs(), req.GetResult())
-	return &pb.ServiceStatusResponse{Result: makePointer(int32(0)), Msg: makePointer("ok")}, nil
+	return &pb.ServiceStatusResponse{Result: makePointer(pb.ServiceStatusResponse_RESULT_OK), Msg: makePointer("ok")}, nil
 }
 
 func (s *server) WantsToCallTool(ctx context.Context, req *pb.WantsToCallToolRequest) (*pb.WantsToCallToolResponse, error) {

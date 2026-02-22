@@ -23,7 +23,7 @@ message DidCallToolRequest {
 }
 
 /**
- * NotifyService is a service for telling the security service about stuff that has heppened in the AI app that's being monitored.
+ * NotifyService is a service for telling the security service about stuff that has happened in the AI app that's being monitored.
  */
 service NotifyService {
   /// WillCallTool can be called by the AI app to tell the security service that the AI model will call a tool.
