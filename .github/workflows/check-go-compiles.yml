@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  check-generated-go:
+  check-generated-go-compiles:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,7 +17,7 @@ jobs:
       - run: go build ./...
         working-directory: gen/go
 
-  check-ref-impl-go:
+  check-ref-impl-go-compiles:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
