@@ -22,7 +22,13 @@ message DidCallToolRequest {
   repeated Message last_messages = 5;
 }
 
+/**
+ * NotifyService is a service for telling the security service about stuff that has heppened in the AI app that's being monitored.
+ */
 service NotifyService {
+  /// WillCallTool can be called by the AI app to tell the security service that the AI model will call a tool.
   rpc WillCallTool(WillCallToolRequest) returns (ServiceStatusResponse);
+
+  /// DidCallTool can be called by the AI app to tell the security service that the AI model did call a tool.
   rpc DidCallTool(DidCallToolRequest) returns (ServiceStatusResponse);
 }

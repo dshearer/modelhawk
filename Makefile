@@ -6,7 +6,7 @@ TS_OUT          := gen/ts/src
 
 DOCKER_RUN   := docker run --rm -v $(CURDIR):/workspace $(IMAGE)
 
-.PHONY: all generate generate-without-docker generate-go generate-go-local generate-ts generate-ts-local clean docker-build opencode-plugin install-opencode-plugin server ref-impls
+.PHONY: all generate generate-without-docker generate-go generate-go-local generate-ts generate-ts-local clean docker-build opencode-plugin install-opencode-plugin server ref-impls generate-proto-docs generate-proto-docs-local
 
 all: generate
 
@@ -21,9 +21,9 @@ docker-build:
 
 # --- Code Generation ---
 
-generate: generate-go generate-ts
+generate: generate-go generate-ts generate-proto-docs
 
-generate-without-docker: generate-go-local generate-ts-local
+generate-without-docker: generate-go-local generate-ts-local generate-proto-docs-local
 
 generate-go: docker-build $(PROTO_FILES)
 	$(DOCKER_RUN) make generate-go-local
@@ -50,6 +50,13 @@ generate-ts-local:
 		"--ts_out=$(TS_OUT)" \
 		$(PROTO_FILES)
 
+generate-proto-docs: docker-build
+	$(DOCKER_RUN) make generate-proto-docs-local
+
+generate-proto-docs-local:
+	@mkdir -p gen/docs
+	go install github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@v1.5.1
+	protoc -I "$(PROTO_DIR)" --doc_out=gen/docs --doc_opt=markdown,docs.md $(PROTO_FILES)
 
 # --- opencode-plugin ref impl ---
 

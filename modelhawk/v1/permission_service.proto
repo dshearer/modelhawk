@@ -18,6 +18,10 @@ message WantsToCallToolResponse {
   optional string details = 2;
 }
 
+/**
+ * PermissionService is a service that AI apps can use to ask the security service for permission to do stuff.
+ */
 service PermissionService {
+  /// The AI app wants to call a tool. The security service can approve or deny it.
   rpc WantsToCallTool(WantsToCallToolRequest) returns (WantsToCallToolResponse);
 }
