@@ -120,7 +120,7 @@ end
 
 It's quite simple.
 
-Messages are serialized with Protocol Buffers. They are defined [here](modelhawk/v1) ([docs](gen/docs/docs.md)).
+Messages are serialized with Protocol Buffers. They are defined in `modelhawk/v1` ([docs](gen/docs/docs.md)).
 
 There are two roles:
     - **AI app:** This is the thing that uses AI and that we want to monitor for bad behavior. It implements a ModelHawk client.
