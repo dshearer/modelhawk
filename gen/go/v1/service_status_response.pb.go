@@ -21,10 +21,56 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ServiceStatusResponse_Result int32
+
+const (
+	ServiceStatusResponse_RESULT_OK    ServiceStatusResponse_Result = 0
+	ServiceStatusResponse_RESULT_ERROR ServiceStatusResponse_Result = 1
+)
+
+// Enum value maps for ServiceStatusResponse_Result.
+var (
+	ServiceStatusResponse_Result_name = map[int32]string{
+		0: "RESULT_OK",
+		1: "RESULT_ERROR",
+	}
+	ServiceStatusResponse_Result_value = map[string]int32{
+		"RESULT_OK":    0,
+		"RESULT_ERROR": 1,
+	}
+)
+
+func (x ServiceStatusResponse_Result) Enum() *ServiceStatusResponse_Result {
+	p := new(ServiceStatusResponse_Result)
+	*p = x
+	return p
+}
+
+func (x ServiceStatusResponse_Result) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ServiceStatusResponse_Result) Descriptor() protoreflect.EnumDescriptor {
+	return file_service_status_response_proto_enumTypes[0].Descriptor()
+}
+
+func (ServiceStatusResponse_Result) Type() protoreflect.EnumType {
+	return &file_service_status_response_proto_enumTypes[0]
+}
+
+func (x ServiceStatusResponse_Result) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ServiceStatusResponse_Result.Descriptor instead.
+func (ServiceStatusResponse_Result) EnumDescriptor() ([]byte, []int) {
+	return file_service_status_response_proto_rawDescGZIP(), []int{0, 0}
+}
+
 type ServiceStatusResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        *int32                 `protobuf:"varint,1,opt,name=result,proto3,oneof" json:"result,omitempty"`
-	Msg           *string                `protobuf:"bytes,2,opt,name=msg,proto3,oneof" json:"msg,omitempty"`
+	state         protoimpl.MessageState        `protogen:"open.v1"`
+	Result        *ServiceStatusResponse_Result `protobuf:"varint,1,opt,name=result,proto3,enum=modelhawk.v1.ServiceStatusResponse_Result,oneof" json:"result,omitempty"`
+	Msg           *string                       `protobuf:"bytes,2,opt,name=msg,proto3,oneof" json:"msg,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -59,11 +105,11 @@ func (*ServiceStatusResponse) Descriptor() ([]byte, []int) {
 	return file_service_status_response_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ServiceStatusResponse) GetResult() int32 {
+func (x *ServiceStatusResponse) GetResult() ServiceStatusResponse_Result {
 	if x != nil && x.Result != nil {
 		return *x.Result
 	}
-	return 0
+	return ServiceStatusResponse_RESULT_OK
 }
 
 func (x *ServiceStatusResponse) GetMsg() string {
@@ -77,10 +123,13 @@ var File_service_status_response_proto protoreflect.FileDescriptor
 
 const file_service_status_response_proto_rawDesc = "" +
 	"\n" +
-	"\x1dservice_status_response.proto\x12\fmodelhawk.v1\"^\n" +
-	"\x15ServiceStatusResponse\x12\x1b\n" +
-	"\x06result\x18\x01 \x01(\x05H\x00R\x06result\x88\x01\x01\x12\x15\n" +
-	"\x03msg\x18\x02 \x01(\tH\x01R\x03msg\x88\x01\x01B\t\n" +
+	"\x1dservice_status_response.proto\x12\fmodelhawk.v1\"\xb5\x01\n" +
+	"\x15ServiceStatusResponse\x12G\n" +
+	"\x06result\x18\x01 \x01(\x0e2*.modelhawk.v1.ServiceStatusResponse.ResultH\x00R\x06result\x88\x01\x01\x12\x15\n" +
+	"\x03msg\x18\x02 \x01(\tH\x01R\x03msg\x88\x01\x01\")\n" +
+	"\x06Result\x12\r\n" +
+	"\tRESULT_OK\x10\x00\x12\x10\n" +
+	"\fRESULT_ERROR\x10\x01B\t\n" +
 	"\a_resultB\x06\n" +
 	"\x04_msgB\"Z github.com/dshearer/modelhawk/v1b\x06proto3"
 
@@ -96,16 +145,19 @@ func file_service_status_response_proto_rawDescGZIP() []byte {
 	return file_service_status_response_proto_rawDescData
 }
 
+var file_service_status_response_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_service_status_response_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_service_status_response_proto_goTypes = []any{
-	(*ServiceStatusResponse)(nil), // 0: modelhawk.v1.ServiceStatusResponse
+	(ServiceStatusResponse_Result)(0), // 0: modelhawk.v1.ServiceStatusResponse.Result
+	(*ServiceStatusResponse)(nil),     // 1: modelhawk.v1.ServiceStatusResponse
 }
 var file_service_status_response_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0, // 0: modelhawk.v1.ServiceStatusResponse.result:type_name -> modelhawk.v1.ServiceStatusResponse.Result
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_service_status_response_proto_init() }
@@ -119,13 +171,14 @@ func file_service_status_response_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_service_status_response_proto_rawDesc), len(file_service_status_response_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_service_status_response_proto_goTypes,
 		DependencyIndexes: file_service_status_response_proto_depIdxs,
+		EnumInfos:         file_service_status_response_proto_enumTypes,
 		MessageInfos:      file_service_status_response_proto_msgTypes,
 	}.Build()
 	File_service_status_response_proto = out.File

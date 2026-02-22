@@ -11,6 +11,9 @@ import type { PartialMessage } from "@protobuf-ts/runtime";
 import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
 /**
+ * *
+ * A message sent from or to an AI model.
+ *
  * @generated from protobuf message modelhawk.v1.Message
  */
 export interface Message {

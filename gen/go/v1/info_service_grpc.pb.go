@@ -25,8 +25,11 @@ const (
 // InfoServiceClient is the client API for InfoService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// *
+// InfoService is a service for telling the security service about configuration in the AI app that's being monitored.
 type InfoServiceClient interface {
-	// Tell ModelHawk about a tool that is available in a particular context.
+	// / Tell the security tool about a tool that is available in a particular context.
 	GiveToolInfo(ctx context.Context, in *GiveToolInfoRequest, opts ...grpc.CallOption) (*ServiceStatusResponse, error)
 }
 
@@ -51,8 +54,11 @@ func (c *infoServiceClient) GiveToolInfo(ctx context.Context, in *GiveToolInfoRe
 // InfoServiceServer is the server API for InfoService service.
 // All implementations must embed UnimplementedInfoServiceServer
 // for forward compatibility.
+//
+// *
+// InfoService is a service for telling the security service about configuration in the AI app that's being monitored.
 type InfoServiceServer interface {
-	// Tell ModelHawk about a tool that is available in a particular context.
+	// / Tell the security tool about a tool that is available in a particular context.
 	GiveToolInfo(context.Context, *GiveToolInfoRequest) (*ServiceStatusResponse, error)
 	mustEmbedUnimplementedInfoServiceServer()
 }

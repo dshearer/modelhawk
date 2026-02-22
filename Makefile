@@ -29,6 +29,8 @@ generate-go: docker-build $(PROTO_FILES)
 	$(DOCKER_RUN) make generate-go-local
 
 generate-go-local:
+	go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.11
+	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.6.1
 	@rm -rf "$(GO_OUT)"
 	@mkdir -p "$(GO_OUT)"
 	protoc \
@@ -43,6 +45,7 @@ generate-ts: docker-build $(PROTO_FILES)
 	$(DOCKER_RUN) make generate-ts-local
 
 generate-ts-local:
+	npm install -g @protobuf-ts/plugin@v2.11.1
 	@rm -rf "$(TS_OUT)"
 	@mkdir -p "$(TS_OUT)"
 	protoc \
