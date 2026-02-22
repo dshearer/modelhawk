@@ -1,4 +1,4 @@
-name: Generated Code Check
+name: Check generated code
 
 on:
   pull_request:
