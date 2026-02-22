@@ -269,7 +269,7 @@ A message sent from or to an AI model.
 <a name="modelhawk-v1-NotifyService"></a>
 
 ### NotifyService
-NotifyService is a service for telling the security service about stuff that has heppened in the AI app that&#39;s being monitored.
+NotifyService is a service for telling the security service about stuff that has happened in the AI app that&#39;s being monitored.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|

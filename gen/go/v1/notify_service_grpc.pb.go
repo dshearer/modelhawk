@@ -28,7 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // *
-// NotifyService is a service for telling the security service about stuff that has heppened in the AI app that's being monitored.
+// NotifyService is a service for telling the security service about stuff that has happened in the AI app that's being monitored.
 type NotifyServiceClient interface {
 	// / WillCallTool can be called by the AI app to tell the security service that the AI model will call a tool.
 	WillCallTool(ctx context.Context, in *WillCallToolRequest, opts ...grpc.CallOption) (*ServiceStatusResponse, error)
@@ -69,7 +69,7 @@ func (c *notifyServiceClient) DidCallTool(ctx context.Context, in *DidCallToolRe
 // for forward compatibility.
 //
 // *
-// NotifyService is a service for telling the security service about stuff that has heppened in the AI app that's being monitored.
+// NotifyService is a service for telling the security service about stuff that has happened in the AI app that's being monitored.
 type NotifyServiceServer interface {
 	// / WillCallTool can be called by the AI app to tell the security service that the AI model will call a tool.
 	WillCallTool(context.Context, *WillCallToolRequest) (*ServiceStatusResponse, error)
