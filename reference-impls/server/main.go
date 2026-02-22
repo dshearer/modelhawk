@@ -7,7 +7,7 @@ import (
 	"log"
 	"net"
 
-	pb "github.com/dshearer/modelhawk/reference-impls/server/modelhawk/v1"
+	pb "github.com/dshearer/modelhawk/gen/go/v1"
 
 	"google.golang.org/grpc"
 )

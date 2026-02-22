@@ -4,7 +4,6 @@ PROTO_FILES     := $(wildcard $(PROTO_DIR)/*.proto)
 GO_OUT          := gen/go/v1
 TS_OUT          := gen/ts
 REF_IMPL_TS_GEN := reference-impls/opencode-plugin/src/modelhawk
-REF_IMPL_GO_GEN := reference-impls/server/modelhawk/v1
 
 DOCKER_RUN   := docker run --rm -v $(CURDIR):/workspace $(IMAGE)
 
@@ -30,8 +29,6 @@ generate-without-docker: generate-go-local generate-ts-local
 generate-go: docker-build $(PROTO_FILES)
 	@mkdir -p $(GO_OUT)
 	$(DOCKER_RUN) make generate-go-local
-	@mkdir -p "$(REF_IMPL_GO_GEN)"
-	@cp -R "${GO_OUT}"/* "$(REF_IMPL_GO_GEN)"
 
 generate-go-local:
 	@mkdir -p $(GO_OUT)
@@ -74,4 +71,4 @@ server : generate-go
 # --- Cleanup ---
 
 clean:
-	rm -rf "$(REF_IMPL_TS_GEN)" "$(REF_IMPL_GO_GEN)" reference-impls/opencode-plugin/node_modules reference-impls/opencode-plugin/dist reference-impls/server/server opencode.log
+	rm -rf "$(REF_IMPL_TS_GEN)" reference-impls/opencode-plugin/node_modules reference-impls/opencode-plugin/dist reference-impls/server/server opencode.log
