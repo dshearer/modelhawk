@@ -19,9 +19,6 @@ jobs:
         run: |
           set -e
           sudo apt-get -y install protobuf-compiler libprotobuf-dev nodejs npm make
-          go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.11
-          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.6.1
-          npm install -g @protobuf-ts/plugin@v2.11.1
 
       - name: Generate protobuf code
         run: make -j generate-without-docker

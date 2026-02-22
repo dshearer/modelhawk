@@ -21,6 +21,8 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// *
+// A message sent from or to an AI model.
 type Message struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Role          *string                `protobuf:"bytes,1,opt,name=role,proto3,oneof" json:"role,omitempty"`

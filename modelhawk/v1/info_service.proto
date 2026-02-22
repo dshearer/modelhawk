@@ -24,7 +24,10 @@ message GiveToolInfoResponse {
   optional string msg = 2;
 }
 
+/**
+ * InfoService is a service for telling the security service about configuration in the AI app that's being monitored.
+ */
 service InfoService {
-  // Tell ModelHawk about a tool that is available in a particular context.
+  /// Tell the security tool about a tool that is available in a particular context.
   rpc GiveToolInfo(GiveToolInfoRequest) returns (ServiceStatusResponse);
 }

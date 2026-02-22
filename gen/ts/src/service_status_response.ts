@@ -15,19 +15,32 @@ import { MessageType } from "@protobuf-ts/runtime";
  */
 export interface ServiceStatusResponse {
     /**
-     * @generated from protobuf field: optional int32 result = 1
+     * @generated from protobuf field: optional modelhawk.v1.ServiceStatusResponse.Result result = 1
      */
-    result?: number;
+    result?: ServiceStatusResponse_Result;
     /**
      * @generated from protobuf field: optional string msg = 2
      */
     msg?: string;
 }
+/**
+ * @generated from protobuf enum modelhawk.v1.ServiceStatusResponse.Result
+ */
+export enum ServiceStatusResponse_Result {
+    /**
+     * @generated from protobuf enum value: RESULT_OK = 0;
+     */
+    OK = 0,
+    /**
+     * @generated from protobuf enum value: RESULT_ERROR = 1;
+     */
+    ERROR = 1
+}
 // @generated message type with reflection information, may provide speed optimized methods
 class ServiceStatusResponse$Type extends MessageType<ServiceStatusResponse> {
     constructor() {
         super("modelhawk.v1.ServiceStatusResponse", [
-            { no: 1, name: "result", kind: "scalar", opt: true, T: 5 /*ScalarType.INT32*/ },
+            { no: 1, name: "result", kind: "enum", opt: true, T: () => ["modelhawk.v1.ServiceStatusResponse.Result", ServiceStatusResponse_Result, "RESULT_"] },
             { no: 2, name: "msg", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
         ]);
     }
@@ -42,7 +55,7 @@ class ServiceStatusResponse$Type extends MessageType<ServiceStatusResponse> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* optional int32 result */ 1:
+                case /* optional modelhawk.v1.ServiceStatusResponse.Result result */ 1:
                     message.result = reader.int32();
                     break;
                 case /* optional string msg */ 2:
@@ -60,7 +73,7 @@ class ServiceStatusResponse$Type extends MessageType<ServiceStatusResponse> {
         return message;
     }
     internalBinaryWrite(message: ServiceStatusResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* optional int32 result = 1; */
+        /* optional modelhawk.v1.ServiceStatusResponse.Result result = 1; */
         if (message.result !== undefined)
             writer.tag(1, WireType.Varint).int32(message.result);
         /* optional string msg = 2; */

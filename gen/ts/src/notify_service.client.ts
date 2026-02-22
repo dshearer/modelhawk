@@ -11,19 +11,29 @@ import type { WillCallToolRequest } from "./notify_service";
 import type { UnaryCall } from "@protobuf-ts/runtime-rpc";
 import type { RpcOptions } from "@protobuf-ts/runtime-rpc";
 /**
+ * *
+ * NotifyService is a service for telling the security service about stuff that has happened in the AI app that's being monitored.
+ *
  * @generated from protobuf service modelhawk.v1.NotifyService
  */
 export interface INotifyServiceClient {
     /**
+     * / WillCallTool can be called by the AI app to tell the security service that the AI model will call a tool.
+     *
      * @generated from protobuf rpc: WillCallTool
      */
     willCallTool(input: WillCallToolRequest, options?: RpcOptions): UnaryCall<WillCallToolRequest, ServiceStatusResponse>;
     /**
+     * / DidCallTool can be called by the AI app to tell the security service that the AI model did call a tool.
+     *
      * @generated from protobuf rpc: DidCallTool
      */
     didCallTool(input: DidCallToolRequest, options?: RpcOptions): UnaryCall<DidCallToolRequest, ServiceStatusResponse>;
 }
 /**
+ * *
+ * NotifyService is a service for telling the security service about stuff that has happened in the AI app that's being monitored.
+ *
  * @generated from protobuf service modelhawk.v1.NotifyService
  */
 export class NotifyServiceClient implements INotifyServiceClient, ServiceInfo {
@@ -33,6 +43,8 @@ export class NotifyServiceClient implements INotifyServiceClient, ServiceInfo {
     constructor(private readonly _transport: RpcTransport) {
     }
     /**
+     * / WillCallTool can be called by the AI app to tell the security service that the AI model will call a tool.
+     *
      * @generated from protobuf rpc: WillCallTool
      */
     willCallTool(input: WillCallToolRequest, options?: RpcOptions): UnaryCall<WillCallToolRequest, ServiceStatusResponse> {
@@ -40,6 +52,8 @@ export class NotifyServiceClient implements INotifyServiceClient, ServiceInfo {
         return stackIntercept<WillCallToolRequest, ServiceStatusResponse>("unary", this._transport, method, opt, input);
     }
     /**
+     * / DidCallTool can be called by the AI app to tell the security service that the AI model did call a tool.
+     *
      * @generated from protobuf rpc: DidCallTool
      */
     didCallTool(input: DidCallToolRequest, options?: RpcOptions): UnaryCall<DidCallToolRequest, ServiceStatusResponse> {

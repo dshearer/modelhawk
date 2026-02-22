@@ -10,17 +10,23 @@ import type { GiveToolInfoRequest } from "./info_service";
 import type { UnaryCall } from "@protobuf-ts/runtime-rpc";
 import type { RpcOptions } from "@protobuf-ts/runtime-rpc";
 /**
+ * *
+ * InfoService is a service for telling the security service about configuration in the AI app that's being monitored.
+ *
  * @generated from protobuf service modelhawk.v1.InfoService
  */
 export interface IInfoServiceClient {
     /**
-     * Tell ModelHawk about a tool that is available in a particular context.
+     * / Tell the security tool about a tool that is available in a particular context.
      *
      * @generated from protobuf rpc: GiveToolInfo
      */
     giveToolInfo(input: GiveToolInfoRequest, options?: RpcOptions): UnaryCall<GiveToolInfoRequest, ServiceStatusResponse>;
 }
 /**
+ * *
+ * InfoService is a service for telling the security service about configuration in the AI app that's being monitored.
+ *
  * @generated from protobuf service modelhawk.v1.InfoService
  */
 export class InfoServiceClient implements IInfoServiceClient, ServiceInfo {
@@ -30,7 +36,7 @@ export class InfoServiceClient implements IInfoServiceClient, ServiceInfo {
     constructor(private readonly _transport: RpcTransport) {
     }
     /**
-     * Tell ModelHawk about a tool that is available in a particular context.
+     * / Tell the security tool about a tool that is available in a particular context.
      *
      * @generated from protobuf rpc: GiveToolInfo
      */

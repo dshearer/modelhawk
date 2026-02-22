@@ -10,15 +10,23 @@ import type { WantsToCallToolRequest } from "./permission_service";
 import type { UnaryCall } from "@protobuf-ts/runtime-rpc";
 import type { RpcOptions } from "@protobuf-ts/runtime-rpc";
 /**
+ * *
+ * PermissionService is a service that AI apps can use to ask the security service for permission to do stuff.
+ *
  * @generated from protobuf service modelhawk.v1.PermissionService
  */
 export interface IPermissionServiceClient {
     /**
+     * / The AI app wants to call a tool. The security service can approve or deny it.
+     *
      * @generated from protobuf rpc: WantsToCallTool
      */
     wantsToCallTool(input: WantsToCallToolRequest, options?: RpcOptions): UnaryCall<WantsToCallToolRequest, WantsToCallToolResponse>;
 }
 /**
+ * *
+ * PermissionService is a service that AI apps can use to ask the security service for permission to do stuff.
+ *
  * @generated from protobuf service modelhawk.v1.PermissionService
  */
 export class PermissionServiceClient implements IPermissionServiceClient, ServiceInfo {
@@ -28,6 +36,8 @@ export class PermissionServiceClient implements IPermissionServiceClient, Servic
     constructor(private readonly _transport: RpcTransport) {
     }
     /**
+     * / The AI app wants to call a tool. The security service can approve or deny it.
+     *
      * @generated from protobuf rpc: WantsToCallTool
      */
     wantsToCallTool(input: WantsToCallToolRequest, options?: RpcOptions): UnaryCall<WantsToCallToolRequest, WantsToCallToolResponse> {

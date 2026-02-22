@@ -11,11 +11,12 @@ import type { PartialMessage } from "@protobuf-ts/runtime";
 import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
 /**
- * An Application identifies a particular deployment of an AI-backed app/tool. Examples:
+ * *
+ * An Application identifies a particular deployment of an AI app. Examples:
  * - A single chat session
  * - A deployment of claude on a particular computer (encompassing all its sessions)
  *
- * The appropriate scope really depends on how you want to use ModelHawk.
+ * The appropriate scope really depends on how you want to use the security service that is monitoring the AI app.
  *
  * @generated from protobuf message modelhawk.v1.Application
  */

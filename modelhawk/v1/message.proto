@@ -3,6 +3,9 @@ package modelhawk.v1;
 
 option go_package = "github.com/dshearer/modelhawk/v1";
 
+/**
+ * A message sent from or to an AI model.
+ */
 message Message {
     optional string role = 1;
     optional string content = 2;
