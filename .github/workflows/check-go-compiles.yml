@@ -1,0 +1,30 @@
+name: Check Go code compiles
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check-generated-go-compiles:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: gen/go/go.mod
+
+      - run: go build ./...
+        working-directory: gen/go
+
+  check-ref-impl-go-compiles:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: reference-impls/server/go.mod
+
+      - run: go build ./...
+        working-directory: reference-impls/server

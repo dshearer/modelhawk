@@ -1,4 +1,4 @@
-name: Generated Code Check
+name: Check generated code
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 jobs:
-  check-generated:
+  check-generated-protos:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

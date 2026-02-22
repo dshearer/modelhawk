@@ -1,0 +1,44 @@
+name: Check go.mod
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check-generated-gomod:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: gen/go/go.mod
+
+      - run: go mod tidy
+        working-directory: gen/go
+
+      - name: Check for uncommitted changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::gen/go/go.mod needs cleaned up. Run 'go mod tidy' and commit the changes."
+            exit 1
+          fi
+
+  check-ref-impl-gomod:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: reference-impls/server/go.mod
+
+      - run: go mod tidy
+        working-directory: reference-impls/server
+
+      - name: Check for uncommitted changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::reference-impls/server/go.mod needs cleaned up. Run 'go mod tidy' and commit the changes."
+            exit 1
+          fi

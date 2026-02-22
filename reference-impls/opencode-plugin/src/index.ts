@@ -2,13 +2,16 @@ import type { Plugin } from '@opencode-ai/plugin';
 import type { OpencodeClient } from '@opencode-ai/sdk';
 import { GrpcTransport } from "@protobuf-ts/grpc-transport";
 import { ChannelCredentials } from "@grpc/grpc-js";
-import { Application } from './modelhawk/application';
-import { NotifyServiceClient } from "./modelhawk/notify_service.client";
-import { InfoServiceClient } from "./modelhawk/info_service.client";
-import { PermissionServiceClient } from "./modelhawk/permission_service.client";
-import { WantsToCallToolRequest } from './modelhawk/permission_service';
-import { WillCallToolRequest, DidCallToolRequest } from "./modelhawk/notify_service";
-import { Message } from './modelhawk/message';
+import {
+    Application,
+    Message,
+    NotifyServiceClient,
+    InfoServiceClient,
+    PermissionServiceClient,
+    WantsToCallToolRequest,
+    WillCallToolRequest,
+    DidCallToolRequest,
+} from "@modelhawk/protobuf";
 
 
 class DenyTool extends Error {
