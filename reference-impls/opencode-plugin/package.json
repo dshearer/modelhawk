@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@modelhawk/protobuf": "file:../../gen/ts",
-    "@opencode-ai/plugin": "^1.2.10",
+    "@opencode-ai/plugin": "1.2.10",
     "@protobuf-ts/grpc-transport": "^2.11.1"
   },
   "devDependencies": {

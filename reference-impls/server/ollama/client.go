@@ -16,7 +16,7 @@ import (
 	"github.com/ollama/ollama/api"
 )
 
-//embed:prompt.md
+//go:embed prompt.md
 var prompt string
 
 func makePointer[T any](v T) *T {
@@ -97,6 +97,9 @@ func NewClient(base *url.URL, logDir string) (*Client, error) {
 
 // CheckConnection verifies the connection to Ollama
 func (c *Client) CheckConnection(ctx context.Context) error {
+	if prompt == "" {
+		panic("Prompt is empty")
+	}
 	if _, err := c.ollamaClient.List(ctx); err != nil {
 		return fmt.Errorf("failed to connect to Ollama: %w", err)
 	}
@@ -126,14 +129,14 @@ func (c *Client) WantsToCallTool(ctx context.Context, req *pb.WantsToCallToolReq
 
 	// send it
 	if c.msgLogger != nil {
-		if err := c.msgLogger.LogRequest(&newMsg); err != nil {
+		if err := c.msgLogger.LogRequest(&ollamaReq); err != nil {
 			panic(err)
 		}
 	}
 	var respMsg api.Message
 	if err := c.ollamaClient.Chat(ctx, &ollamaReq, func(cr api.ChatResponse) error {
 		if c.msgLogger != nil {
-			if err := c.msgLogger.LogResponse(&cr.Message); err != nil {
+			if err := c.msgLogger.LogResponse(&cr); err != nil {
 				panic(err)
 			}
 		}

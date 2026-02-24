@@ -88,6 +88,7 @@ func (cl *msgLogger) LogResponse(msg *api.ChatResponse) error {
 	cl.mu.Lock()
 	defer cl.mu.Unlock()
 
+	cl.counter++
 	filename := fmt.Sprintf("response_%04d.json", cl.counter)
 	return cl.writeJSON(filename, msg)
 }
