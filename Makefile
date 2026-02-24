@@ -1,4 +1,7 @@
+include versions.mk
+
 IMAGE           := modelhawk-proto
+IN_DOCKER       := $(shell test -f /.dockerenv && echo yes)
 PROTO_DIR       := modelhawk/v1
 PROTO_FILES     := $(wildcard $(PROTO_DIR)/*.proto)
 GO_OUT          := gen/go/v1
@@ -16,7 +19,12 @@ ref-impls: opencode-plugin server
 # --- Docker ---
 
 docker-build:
-	docker build -t $(IMAGE) .
+	docker build \
+		--build-arg PROTOC_GEN_GO_VERSION=$(PROTOC_GEN_GO_VERSION) \
+		--build-arg PROTOC_GEN_GO_GRPC_VERSION=$(PROTOC_GEN_GO_GRPC_VERSION) \
+		--build-arg PROTOBUF_TS_PLUGIN_VERSION=$(PROTOBUF_TS_PLUGIN_VERSION) \
+		--build-arg PROTOC_GEN_DOC_VERSION=$(PROTOC_GEN_DOC_VERSION) \
+		-t $(IMAGE) .
 
 
 # --- Code Generation ---
@@ -29,8 +37,8 @@ generate-go: docker-build $(PROTO_FILES)
 	$(DOCKER_RUN) make generate-go-local
 
 generate-go-local:
-	go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.11
-	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.6.1
+	$(if $(IN_DOCKER),,go install google.golang.org/protobuf/cmd/protoc-gen-go@$(PROTOC_GEN_GO_VERSION))
+	$(if $(IN_DOCKER),,go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@$(PROTOC_GEN_GO_GRPC_VERSION))
 	@rm -rf "$(GO_OUT)"
 	@mkdir -p "$(GO_OUT)"
 	protoc \
@@ -45,7 +53,7 @@ generate-ts: docker-build $(PROTO_FILES)
 	$(DOCKER_RUN) make generate-ts-local
 
 generate-ts-local:
-	npm install -g @protobuf-ts/plugin@v2.11.1
+	$(if $(IN_DOCKER),,npm install -g @protobuf-ts/plugin@$(PROTOBUF_TS_PLUGIN_VERSION))
 	@rm -rf "$(TS_OUT)"
 	@mkdir -p "$(TS_OUT)"
 	protoc \
@@ -58,8 +66,9 @@ generate-proto-docs: docker-build
 
 generate-proto-docs-local:
 	@mkdir -p gen/docs
-	go install github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@v1.5.1
+	$(if $(IN_DOCKER),,go install github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@$(PROTOC_GEN_DOC_VERSION))
 	protoc -I "$(PROTO_DIR)" --doc_out=gen/docs --doc_opt=markdown,docs.md $(PROTO_FILES)
+
 
 # --- opencode-plugin ref impl ---
 
@@ -78,4 +87,4 @@ server : generate-go
 # --- Cleanup ---
 
 clean:
-	rm -rf gen/ts/dist gen/ts/node_modules reference-impls/opencode-plugin/dist reference-impls/opencode-plugin/node_modules reference-impls/server/server opencode.log
+	@rm -rf gen/ts/dist gen/ts/node_modules reference-impls/opencode-plugin/dist reference-impls/opencode-plugin/node_modules reference-impls/server/server opencode.log
