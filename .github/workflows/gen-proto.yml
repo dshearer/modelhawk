@@ -14,11 +14,18 @@ jobs:
       - uses: actions/setup-go@v6
         with:
           go-version: stable
+          cache: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: gen/ts/package.json
 
       - name: Install stuff
         run: |
           set -e
-          sudo apt-get -y install protobuf-compiler libprotobuf-dev nodejs npm make
+          sudo apt-get -y install protobuf-compiler libprotobuf-dev make
 
       - name: Generate protobuf code
         run: make -j generate-without-docker
