@@ -1,6 +1,7 @@
 include versions.mk
 
 IMAGE           := modelhawk-proto
+IN_DOCKER       := $(shell test -f /.dockerenv && echo yes)
 PROTO_DIR       := modelhawk/v1
 PROTO_FILES     := $(wildcard $(PROTO_DIR)/*.proto)
 GO_OUT          := gen/go/v1
@@ -36,8 +37,8 @@ generate-go: docker-build $(PROTO_FILES)
 	$(DOCKER_RUN) make generate-go-local
 
 generate-go-local:
-	go install google.golang.org/protobuf/cmd/protoc-gen-go@$(PROTOC_GEN_GO_VERSION)
-	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@$(PROTOC_GEN_GO_GRPC_VERSION)
+	$(if $(IN_DOCKER),,go install google.golang.org/protobuf/cmd/protoc-gen-go@$(PROTOC_GEN_GO_VERSION))
+	$(if $(IN_DOCKER),,go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@$(PROTOC_GEN_GO_GRPC_VERSION))
 	@rm -rf "$(GO_OUT)"
 	@mkdir -p "$(GO_OUT)"
 	protoc \
@@ -52,7 +53,7 @@ generate-ts: docker-build $(PROTO_FILES)
 	$(DOCKER_RUN) make generate-ts-local
 
 generate-ts-local:
-	npm install -g @protobuf-ts/plugin@$(PROTOBUF_TS_PLUGIN_VERSION)
+	$(if $(IN_DOCKER),,npm install -g @protobuf-ts/plugin@$(PROTOBUF_TS_PLUGIN_VERSION))
 	@rm -rf "$(TS_OUT)"
 	@mkdir -p "$(TS_OUT)"
 	protoc \
@@ -65,7 +66,7 @@ generate-proto-docs: docker-build
 
 generate-proto-docs-local:
 	@mkdir -p gen/docs
-	go install github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@$(PROTOC_GEN_DOC_VERSION)
+	$(if $(IN_DOCKER),,go install github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@$(PROTOC_GEN_DOC_VERSION))
 	protoc -I "$(PROTO_DIR)" --doc_out=gen/docs --doc_opt=markdown,docs.md $(PROTO_FILES)
 
 
