@@ -86,4 +86,4 @@ server : generate-go
 # --- Cleanup ---
 
 clean:
-	rm -rf gen/ts/dist gen/ts/node_modules reference-impls/opencode-plugin/dist reference-impls/opencode-plugin/node_modules reference-impls/server/server opencode.log
+	@rm -rf gen/ts/dist gen/ts/node_modules reference-impls/opencode-plugin/dist reference-impls/opencode-plugin/node_modules reference-impls/server/server opencode.log
