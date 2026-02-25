@@ -4,7 +4,7 @@
 // - protoc             v6.31.1
 // source: notify_service.proto
 
-package v1
+package v0
 
 import (
 	context "context"
@@ -19,8 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	NotifyService_WillCallTool_FullMethodName = "/modelhawk.v1.NotifyService/WillCallTool"
-	NotifyService_DidCallTool_FullMethodName  = "/modelhawk.v1.NotifyService/DidCallTool"
+	NotifyService_WillCallTool_FullMethodName = "/modelhawk.v0.NotifyService/WillCallTool"
+	NotifyService_DidCallTool_FullMethodName  = "/modelhawk.v0.NotifyService/DidCallTool"
 )
 
 // NotifyServiceClient is the client API for NotifyService service.
@@ -152,7 +152,7 @@ func _NotifyService_DidCallTool_Handler(srv interface{}, ctx context.Context, de
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var NotifyService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "modelhawk.v1.NotifyService",
+	ServiceName: "modelhawk.v0.NotifyService",
 	HandlerType: (*NotifyServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

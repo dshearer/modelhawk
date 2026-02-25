@@ -12,7 +12,7 @@ import (
 
 	_ "embed"
 
-	pb "github.com/dshearer/modelhawk/gen/go/v1"
+	pb "github.com/dshearer/modelhawk/gen/go/v0"
 	"github.com/ollama/ollama/api"
 )
 

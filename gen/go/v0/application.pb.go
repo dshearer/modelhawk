@@ -4,7 +4,7 @@
 // 	protoc        v6.31.1
 // source: application.proto
 
-package v1
+package v0
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -75,10 +75,10 @@ var File_application_proto protoreflect.FileDescriptor
 
 const file_application_proto_rawDesc = "" +
 	"\n" +
-	"\x11application.proto\x12\fmodelhawk.v1\"2\n" +
+	"\x11application.proto\x12\fmodelhawk.v0\"2\n" +
 	"\vApplication\x12\x19\n" +
 	"\x05value\x18\x01 \x01(\tH\x00R\x05value\x88\x01\x01B\b\n" +
-	"\x06_valueB\"Z github.com/dshearer/modelhawk/v1b\x06proto3"
+	"\x06_valueB)Z'github.com/dshearer/modelhawk/gen/go/v0b\x06proto3"
 
 var (
 	file_application_proto_rawDescOnce sync.Once
@@ -94,7 +94,7 @@ func file_application_proto_rawDescGZIP() []byte {
 
 var file_application_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_application_proto_goTypes = []any{
-	(*Application)(nil), // 0: modelhawk.v1.Application
+	(*Application)(nil), // 0: modelhawk.v0.Application
 }
 var file_application_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

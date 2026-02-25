@@ -1,5 +1,4 @@
 {
-  "//": " @generated - see package-config for template",
   "compilerOptions": {
     "target": "ES2022",
     "module": "ES2022",

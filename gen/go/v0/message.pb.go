@@ -4,7 +4,7 @@
 // 	protoc        v6.31.1
 // source: message.proto
 
-package v1
+package v0
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -79,13 +79,13 @@ var File_message_proto protoreflect.FileDescriptor
 
 const file_message_proto_rawDesc = "" +
 	"\n" +
-	"\rmessage.proto\x12\fmodelhawk.v1\"V\n" +
+	"\rmessage.proto\x12\fmodelhawk.v0\"V\n" +
 	"\aMessage\x12\x17\n" +
 	"\x04role\x18\x01 \x01(\tH\x00R\x04role\x88\x01\x01\x12\x1d\n" +
 	"\acontent\x18\x02 \x01(\tH\x01R\acontent\x88\x01\x01B\a\n" +
 	"\x05_roleB\n" +
 	"\n" +
-	"\b_contentB\"Z github.com/dshearer/modelhawk/v1b\x06proto3"
+	"\b_contentB)Z'github.com/dshearer/modelhawk/gen/go/v0b\x06proto3"
 
 var (
 	file_message_proto_rawDescOnce sync.Once
@@ -101,7 +101,7 @@ func file_message_proto_rawDescGZIP() []byte {
 
 var file_message_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_message_proto_goTypes = []any{
-	(*Message)(nil), // 0: modelhawk.v1.Message
+	(*Message)(nil), // 0: modelhawk.v0.Message
 }
 var file_message_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

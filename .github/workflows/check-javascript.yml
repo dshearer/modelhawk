@@ -26,7 +26,7 @@ jobs:
               run: |
                 T=$(git status --porcelain)
                 if [ -n "${T}" ]; then
-                  ehco "${T}"
+                  echo "${T}"
                   echo "::error::Files in gen/ts are out of date. Run 'npm i' and commit the changes."
                   exit 1
                 fi

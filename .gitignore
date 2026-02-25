@@ -1,2 +1,4 @@
 opencode.log
 server-log/
+gen/ts/node_modules/
+gen/ts/dist/
