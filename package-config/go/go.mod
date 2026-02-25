@@ -1,4 +1,3 @@
-// @generated - see package-config for template
 module github.com/dshearer/modelhawk/gen/go
 
 go 1.25.0

@@ -1,4 +1,3 @@
-// @generated - see package-config for template
 // Re-export all generated protobuf types and service clients.
 export { Application } from "./src/application";
 export { Message } from "./src/message";

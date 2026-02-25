@@ -1,0 +1,101 @@
+#!/bin/sh
+#
+# cp-with-comment - Copy file(s) and add a comment line
+#   - For JSON files: adds {"//": "Generated file - see package-config for template"}
+#   - For go.mod, go.sum: copies as-is (no comments)
+#   - For other files: adds "// @generated" as first line
+#
+# Usage: cp-with-comment <source...> <destination>
+#
+
+set -e
+
+# Function to add comment to a file
+add_comment() {
+    source_file="$1"
+    dest_file="$2"
+    
+    basename=$(basename "$source_file")
+    
+    # Skip comment for files with strict formats
+    case "$basename" in
+        go.sum)
+            # Copy as-is without comment
+            cp "$source_file" "$dest_file"
+            return
+            ;;
+    esac
+    
+    # Add comments based on file type
+    case "$source_file" in
+        *.json)
+            # For JSON files, add a "//" field at the beginning
+            {
+                echo '{'
+                echo '  "//": " @generated - see package-config for template",'
+                tail -n +2 "$source_file" | sed '1s/^{$//'
+            } > "$dest_file"
+            ;;
+        *)
+            # For other files, add // test comment
+            {
+                echo "// @generated - see package-config for template"
+                cat "$source_file"
+            } > "$dest_file"
+            ;;
+    esac
+}
+
+if [ $# -lt 2 ]; then
+    echo "Usage: $0 <source...> <destination>" >&2
+    exit 1
+fi
+
+# Get all arguments
+args="$@"
+
+# Last argument is the destination
+for dest in "$@"; do :; done
+
+# Count arguments to determine if we have multiple sources
+num_args=$#
+num_sources=$((num_args - 1))
+
+# If destination is a directory or we have multiple sources, treat it as directory copy
+if [ $num_sources -gt 1 ] || [ -d "$dest" ]; then
+    # Ensure destination directory exists
+    mkdir -p "$dest"
+    
+    # Copy each source file
+    while [ $# -gt 1 ]; do
+        source="$1"
+        shift
+        
+        if [ ! -f "$source" ]; then
+            echo "Warning: Source file '$source' not found, skipping" >&2
+            continue
+        fi
+        
+        # Get basename for destination
+        basename=$(basename "$source")
+        dest_file="$dest/$basename"
+        
+        # Add comment and copy file contents
+        add_comment "$source" "$dest_file"
+    done
+else
+    # Single file to single file
+    source="$1"
+    
+    if [ ! -f "$source" ]; then
+        echo "Error: Source file '$source' not found" >&2
+        exit 1
+    fi
+    
+    # Create destination directory if it doesn't exist
+    dest_dir=$(dirname "$dest")
+    mkdir -p "$dest_dir"
+    
+    # Add comment and copy file contents
+    add_comment "$source" "$dest"
+fi
