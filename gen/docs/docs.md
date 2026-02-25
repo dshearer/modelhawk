@@ -4,37 +4,37 @@
 ## Table of Contents
 
 - [application.proto](#application-proto)
-    - [Application](#modelhawk-v1-Application)
+    - [Application](#modelhawk-v0-Application)
   
 - [info_service.proto](#info_service-proto)
-    - [GiveToolInfoRequest](#modelhawk-v1-GiveToolInfoRequest)
-    - [GiveToolInfoResponse](#modelhawk-v1-GiveToolInfoResponse)
-    - [ToolArgInfo](#modelhawk-v1-ToolArgInfo)
+    - [GiveToolInfoRequest](#modelhawk-v0-GiveToolInfoRequest)
+    - [GiveToolInfoResponse](#modelhawk-v0-GiveToolInfoResponse)
+    - [ToolArgInfo](#modelhawk-v0-ToolArgInfo)
   
-    - [InfoService](#modelhawk-v1-InfoService)
+    - [InfoService](#modelhawk-v0-InfoService)
   
 - [message.proto](#message-proto)
-    - [Message](#modelhawk-v1-Message)
+    - [Message](#modelhawk-v0-Message)
   
 - [notify_service.proto](#notify_service-proto)
-    - [DidCallToolRequest](#modelhawk-v1-DidCallToolRequest)
-    - [DidCallToolRequest.ArgsEntry](#modelhawk-v1-DidCallToolRequest-ArgsEntry)
-    - [WillCallToolRequest](#modelhawk-v1-WillCallToolRequest)
-    - [WillCallToolRequest.ArgsEntry](#modelhawk-v1-WillCallToolRequest-ArgsEntry)
+    - [DidCallToolRequest](#modelhawk-v0-DidCallToolRequest)
+    - [DidCallToolRequest.ArgsEntry](#modelhawk-v0-DidCallToolRequest-ArgsEntry)
+    - [WillCallToolRequest](#modelhawk-v0-WillCallToolRequest)
+    - [WillCallToolRequest.ArgsEntry](#modelhawk-v0-WillCallToolRequest-ArgsEntry)
   
-    - [NotifyService](#modelhawk-v1-NotifyService)
+    - [NotifyService](#modelhawk-v0-NotifyService)
   
 - [permission_service.proto](#permission_service-proto)
-    - [WantsToCallToolRequest](#modelhawk-v1-WantsToCallToolRequest)
-    - [WantsToCallToolRequest.ArgsEntry](#modelhawk-v1-WantsToCallToolRequest-ArgsEntry)
-    - [WantsToCallToolResponse](#modelhawk-v1-WantsToCallToolResponse)
+    - [WantsToCallToolRequest](#modelhawk-v0-WantsToCallToolRequest)
+    - [WantsToCallToolRequest.ArgsEntry](#modelhawk-v0-WantsToCallToolRequest-ArgsEntry)
+    - [WantsToCallToolResponse](#modelhawk-v0-WantsToCallToolResponse)
   
-    - [PermissionService](#modelhawk-v1-PermissionService)
+    - [PermissionService](#modelhawk-v0-PermissionService)
   
 - [service_status_response.proto](#service_status_response-proto)
-    - [ServiceStatusResponse](#modelhawk-v1-ServiceStatusResponse)
+    - [ServiceStatusResponse](#modelhawk-v0-ServiceStatusResponse)
   
-    - [ServiceStatusResponse.Result](#modelhawk-v1-ServiceStatusResponse-Result)
+    - [ServiceStatusResponse.Result](#modelhawk-v0-ServiceStatusResponse-Result)
   
 - [Scalar Value Types](#scalar-value-types)
 
@@ -47,7 +47,7 @@
 
 
 
-<a name="modelhawk-v1-Application"></a>
+<a name="modelhawk-v0-Application"></a>
 
 ### Application
 An Application identifies a particular deployment of an AI app. Examples:
@@ -82,7 +82,7 @@ The appropriate scope really depends on how you want to use the security app tha
 
 
 
-<a name="modelhawk-v1-GiveToolInfoRequest"></a>
+<a name="modelhawk-v0-GiveToolInfoRequest"></a>
 
 ### GiveToolInfoRequest
 
@@ -90,17 +90,17 @@ The appropriate scope really depends on how you want to use the security app tha
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| app | [Application](#modelhawk-v1-Application) | optional |  |
+| app | [Application](#modelhawk-v0-Application) | optional |  |
 | name | [string](#string) | optional |  |
 | desc | [string](#string) | optional |  |
-| args | [ToolArgInfo](#modelhawk-v1-ToolArgInfo) | repeated |  |
+| args | [ToolArgInfo](#modelhawk-v0-ToolArgInfo) | repeated |  |
 
 
 
 
 
 
-<a name="modelhawk-v1-GiveToolInfoResponse"></a>
+<a name="modelhawk-v0-GiveToolInfoResponse"></a>
 
 ### GiveToolInfoResponse
 
@@ -116,7 +116,7 @@ The appropriate scope really depends on how you want to use the security app tha
 
 
 
-<a name="modelhawk-v1-ToolArgInfo"></a>
+<a name="modelhawk-v0-ToolArgInfo"></a>
 
 ### ToolArgInfo
 
@@ -139,14 +139,14 @@ The appropriate scope really depends on how you want to use the security app tha
  
 
 
-<a name="modelhawk-v1-InfoService"></a>
+<a name="modelhawk-v0-InfoService"></a>
 
 ### InfoService
 InfoService is a service for telling the security app about configuration in the AI app that&#39;s being monitored.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GiveToolInfo | [GiveToolInfoRequest](#modelhawk-v1-GiveToolInfoRequest) | [ServiceStatusResponse](#modelhawk-v1-ServiceStatusResponse) | Tell the security tool about a tool that is available in a particular context. |
+| GiveToolInfo | [GiveToolInfoRequest](#modelhawk-v0-GiveToolInfoRequest) | [ServiceStatusResponse](#modelhawk-v0-ServiceStatusResponse) | Tell the security tool about a tool that is available in a particular context. |
 
  
 
@@ -159,7 +159,7 @@ InfoService is a service for telling the security app about configuration in the
 
 
 
-<a name="modelhawk-v1-Message"></a>
+<a name="modelhawk-v0-Message"></a>
 
 ### Message
 A message sent from or to an AI model.
@@ -191,7 +191,7 @@ A message sent from or to an AI model.
 
 
 
-<a name="modelhawk-v1-DidCallToolRequest"></a>
+<a name="modelhawk-v0-DidCallToolRequest"></a>
 
 ### DidCallToolRequest
 
@@ -199,18 +199,18 @@ A message sent from or to an AI model.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| app | [Application](#modelhawk-v1-Application) | optional |  |
+| app | [Application](#modelhawk-v0-Application) | optional |  |
 | tool_name | [string](#string) | optional |  |
-| args | [DidCallToolRequest.ArgsEntry](#modelhawk-v1-DidCallToolRequest-ArgsEntry) | repeated |  |
+| args | [DidCallToolRequest.ArgsEntry](#modelhawk-v0-DidCallToolRequest-ArgsEntry) | repeated |  |
 | result | [string](#string) | optional |  |
-| last_messages | [Message](#modelhawk-v1-Message) | repeated |  |
+| last_messages | [Message](#modelhawk-v0-Message) | repeated |  |
 
 
 
 
 
 
-<a name="modelhawk-v1-DidCallToolRequest-ArgsEntry"></a>
+<a name="modelhawk-v0-DidCallToolRequest-ArgsEntry"></a>
 
 ### DidCallToolRequest.ArgsEntry
 
@@ -226,7 +226,7 @@ A message sent from or to an AI model.
 
 
 
-<a name="modelhawk-v1-WillCallToolRequest"></a>
+<a name="modelhawk-v0-WillCallToolRequest"></a>
 
 ### WillCallToolRequest
 
@@ -234,17 +234,17 @@ A message sent from or to an AI model.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| app | [Application](#modelhawk-v1-Application) | optional |  |
+| app | [Application](#modelhawk-v0-Application) | optional |  |
 | tool_name | [string](#string) | optional |  |
-| args | [WillCallToolRequest.ArgsEntry](#modelhawk-v1-WillCallToolRequest-ArgsEntry) | repeated |  |
-| last_messages | [Message](#modelhawk-v1-Message) | repeated |  |
+| args | [WillCallToolRequest.ArgsEntry](#modelhawk-v0-WillCallToolRequest-ArgsEntry) | repeated |  |
+| last_messages | [Message](#modelhawk-v0-Message) | repeated |  |
 
 
 
 
 
 
-<a name="modelhawk-v1-WillCallToolRequest-ArgsEntry"></a>
+<a name="modelhawk-v0-WillCallToolRequest-ArgsEntry"></a>
 
 ### WillCallToolRequest.ArgsEntry
 
@@ -266,15 +266,15 @@ A message sent from or to an AI model.
  
 
 
-<a name="modelhawk-v1-NotifyService"></a>
+<a name="modelhawk-v0-NotifyService"></a>
 
 ### NotifyService
 NotifyService is a service for telling the security app about stuff that has happened in the AI app that&#39;s being monitored.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| WillCallTool | [WillCallToolRequest](#modelhawk-v1-WillCallToolRequest) | [ServiceStatusResponse](#modelhawk-v1-ServiceStatusResponse) | WillCallTool can be called by the AI app to tell the security app that the AI model will call a tool. |
-| DidCallTool | [DidCallToolRequest](#modelhawk-v1-DidCallToolRequest) | [ServiceStatusResponse](#modelhawk-v1-ServiceStatusResponse) | DidCallTool can be called by the AI app to tell the security app that the AI model did call a tool. |
+| WillCallTool | [WillCallToolRequest](#modelhawk-v0-WillCallToolRequest) | [ServiceStatusResponse](#modelhawk-v0-ServiceStatusResponse) | WillCallTool can be called by the AI app to tell the security app that the AI model will call a tool. |
+| DidCallTool | [DidCallToolRequest](#modelhawk-v0-DidCallToolRequest) | [ServiceStatusResponse](#modelhawk-v0-ServiceStatusResponse) | DidCallTool can be called by the AI app to tell the security app that the AI model did call a tool. |
 
  
 
@@ -287,7 +287,7 @@ NotifyService is a service for telling the security app about stuff that has hap
 
 
 
-<a name="modelhawk-v1-WantsToCallToolRequest"></a>
+<a name="modelhawk-v0-WantsToCallToolRequest"></a>
 
 ### WantsToCallToolRequest
 
@@ -295,17 +295,17 @@ NotifyService is a service for telling the security app about stuff that has hap
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| app | [Application](#modelhawk-v1-Application) | optional |  |
+| app | [Application](#modelhawk-v0-Application) | optional |  |
 | tool_name | [string](#string) | optional |  |
-| args | [WantsToCallToolRequest.ArgsEntry](#modelhawk-v1-WantsToCallToolRequest-ArgsEntry) | repeated |  |
-| last_messages | [Message](#modelhawk-v1-Message) | repeated |  |
+| args | [WantsToCallToolRequest.ArgsEntry](#modelhawk-v0-WantsToCallToolRequest-ArgsEntry) | repeated |  |
+| last_messages | [Message](#modelhawk-v0-Message) | repeated |  |
 
 
 
 
 
 
-<a name="modelhawk-v1-WantsToCallToolRequest-ArgsEntry"></a>
+<a name="modelhawk-v0-WantsToCallToolRequest-ArgsEntry"></a>
 
 ### WantsToCallToolRequest.ArgsEntry
 
@@ -321,7 +321,7 @@ NotifyService is a service for telling the security app about stuff that has hap
 
 
 
-<a name="modelhawk-v1-WantsToCallToolResponse"></a>
+<a name="modelhawk-v0-WantsToCallToolResponse"></a>
 
 ### WantsToCallToolResponse
 
@@ -343,14 +343,14 @@ NotifyService is a service for telling the security app about stuff that has hap
  
 
 
-<a name="modelhawk-v1-PermissionService"></a>
+<a name="modelhawk-v0-PermissionService"></a>
 
 ### PermissionService
 PermissionService is a service that AI apps can use to ask the security app for permission to do stuff.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| WantsToCallTool | [WantsToCallToolRequest](#modelhawk-v1-WantsToCallToolRequest) | [WantsToCallToolResponse](#modelhawk-v1-WantsToCallToolResponse) | The AI app wants to call a tool. The security app can approve or deny it. |
+| WantsToCallTool | [WantsToCallToolRequest](#modelhawk-v0-WantsToCallToolRequest) | [WantsToCallToolResponse](#modelhawk-v0-WantsToCallToolResponse) | The AI app wants to call a tool. The security app can approve or deny it. |
 
  
 
@@ -363,7 +363,7 @@ PermissionService is a service that AI apps can use to ask the security app for 
 
 
 
-<a name="modelhawk-v1-ServiceStatusResponse"></a>
+<a name="modelhawk-v0-ServiceStatusResponse"></a>
 
 ### ServiceStatusResponse
 
@@ -371,7 +371,7 @@ PermissionService is a service that AI apps can use to ask the security app for 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| result | [ServiceStatusResponse.Result](#modelhawk-v1-ServiceStatusResponse-Result) | optional |  |
+| result | [ServiceStatusResponse.Result](#modelhawk-v0-ServiceStatusResponse-Result) | optional |  |
 | msg | [string](#string) | optional |  |
 
 
@@ -381,7 +381,7 @@ PermissionService is a service that AI apps can use to ask the security app for 
  
 
 
-<a name="modelhawk-v1-ServiceStatusResponse-Result"></a>
+<a name="modelhawk-v0-ServiceStatusResponse-Result"></a>
 
 ### ServiceStatusResponse.Result
 

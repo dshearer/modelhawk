@@ -4,7 +4,7 @@
 // 	protoc        v6.31.1
 // source: info_service.proto
 
-package v1
+package v0
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -205,7 +205,7 @@ var File_info_service_proto protoreflect.FileDescriptor
 
 const file_info_service_proto_rawDesc = "" +
 	"\n" +
-	"\x12info_service.proto\x12\fmodelhawk.v1\x1a\x11application.proto\x1a\x1dservice_status_response.proto\"s\n" +
+	"\x12info_service.proto\x12\fmodelhawk.v0\x1a\x11application.proto\x1a\x1dservice_status_response.proto\"s\n" +
 	"\vToolArgInfo\x12\x17\n" +
 	"\x04name\x18\x01 \x01(\tH\x00R\x04name\x88\x01\x01\x12\x17\n" +
 	"\x04type\x18\x02 \x01(\tH\x01R\x04type\x88\x01\x01\x12\x17\n" +
@@ -214,10 +214,10 @@ const file_info_service_proto_rawDesc = "" +
 	"\x05_typeB\a\n" +
 	"\x05_desc\"\xc2\x01\n" +
 	"\x13GiveToolInfoRequest\x120\n" +
-	"\x03app\x18\x01 \x01(\v2\x19.modelhawk.v1.ApplicationH\x00R\x03app\x88\x01\x01\x12\x17\n" +
+	"\x03app\x18\x01 \x01(\v2\x19.modelhawk.v0.ApplicationH\x00R\x03app\x88\x01\x01\x12\x17\n" +
 	"\x04name\x18\x02 \x01(\tH\x01R\x04name\x88\x01\x01\x12\x17\n" +
 	"\x04desc\x18\x03 \x01(\tH\x02R\x04desc\x88\x01\x01\x12-\n" +
-	"\x04args\x18\x04 \x03(\v2\x19.modelhawk.v1.ToolArgInfoR\x04argsB\x06\n" +
+	"\x04args\x18\x04 \x03(\v2\x19.modelhawk.v0.ToolArgInfoR\x04argsB\x06\n" +
 	"\x04_appB\a\n" +
 	"\x05_nameB\a\n" +
 	"\x05_desc\"]\n" +
@@ -227,7 +227,7 @@ const file_info_service_proto_rawDesc = "" +
 	"\a_resultB\x06\n" +
 	"\x04_msg2e\n" +
 	"\vInfoService\x12V\n" +
-	"\fGiveToolInfo\x12!.modelhawk.v1.GiveToolInfoRequest\x1a#.modelhawk.v1.ServiceStatusResponseB\"Z github.com/dshearer/modelhawk/v1b\x06proto3"
+	"\fGiveToolInfo\x12!.modelhawk.v0.GiveToolInfoRequest\x1a#.modelhawk.v0.ServiceStatusResponseB)Z'github.com/dshearer/modelhawk/gen/go/v0b\x06proto3"
 
 var (
 	file_info_service_proto_rawDescOnce sync.Once
@@ -243,17 +243,17 @@ func file_info_service_proto_rawDescGZIP() []byte {
 
 var file_info_service_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_info_service_proto_goTypes = []any{
-	(*ToolArgInfo)(nil),           // 0: modelhawk.v1.ToolArgInfo
-	(*GiveToolInfoRequest)(nil),   // 1: modelhawk.v1.GiveToolInfoRequest
-	(*GiveToolInfoResponse)(nil),  // 2: modelhawk.v1.GiveToolInfoResponse
-	(*Application)(nil),           // 3: modelhawk.v1.Application
-	(*ServiceStatusResponse)(nil), // 4: modelhawk.v1.ServiceStatusResponse
+	(*ToolArgInfo)(nil),           // 0: modelhawk.v0.ToolArgInfo
+	(*GiveToolInfoRequest)(nil),   // 1: modelhawk.v0.GiveToolInfoRequest
+	(*GiveToolInfoResponse)(nil),  // 2: modelhawk.v0.GiveToolInfoResponse
+	(*Application)(nil),           // 3: modelhawk.v0.Application
+	(*ServiceStatusResponse)(nil), // 4: modelhawk.v0.ServiceStatusResponse
 }
 var file_info_service_proto_depIdxs = []int32{
-	3, // 0: modelhawk.v1.GiveToolInfoRequest.app:type_name -> modelhawk.v1.Application
-	0, // 1: modelhawk.v1.GiveToolInfoRequest.args:type_name -> modelhawk.v1.ToolArgInfo
-	1, // 2: modelhawk.v1.InfoService.GiveToolInfo:input_type -> modelhawk.v1.GiveToolInfoRequest
-	4, // 3: modelhawk.v1.InfoService.GiveToolInfo:output_type -> modelhawk.v1.ServiceStatusResponse
+	3, // 0: modelhawk.v0.GiveToolInfoRequest.app:type_name -> modelhawk.v0.Application
+	0, // 1: modelhawk.v0.GiveToolInfoRequest.args:type_name -> modelhawk.v0.ToolArgInfo
+	1, // 2: modelhawk.v0.InfoService.GiveToolInfo:input_type -> modelhawk.v0.GiveToolInfoRequest
+	4, // 3: modelhawk.v0.InfoService.GiveToolInfo:output_type -> modelhawk.v0.ServiceStatusResponse
 	3, // [3:4] is the sub-list for method output_type
 	2, // [2:3] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name

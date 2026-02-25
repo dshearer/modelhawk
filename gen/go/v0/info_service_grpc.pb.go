@@ -4,7 +4,7 @@
 // - protoc             v6.31.1
 // source: info_service.proto
 
-package v1
+package v0
 
 import (
 	context "context"
@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	InfoService_GiveToolInfo_FullMethodName = "/modelhawk.v1.InfoService/GiveToolInfo"
+	InfoService_GiveToolInfo_FullMethodName = "/modelhawk.v0.InfoService/GiveToolInfo"
 )
 
 // InfoServiceClient is the client API for InfoService service.
@@ -116,7 +116,7 @@ func _InfoService_GiveToolInfo_Handler(srv interface{}, ctx context.Context, dec
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var InfoService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "modelhawk.v1.InfoService",
+	ServiceName: "modelhawk.v0.InfoService",
 	HandlerType: (*InfoServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

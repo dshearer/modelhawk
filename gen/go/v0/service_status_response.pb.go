@@ -4,7 +4,7 @@
 // 	protoc        v6.31.1
 // source: service_status_response.proto
 
-package v1
+package v0
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -69,7 +69,7 @@ func (ServiceStatusResponse_Result) EnumDescriptor() ([]byte, []int) {
 
 type ServiceStatusResponse struct {
 	state         protoimpl.MessageState        `protogen:"open.v1"`
-	Result        *ServiceStatusResponse_Result `protobuf:"varint,1,opt,name=result,proto3,enum=modelhawk.v1.ServiceStatusResponse_Result,oneof" json:"result,omitempty"`
+	Result        *ServiceStatusResponse_Result `protobuf:"varint,1,opt,name=result,proto3,enum=modelhawk.v0.ServiceStatusResponse_Result,oneof" json:"result,omitempty"`
 	Msg           *string                       `protobuf:"bytes,2,opt,name=msg,proto3,oneof" json:"msg,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -123,15 +123,15 @@ var File_service_status_response_proto protoreflect.FileDescriptor
 
 const file_service_status_response_proto_rawDesc = "" +
 	"\n" +
-	"\x1dservice_status_response.proto\x12\fmodelhawk.v1\"\xb5\x01\n" +
+	"\x1dservice_status_response.proto\x12\fmodelhawk.v0\"\xb5\x01\n" +
 	"\x15ServiceStatusResponse\x12G\n" +
-	"\x06result\x18\x01 \x01(\x0e2*.modelhawk.v1.ServiceStatusResponse.ResultH\x00R\x06result\x88\x01\x01\x12\x15\n" +
+	"\x06result\x18\x01 \x01(\x0e2*.modelhawk.v0.ServiceStatusResponse.ResultH\x00R\x06result\x88\x01\x01\x12\x15\n" +
 	"\x03msg\x18\x02 \x01(\tH\x01R\x03msg\x88\x01\x01\")\n" +
 	"\x06Result\x12\r\n" +
 	"\tRESULT_OK\x10\x00\x12\x10\n" +
 	"\fRESULT_ERROR\x10\x01B\t\n" +
 	"\a_resultB\x06\n" +
-	"\x04_msgB\"Z github.com/dshearer/modelhawk/v1b\x06proto3"
+	"\x04_msgB)Z'github.com/dshearer/modelhawk/gen/go/v0b\x06proto3"
 
 var (
 	file_service_status_response_proto_rawDescOnce sync.Once
@@ -148,11 +148,11 @@ func file_service_status_response_proto_rawDescGZIP() []byte {
 var file_service_status_response_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_service_status_response_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_service_status_response_proto_goTypes = []any{
-	(ServiceStatusResponse_Result)(0), // 0: modelhawk.v1.ServiceStatusResponse.Result
-	(*ServiceStatusResponse)(nil),     // 1: modelhawk.v1.ServiceStatusResponse
+	(ServiceStatusResponse_Result)(0), // 0: modelhawk.v0.ServiceStatusResponse.Result
+	(*ServiceStatusResponse)(nil),     // 1: modelhawk.v0.ServiceStatusResponse
 }
 var file_service_status_response_proto_depIdxs = []int32{
-	0, // 0: modelhawk.v1.ServiceStatusResponse.result:type_name -> modelhawk.v1.ServiceStatusResponse.Result
+	0, // 0: modelhawk.v0.ServiceStatusResponse.result:type_name -> modelhawk.v0.ServiceStatusResponse.Result
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name

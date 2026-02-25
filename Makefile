@@ -2,14 +2,14 @@ include versions.mk
 
 IMAGE           := modelhawk-proto
 IN_DOCKER       := $(shell test -f /.dockerenv && echo yes)
-PROTO_DIR       := modelhawk/v1
+PROTO_DIR       := proto/v0
 PROTO_FILES     := $(wildcard $(PROTO_DIR)/*.proto)
-GO_OUT          := gen/go/v1
+GO_OUT          := gen/go/v0
 TS_OUT          := gen/ts/src
 
 DOCKER_RUN   := docker run --rm -v $(CURDIR):/workspace $(IMAGE)
 
-.PHONY: all generate generate-without-docker generate-go generate-go-local generate-ts generate-ts-local clean docker-build opencode-plugin install-opencode-plugin server ref-impls generate-proto-docs generate-proto-docs-local
+.PHONY: all generate generate-without-docker generate-go generate-go-local generate-ts generate-ts-local clean clean-gen docker-build opencode-plugin install-opencode-plugin server ref-impls generate-proto-docs generate-proto-docs-local
 
 all: generate
 
@@ -85,6 +85,9 @@ server : generate-go
 	@cd reference-impls/server && go build .
 
 # --- Cleanup ---
+
+clean-gen:
+	@rm -rf gen/docs gen/go/v0 gen/ts/src
 
 clean:
 	@rm -rf gen/ts/dist gen/ts/node_modules reference-impls/opencode-plugin/dist reference-impls/opencode-plugin/node_modules reference-impls/server/server opencode.log

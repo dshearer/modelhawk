@@ -4,7 +4,7 @@
 // 	protoc        v6.31.1
 // source: permission_service.proto
 
-package v1
+package v0
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -145,12 +145,12 @@ var File_permission_service_proto protoreflect.FileDescriptor
 
 const file_permission_service_proto_rawDesc = "" +
 	"\n" +
-	"\x18permission_service.proto\x12\fmodelhawk.v1\x1a\x11application.proto\x1a\rmessage.proto\"\xbb\x02\n" +
+	"\x18permission_service.proto\x12\fmodelhawk.v0\x1a\x11application.proto\x1a\rmessage.proto\"\xbb\x02\n" +
 	"\x16WantsToCallToolRequest\x120\n" +
-	"\x03app\x18\x01 \x01(\v2\x19.modelhawk.v1.ApplicationH\x00R\x03app\x88\x01\x01\x12 \n" +
+	"\x03app\x18\x01 \x01(\v2\x19.modelhawk.v0.ApplicationH\x00R\x03app\x88\x01\x01\x12 \n" +
 	"\ttool_name\x18\x02 \x01(\tH\x01R\btoolName\x88\x01\x01\x12B\n" +
-	"\x04args\x18\x03 \x03(\v2..modelhawk.v1.WantsToCallToolRequest.ArgsEntryR\x04args\x12:\n" +
-	"\rlast_messages\x18\x04 \x03(\v2\x15.modelhawk.v1.MessageR\flastMessages\x1a7\n" +
+	"\x04args\x18\x03 \x03(\v2..modelhawk.v0.WantsToCallToolRequest.ArgsEntryR\x04args\x12:\n" +
+	"\rlast_messages\x18\x04 \x03(\v2\x15.modelhawk.v0.MessageR\flastMessages\x1a7\n" +
 	"\tArgsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x06\n" +
@@ -165,7 +165,7 @@ const file_permission_service_proto_rawDesc = "" +
 	"\n" +
 	"\b_details2s\n" +
 	"\x11PermissionService\x12^\n" +
-	"\x0fWantsToCallTool\x12$.modelhawk.v1.WantsToCallToolRequest\x1a%.modelhawk.v1.WantsToCallToolResponseB\"Z github.com/dshearer/modelhawk/v1b\x06proto3"
+	"\x0fWantsToCallTool\x12$.modelhawk.v0.WantsToCallToolRequest\x1a%.modelhawk.v0.WantsToCallToolResponseB)Z'github.com/dshearer/modelhawk/gen/go/v0b\x06proto3"
 
 var (
 	file_permission_service_proto_rawDescOnce sync.Once
@@ -181,18 +181,18 @@ func file_permission_service_proto_rawDescGZIP() []byte {
 
 var file_permission_service_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_permission_service_proto_goTypes = []any{
-	(*WantsToCallToolRequest)(nil),  // 0: modelhawk.v1.WantsToCallToolRequest
-	(*WantsToCallToolResponse)(nil), // 1: modelhawk.v1.WantsToCallToolResponse
-	nil,                             // 2: modelhawk.v1.WantsToCallToolRequest.ArgsEntry
-	(*Application)(nil),             // 3: modelhawk.v1.Application
-	(*Message)(nil),                 // 4: modelhawk.v1.Message
+	(*WantsToCallToolRequest)(nil),  // 0: modelhawk.v0.WantsToCallToolRequest
+	(*WantsToCallToolResponse)(nil), // 1: modelhawk.v0.WantsToCallToolResponse
+	nil,                             // 2: modelhawk.v0.WantsToCallToolRequest.ArgsEntry
+	(*Application)(nil),             // 3: modelhawk.v0.Application
+	(*Message)(nil),                 // 4: modelhawk.v0.Message
 }
 var file_permission_service_proto_depIdxs = []int32{
-	3, // 0: modelhawk.v1.WantsToCallToolRequest.app:type_name -> modelhawk.v1.Application
-	2, // 1: modelhawk.v1.WantsToCallToolRequest.args:type_name -> modelhawk.v1.WantsToCallToolRequest.ArgsEntry
-	4, // 2: modelhawk.v1.WantsToCallToolRequest.last_messages:type_name -> modelhawk.v1.Message
-	0, // 3: modelhawk.v1.PermissionService.WantsToCallTool:input_type -> modelhawk.v1.WantsToCallToolRequest
-	1, // 4: modelhawk.v1.PermissionService.WantsToCallTool:output_type -> modelhawk.v1.WantsToCallToolResponse
+	3, // 0: modelhawk.v0.WantsToCallToolRequest.app:type_name -> modelhawk.v0.Application
+	2, // 1: modelhawk.v0.WantsToCallToolRequest.args:type_name -> modelhawk.v0.WantsToCallToolRequest.ArgsEntry
+	4, // 2: modelhawk.v0.WantsToCallToolRequest.last_messages:type_name -> modelhawk.v0.Message
+	0, // 3: modelhawk.v0.PermissionService.WantsToCallTool:input_type -> modelhawk.v0.WantsToCallToolRequest
+	1, // 4: modelhawk.v0.PermissionService.WantsToCallTool:output_type -> modelhawk.v0.WantsToCallToolResponse
 	4, // [4:5] is the sub-list for method output_type
 	3, // [3:4] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name

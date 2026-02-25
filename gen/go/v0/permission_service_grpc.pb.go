@@ -4,7 +4,7 @@
 // - protoc             v6.31.1
 // source: permission_service.proto
 
-package v1
+package v0
 
 import (
 	context "context"
@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PermissionService_WantsToCallTool_FullMethodName = "/modelhawk.v1.PermissionService/WantsToCallTool"
+	PermissionService_WantsToCallTool_FullMethodName = "/modelhawk.v0.PermissionService/WantsToCallTool"
 )
 
 // PermissionServiceClient is the client API for PermissionService service.
@@ -116,7 +116,7 @@ func _PermissionService_WantsToCallTool_Handler(srv interface{}, ctx context.Con
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var PermissionService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "modelhawk.v1.PermissionService",
+	ServiceName: "modelhawk.v0.PermissionService",
 	HandlerType: (*PermissionServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

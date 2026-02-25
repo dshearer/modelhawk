@@ -1,7 +1,7 @@
 syntax = "proto3";
-package modelhawk.v1;
+package modelhawk.v0;
 
-option go_package = "github.com/dshearer/modelhawk/v1";
+option go_package = "github.com/dshearer/modelhawk/gen/go/v0";
 
 import "application.proto";
 import "message.proto";

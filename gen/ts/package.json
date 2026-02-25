@@ -1,7 +1,7 @@
 {
   "name": "@modelhawk/protobuf",
   "version": "0.1.0",
-  "description": "Generated protobuf types and gRPC service clients for ModelHawk",
+  "description": "ModelHawk protocol buffer definitions and TypeScript client",
   "author": {
     "name": "C. Dylan Shearer",
     "email": "dylan@nekonya.info"
@@ -13,7 +13,8 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
     }
   },
   "files": [
