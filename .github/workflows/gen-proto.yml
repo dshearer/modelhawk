@@ -28,7 +28,7 @@ jobs:
           sudo apt-get -y install protobuf-compiler libprotobuf-dev make
 
       - name: Generate protobuf code
-        run: make -j generate-without-docker
+        run: make clean-gen && make -j generate-without-docker
 
       - name: Check for uncommitted changes
         run: |
