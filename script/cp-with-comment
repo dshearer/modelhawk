@@ -19,7 +19,7 @@ add_comment() {
     
     # Skip comment for files with strict formats
     case "$basename" in
-        go.sum)
+        go.sum|package-lock.json)
             # Copy as-is without comment
             cp "$source_file" "$dest_file"
             return
