@@ -8,7 +8,7 @@ import (
 	"net"
 	"net/url"
 
-	pb "github.com/dshearer/modelhawk/gen/go/v1"
+	pb "github.com/dshearer/modelhawk/gen/go/v0"
 	"github.com/dshearer/modelhawk/reference-impls/server/ollama"
 
 	"google.golang.org/grpc"
