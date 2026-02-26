@@ -68,6 +68,7 @@ generate-ts-local: $(patsubst package-config/ts/%,gen/ts/%,$(PACKAGE_CONFIG_GO))
 		$(PROTO_FILES)
 
 gen/ts/%: package-config/ts/%
+	cd package-config/ts && npm i
 	$(CP_WITH_COMMENT) $^ $@
 
 generate-proto-docs: docker-build
@@ -101,4 +102,4 @@ clean-gen:
 	@rm -rf gen
 
 clean:
-	@rm -rf reference-impls/opencode-plugin/dist reference-impls/opencode-plugin/node_modules reference-impls/server/server opencode.log
+	@rm -rf reference-impls/opencode-plugin/dist reference-impls/opencode-plugin/node_modules reference-impls/server/server opencode.log package-config/ts/node_modules
