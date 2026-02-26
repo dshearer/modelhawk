@@ -32,14 +32,6 @@ jobs:
             exit 1
           fi
 
-      - name: Install protobuf compiler
-        run: |
-          sudo apt-get update
-          sudo apt-get -y install protobuf-compiler
-
-      - name: Generate TypeScript protobuf code
-        run: make generate-ts-local
-
       - name: Build and publish @dshearer/modelhawk
         working-directory: gen/ts
         run: |
