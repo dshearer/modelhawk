@@ -19,6 +19,8 @@ jobs:
         with:
           node-version: "25.5.0"
           registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+          cache-dependency-path: gen/ts/package-lock.json
 
       - name: Verify version matches release tag
         run: |
