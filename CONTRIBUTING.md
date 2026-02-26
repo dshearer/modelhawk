@@ -37,7 +37,8 @@ Releases are automated via GitHub Actions. Javascript/Typescript files are publi
 2. **Commit and merge via pull request**:
 
    ```sh
-   git add gen/ts/package.json
+   git add package-config/ts/package.json
+   make -j generate
    git commit -m "chore: bump version to 0.2.0"
    git push origin your-branch
    # Create PR, get approval, merge to main

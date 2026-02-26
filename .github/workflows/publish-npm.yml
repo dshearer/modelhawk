@@ -30,7 +30,7 @@ jobs:
           echo "Tag version: $TAG_VERSION"
           if [ "$PACKAGE_VERSION" != "$TAG_VERSION" ]; then
             echo "::error::Version mismatch! gen/ts/package.json has $PACKAGE_VERSION but release tag is v$TAG_VERSION"
-            echo "::error::Update gen/ts/package.json version to $TAG_VERSION before creating the release"
+            echo "::error::Update package-config/ts/package.json version to $TAG_VERSION before creating the release"
             exit 1
           fi
 
