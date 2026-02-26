@@ -1,7 +1,7 @@
 {
-  "name": "@modelhawk/protobuf",
+  "name": "@dshearer/modelhawk",
   "version": "0.1.0",
-  "description": "ModelHawk protocol buffer definitions and TypeScript client",
+  "description": "Protocol for connecting AI harnesses to security tools",
   "author": {
     "name": "C. Dylan Shearer",
     "email": "dylan@nekonya.info"
