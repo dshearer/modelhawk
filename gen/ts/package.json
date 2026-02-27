@@ -37,6 +37,7 @@
     "directory": "gen/ts"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   }
 }
