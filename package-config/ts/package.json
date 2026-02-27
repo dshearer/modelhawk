@@ -1,6 +1,6 @@
 {
   "name": "@dshearer/modelhawk",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Protocol for connecting AI harnesses to security tools",
   "author": {
     "name": "C. Dylan Shearer",
