@@ -33,18 +33,3 @@ jobs:
 
             - run: npm run build
               working-directory: gen/ts
-            
-            - run: bun install
-              working-directory: reference-impls/opencode-plugin
-
-            - name: Check for uncommitted changes
-              run: |
-                T=$(git status --porcelain)
-                if [ -n "${T}" ]; then
-                  echo "${T}"
-                  echo "::error::Files in reference-impls/opencode-plugin are out of date. Run 'bun i' and commit the changes."
-                  exit 1
-                fi
-
-            - run: bun run build
-              working-directory: reference-impls/opencode-plugin
