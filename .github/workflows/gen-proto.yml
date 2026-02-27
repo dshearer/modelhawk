@@ -25,6 +25,7 @@ jobs:
       - name: Install stuff
         run: |
           set -e
+          sudo apt-get update
           sudo apt-get -y install protobuf-compiler libprotobuf-dev make
 
       - name: Generate protobuf code
