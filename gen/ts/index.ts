@@ -4,8 +4,7 @@ export { Application } from "./src/application";
 export { Message } from "./src/message";
 export { ServiceStatusResponse } from "./src/service_status_response";
 
-export { ToolArgInfo, GiveToolInfoRequest, GiveToolInfoResponse, InfoService } from "./src/info_service";
-export { IInfoServiceClient, InfoServiceClient } from "./src/info_service.client";
+export { ToolInfo, ToolParamInfo } from "./src/tool_info";
 
 export { WillCallToolRequest, DidCallToolRequest, NotifyService } from "./src/notify_service";
 export { INotifyServiceClient, NotifyServiceClient } from "./src/notify_service.client";

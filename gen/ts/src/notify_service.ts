@@ -13,6 +13,7 @@ import type { PartialMessage } from "@protobuf-ts/runtime";
 import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
 import { Message } from "./message";
+import { ToolInfo } from "./tool_info";
 import { Application } from "./application";
 /**
  * @generated from protobuf message modelhawk.v0.WillCallToolRequest
@@ -23,9 +24,9 @@ export interface WillCallToolRequest {
      */
     app?: Application;
     /**
-     * @generated from protobuf field: optional string tool_name = 2
+     * @generated from protobuf field: optional modelhawk.v0.ToolInfo tool = 2
      */
-    toolName?: string;
+    tool?: ToolInfo;
     /**
      * @generated from protobuf field: map<string, string> args = 3
      */
@@ -46,9 +47,9 @@ export interface DidCallToolRequest {
      */
     app?: Application;
     /**
-     * @generated from protobuf field: optional string tool_name = 2
+     * @generated from protobuf field: optional modelhawk.v0.ToolInfo tool = 2
      */
-    toolName?: string;
+    tool?: ToolInfo;
     /**
      * @generated from protobuf field: map<string, string> args = 3
      */
@@ -69,7 +70,7 @@ class WillCallToolRequest$Type extends MessageType<WillCallToolRequest> {
     constructor() {
         super("modelhawk.v0.WillCallToolRequest", [
             { no: 1, name: "app", kind: "message", T: () => Application },
-            { no: 2, name: "tool_name", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "tool", kind: "message", T: () => ToolInfo },
             { no: 3, name: "args", kind: "map", K: 9 /*ScalarType.STRING*/, V: { kind: "scalar", T: 9 /*ScalarType.STRING*/ } },
             { no: 4, name: "last_messages", kind: "message", repeat: 2 /*RepeatType.UNPACKED*/, T: () => Message }
         ]);
@@ -90,8 +91,8 @@ class WillCallToolRequest$Type extends MessageType<WillCallToolRequest> {
                 case /* optional modelhawk.v0.Application app */ 1:
                     message.app = Application.internalBinaryRead(reader, reader.uint32(), options, message.app);
                     break;
-                case /* optional string tool_name */ 2:
-                    message.toolName = reader.string();
+                case /* optional modelhawk.v0.ToolInfo tool */ 2:
+                    message.tool = ToolInfo.internalBinaryRead(reader, reader.uint32(), options, message.tool);
                     break;
                 case /* map<string, string> args */ 3:
                     this.binaryReadMap3(message.args, reader, options);
@@ -130,9 +131,9 @@ class WillCallToolRequest$Type extends MessageType<WillCallToolRequest> {
         /* optional modelhawk.v0.Application app = 1; */
         if (message.app)
             Application.internalBinaryWrite(message.app, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
-        /* optional string tool_name = 2; */
-        if (message.toolName !== undefined)
-            writer.tag(2, WireType.LengthDelimited).string(message.toolName);
+        /* optional modelhawk.v0.ToolInfo tool = 2; */
+        if (message.tool)
+            ToolInfo.internalBinaryWrite(message.tool, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
         /* map<string, string> args = 3; */
         for (let k of globalThis.Object.keys(message.args))
             writer.tag(3, WireType.LengthDelimited).fork().tag(1, WireType.LengthDelimited).string(k).tag(2, WireType.LengthDelimited).string(message.args[k]).join();
@@ -154,7 +155,7 @@ class DidCallToolRequest$Type extends MessageType<DidCallToolRequest> {
     constructor() {
         super("modelhawk.v0.DidCallToolRequest", [
             { no: 1, name: "app", kind: "message", T: () => Application },
-            { no: 2, name: "tool_name", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "tool", kind: "message", T: () => ToolInfo },
             { no: 3, name: "args", kind: "map", K: 9 /*ScalarType.STRING*/, V: { kind: "scalar", T: 9 /*ScalarType.STRING*/ } },
             { no: 4, name: "result", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
             { no: 5, name: "last_messages", kind: "message", repeat: 2 /*RepeatType.UNPACKED*/, T: () => Message }
@@ -176,8 +177,8 @@ class DidCallToolRequest$Type extends MessageType<DidCallToolRequest> {
                 case /* optional modelhawk.v0.Application app */ 1:
                     message.app = Application.internalBinaryRead(reader, reader.uint32(), options, message.app);
                     break;
-                case /* optional string tool_name */ 2:
-                    message.toolName = reader.string();
+                case /* optional modelhawk.v0.ToolInfo tool */ 2:
+                    message.tool = ToolInfo.internalBinaryRead(reader, reader.uint32(), options, message.tool);
                     break;
                 case /* map<string, string> args */ 3:
                     this.binaryReadMap3(message.args, reader, options);
@@ -219,9 +220,9 @@ class DidCallToolRequest$Type extends MessageType<DidCallToolRequest> {
         /* optional modelhawk.v0.Application app = 1; */
         if (message.app)
             Application.internalBinaryWrite(message.app, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
-        /* optional string tool_name = 2; */
-        if (message.toolName !== undefined)
-            writer.tag(2, WireType.LengthDelimited).string(message.toolName);
+        /* optional modelhawk.v0.ToolInfo tool = 2; */
+        if (message.tool)
+            ToolInfo.internalBinaryWrite(message.tool, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
         /* map<string, string> args = 3; */
         for (let k of globalThis.Object.keys(message.args))
             writer.tag(3, WireType.LengthDelimited).fork().tag(1, WireType.LengthDelimited).string(k).tag(2, WireType.LengthDelimited).string(message.args[k]).join();

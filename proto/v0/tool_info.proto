@@ -1,0 +1,22 @@
+syntax = "proto3";
+package modelhawk.v0;
+
+option go_package = "github.com/dshearer/modelhawk/gen/go/v0";
+
+/**
+ * A ToolParamInfo is information about a parameter that a tool takes.
+ */
+message ToolParamInfo {
+  optional string name = 1;
+  optional string type = 2;
+  optional string desc = 3;
+}
+
+/**
+ * A ToolInfo is information about a tool that an AI-based app can use.
+ */
+message ToolInfo {
+  optional string name = 1;
+  optional string desc = 2;
+  repeated ToolParamInfo args = 3;
+}

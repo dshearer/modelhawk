@@ -6,17 +6,18 @@ option go_package = "github.com/dshearer/modelhawk/gen/go/v0";
 import "application.proto";
 import "service_status_response.proto";
 import "message.proto";
+import "tool_info.proto";
 
 message WillCallToolRequest {
   optional Application app = 1;
-  optional string tool_name = 2;
+  optional ToolInfo tool = 2;
   map<string, string> args = 3;
   repeated Message last_messages = 4;
 }
 
 message DidCallToolRequest {
   optional Application app = 1;
-  optional string tool_name = 2;
+  optional ToolInfo tool = 2;
   map<string, string> args = 3;
   optional string result = 4;
   repeated Message last_messages = 5;
