@@ -15,19 +15,13 @@ import (
 )
 
 type server struct {
-	pb.UnimplementedInfoServiceServer
 	pb.UnimplementedNotifyServiceServer
-	pb.UnimplementedPermissionServiceServer
+	pb.UnimplementedPermissionServiceServer 
 	ollama *ollama.Client
 }
 
 func makePointer[T any](v T) *T {
 	return &v
-}
-
-func (s *server) GiveToolInfo(ctx context.Context, req *pb.GiveToolInfoRequest) (*pb.ServiceStatusResponse, error) {
-	// log.Printf("GiveToolInfo: app=%q tool=%q desc=%q args=%v", req.GetApp().GetValue(), req.GetName(), req.GetDesc(), req.GetArgs())
-	return &pb.ServiceStatusResponse{Result: makePointer(pb.ServiceStatusResponse_RESULT_OK), Msg: makePointer("ok")}, nil
 }
 
 func (s *server) WillCallTool(ctx context.Context, req *pb.WillCallToolRequest) (*pb.ServiceStatusResponse, error) {
@@ -86,7 +80,6 @@ func main() {
 	}
 
 	s := grpc.NewServer()
-	pb.RegisterInfoServiceServer(s, svc)
 	pb.RegisterNotifyServiceServer(s, svc)
 	pb.RegisterPermissionServiceServer(s, svc)
 
