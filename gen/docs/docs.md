@@ -6,13 +6,6 @@
 - [application.proto](#application-proto)
     - [Application](#modelhawk-v0-Application)
   
-- [info_service.proto](#info_service-proto)
-    - [GiveToolInfoRequest](#modelhawk-v0-GiveToolInfoRequest)
-    - [GiveToolInfoResponse](#modelhawk-v0-GiveToolInfoResponse)
-    - [ToolArgInfo](#modelhawk-v0-ToolArgInfo)
-  
-    - [InfoService](#modelhawk-v0-InfoService)
-  
 - [message.proto](#message-proto)
     - [Message](#modelhawk-v0-Message)
   
@@ -35,6 +28,10 @@
     - [ServiceStatusResponse](#modelhawk-v0-ServiceStatusResponse)
   
     - [ServiceStatusResponse.Result](#modelhawk-v0-ServiceStatusResponse-Result)
+  
+- [tool_info.proto](#tool_info-proto)
+    - [ToolInfo](#modelhawk-v0-ToolInfo)
+    - [ToolParamInfo](#modelhawk-v0-ToolParamInfo)
   
 - [Scalar Value Types](#scalar-value-types)
 
@@ -70,83 +67,6 @@ The appropriate scope really depends on how you want to use the security app tha
  
 
  
-
- 
-
-
-
-<a name="info_service-proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## info_service.proto
-
-
-
-<a name="modelhawk-v0-GiveToolInfoRequest"></a>
-
-### GiveToolInfoRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| app | [Application](#modelhawk-v0-Application) | optional |  |
-| name | [string](#string) | optional |  |
-| desc | [string](#string) | optional |  |
-| args | [ToolArgInfo](#modelhawk-v0-ToolArgInfo) | repeated |  |
-
-
-
-
-
-
-<a name="modelhawk-v0-GiveToolInfoResponse"></a>
-
-### GiveToolInfoResponse
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| result | [int32](#int32) | optional |  |
-| msg | [string](#string) | optional |  |
-
-
-
-
-
-
-<a name="modelhawk-v0-ToolArgInfo"></a>
-
-### ToolArgInfo
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) | optional |  |
-| type | [string](#string) | optional |  |
-| desc | [string](#string) | optional |  |
-
-
-
-
-
- 
-
- 
-
- 
-
-
-<a name="modelhawk-v0-InfoService"></a>
-
-### InfoService
-InfoService is a service for telling the security app about configuration in the AI app that&#39;s being monitored.
-
-| Method Name | Request Type | Response Type | Description |
-| ----------- | ------------ | ------------- | ------------|
-| GiveToolInfo | [GiveToolInfoRequest](#modelhawk-v0-GiveToolInfoRequest) | [ServiceStatusResponse](#modelhawk-v0-ServiceStatusResponse) | Tell the security tool about a tool that is available in a particular context. |
 
  
 
@@ -200,7 +120,7 @@ A message sent from or to an AI model.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | app | [Application](#modelhawk-v0-Application) | optional |  |
-| tool_name | [string](#string) | optional |  |
+| tool | [ToolInfo](#modelhawk-v0-ToolInfo) | optional |  |
 | args | [DidCallToolRequest.ArgsEntry](#modelhawk-v0-DidCallToolRequest-ArgsEntry) | repeated |  |
 | result | [string](#string) | optional |  |
 | last_messages | [Message](#modelhawk-v0-Message) | repeated |  |
@@ -235,7 +155,7 @@ A message sent from or to an AI model.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | app | [Application](#modelhawk-v0-Application) | optional |  |
-| tool_name | [string](#string) | optional |  |
+| tool | [ToolInfo](#modelhawk-v0-ToolInfo) | optional |  |
 | args | [WillCallToolRequest.ArgsEntry](#modelhawk-v0-WillCallToolRequest-ArgsEntry) | repeated |  |
 | last_messages | [Message](#modelhawk-v0-Message) | repeated |  |
 
@@ -391,6 +311,56 @@ PermissionService is a service that AI apps can use to ask the security app for 
 | RESULT_OK | 0 |  |
 | RESULT_ERROR | 1 |  |
 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="tool_info-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## tool_info.proto
+
+
+
+<a name="modelhawk-v0-ToolInfo"></a>
+
+### ToolInfo
+A ToolInfo is information about a tool that an AI-based app can use.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) | optional |  |
+| desc | [string](#string) | optional |  |
+| args | [ToolParamInfo](#modelhawk-v0-ToolParamInfo) | repeated |  |
+
+
+
+
+
+
+<a name="modelhawk-v0-ToolParamInfo"></a>
+
+### ToolParamInfo
+A ToolParamInfo is information about a parameter that a tool takes.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) | optional |  |
+| type | [string](#string) | optional |  |
+| desc | [string](#string) | optional |  |
+
+
+
+
+
+ 
 
  
 
