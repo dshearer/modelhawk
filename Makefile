@@ -10,11 +10,11 @@ PACKAGE_CONFIG_TS := $(wildcard package-config/ts/*)
 DOCKER_RUN   := docker run --rm -v $(CURDIR):/workspace $(IMAGE)
 CP_WITH_COMMENT := script/cp-with-comment
 
-.PHONY: all generate generate-without-docker generate-go generate-go-local generate-ts generate-ts-local clean clean-gen docker-build opencode-plugin install-opencode-plugin server ref-impls generate-proto-docs generate-proto-docs-local
+.PHONY: all generate generate-without-docker generate-go generate-go-local generate-ts generate-ts-local clean clean-gen docker-build server ref-impls generate-proto-docs generate-proto-docs-local
 
 all: generate
 
-ref-impls: opencode-plugin server
+ref-impls: server
 
 
 # --- Docker ---
@@ -82,19 +82,11 @@ gen/docs/docs.md: $(PROTO_FILES)
 	protoc -I "$(PROTO_DIR)" --doc_out=gen/docs --doc_opt=markdown,docs.md $(PROTO_FILES)
 
 
-# --- opencode-plugin ref impl ---
-
-opencode-plugin : generate-ts
-	@cd gen/ts && npm install
-	@cd gen/ts && npm run build
-	@cd reference-impls/opencode-plugin && bun install
-	@cd reference-impls/opencode-plugin && bun run build
-
-
 # --- server ref impl ---
 
 server : generate-go
 	@cd reference-impls/server && go build .
+
 
 # --- Cleanup ---
 
@@ -102,4 +94,4 @@ clean-gen:
 	@rm -rf gen
 
 clean:
-	@rm -rf reference-impls/opencode-plugin/dist reference-impls/opencode-plugin/node_modules reference-impls/server/server opencode.log package-config/ts/node_modules
+	@rm -rf reference-impls/server/server package-config/ts/node_modules
