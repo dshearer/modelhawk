@@ -126,16 +126,12 @@ There are two roles:
     - **AI app:** This is the thing that uses AI and that we want to monitor for bad behavior. It implements a ModelHawk client.
     - **Security app:** This is the thing that monitors the AI app for bad behavior. It implements a ModelHawk server.
 
-The security app provides three services:
+The security app provides two services:
     - [`NotifyService`](modelhawk/v1/notify_service.proto)
     - [`PermissionService`](modelhawk/v1/permission_service.proto)
-    - [`InfoService`](modelhawk/v1/info_service.proto)
 
 The AI app can use `NotifyService` to tell the security app about events --- e.g., the AI model used a tool. The AI app uses `PermissionService` to
 ask the security app for permission for the AI model to do something.
-
-To avoid sending the same metadata multiple times, the AI app must use `InfoService` to tell the security app about tools before those tools are mentioned
-in other service calls.
 
 That's it!
 
