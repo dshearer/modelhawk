@@ -20,7 +20,7 @@ This generates:
 ### Protocol Buffer Changes
 
 1. Edit `.proto` files in `proto/v0/`
-2. Run `make generate` to regenerate code
+2. Run `make -j generate` to regenerate code
 3. Commit both the `.proto` files and generated code
 4. Open a pull request
 
