@@ -1,6 +1,6 @@
 ## Intro
 
-This are instructions for Copilot
+These are instructions for Copilot
 
 ## Reviewing Changes
 
