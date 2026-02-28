@@ -16,6 +16,7 @@ gen-ts:
 		-I "$(PROTO_DIR)" \
 		"--ts_out=gen/ts/src" \
 		$(PROTO_FILES)
+	cd gen/ts && npm install
 
 .PHONY: gen-go
 gen-go:
