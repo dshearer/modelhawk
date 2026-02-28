@@ -1,12 +1,15 @@
 name: Publish to npm
 
 on:
-  push:
-    tags:
-      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (e.g., 1.2.3 without the v prefix)'
+        required: true
+        type: string
 
 permissions:
-  contents: write
+  contents: read
   id-token: write
 
 jobs:
@@ -14,6 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: v${{ inputs.version }}
 
       - uses: actions/setup-node@v4
         with:
@@ -22,36 +27,21 @@ jobs:
           cache: 'npm'
           cache-dependency-path: gen/ts/package-lock.json
 
-      - name: Verify version matches release tag
+      - name: Verify version matches input
         run: |
           PACKAGE_VERSION=$(node -p "require('./gen/ts/package.json').version")
-          TAG_VERSION=${GITHUB_REF#refs/tags/v}
+          INPUT_VERSION="${{ inputs.version }}"
           echo "Package version: $PACKAGE_VERSION"
-          echo "Tag version: $TAG_VERSION"
-          if [ "$PACKAGE_VERSION" != "$TAG_VERSION" ]; then
-            echo "::error::Version mismatch! gen/ts/package.json has $PACKAGE_VERSION but release tag is v$TAG_VERSION"
-            echo "::error::Update package-config/ts/package.json version to $TAG_VERSION before creating the release"
+          echo "Input version: $INPUT_VERSION"
+          if [ "$PACKAGE_VERSION" != "$INPUT_VERSION" ]; then
+            echo "::error::Version mismatch! gen/ts/package.json has $PACKAGE_VERSION but input version is $INPUT_VERSION"
+            echo "::error::Update package-config/ts/package.json version to $INPUT_VERSION before publishing"
             exit 1
           fi
 
-      - name: Build and publish @dshearer/modelhawk
+      - run: npm ci
         working-directory: gen/ts
-        run: |
-          npm install
-          npm run build
-          npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Create GitHub Release
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const tag = context.ref.replace('refs/tags/', '');
-            await github.rest.repos.createRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              tag_name: tag,
-              name: tag,
-              generate_release_notes: true
-            });
+      - run: npm run build --if-present
+        working-directory: gen/ts
+      - run: npm publish --provenance --access public
+        working-directory: gen/ts
