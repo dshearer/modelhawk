@@ -27,7 +27,7 @@ docker-build:
 # --- Code Generation ---
 
 .PHONY: generate
-generate: $(docker-build)
+generate: docker-build
 	$(DOCKER_RUN) make -f in-docker.mk
 
 
