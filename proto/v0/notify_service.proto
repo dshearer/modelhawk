@@ -8,6 +8,12 @@ import "service_status_response.proto";
 import "message.proto";
 import "tool_info.proto";
 
+message DidSendResponseRequest {
+  optional Application app = 1;
+  repeated Message context = 2;
+  optional Message response = 3;
+}
+
 message WillCallToolRequest {
   optional Application app = 1;
   optional ToolInfo tool = 2;
@@ -27,6 +33,9 @@ message DidCallToolRequest {
  * NotifyService is a service for telling the security app about stuff that has happened in the AI app that's being monitored.
  */
 service NotifyService {
+  /// DidSendResponse can be called by the AI app to tell the security tool that the AI model returned a response.
+  rpc DidSendResponse(DidSendResponseRequest) returns (ServiceStatusResponse);
+
   /// WillCallTool can be called by the AI app to tell the security app that the AI model will call a tool.
   rpc WillCallTool(WillCallToolRequest) returns (ServiceStatusResponse);
 

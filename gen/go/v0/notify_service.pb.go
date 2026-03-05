@@ -21,6 +21,66 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type DidSendResponseRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	App           *Application           `protobuf:"bytes,1,opt,name=app,proto3,oneof" json:"app,omitempty"`
+	Context       []*Message             `protobuf:"bytes,2,rep,name=context,proto3" json:"context,omitempty"`
+	Response      *Message               `protobuf:"bytes,3,opt,name=response,proto3,oneof" json:"response,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DidSendResponseRequest) Reset() {
+	*x = DidSendResponseRequest{}
+	mi := &file_notify_service_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DidSendResponseRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DidSendResponseRequest) ProtoMessage() {}
+
+func (x *DidSendResponseRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_notify_service_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DidSendResponseRequest.ProtoReflect.Descriptor instead.
+func (*DidSendResponseRequest) Descriptor() ([]byte, []int) {
+	return file_notify_service_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *DidSendResponseRequest) GetApp() *Application {
+	if x != nil {
+		return x.App
+	}
+	return nil
+}
+
+func (x *DidSendResponseRequest) GetContext() []*Message {
+	if x != nil {
+		return x.Context
+	}
+	return nil
+}
+
+func (x *DidSendResponseRequest) GetResponse() *Message {
+	if x != nil {
+		return x.Response
+	}
+	return nil
+}
+
 type WillCallToolRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	App           *Application           `protobuf:"bytes,1,opt,name=app,proto3,oneof" json:"app,omitempty"`
@@ -33,7 +93,7 @@ type WillCallToolRequest struct {
 
 func (x *WillCallToolRequest) Reset() {
 	*x = WillCallToolRequest{}
-	mi := &file_notify_service_proto_msgTypes[0]
+	mi := &file_notify_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45,7 +105,7 @@ func (x *WillCallToolRequest) String() string {
 func (*WillCallToolRequest) ProtoMessage() {}
 
 func (x *WillCallToolRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_notify_service_proto_msgTypes[0]
+	mi := &file_notify_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +118,7 @@ func (x *WillCallToolRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WillCallToolRequest.ProtoReflect.Descriptor instead.
 func (*WillCallToolRequest) Descriptor() ([]byte, []int) {
-	return file_notify_service_proto_rawDescGZIP(), []int{0}
+	return file_notify_service_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *WillCallToolRequest) GetApp() *Application {
@@ -102,7 +162,7 @@ type DidCallToolRequest struct {
 
 func (x *DidCallToolRequest) Reset() {
 	*x = DidCallToolRequest{}
-	mi := &file_notify_service_proto_msgTypes[1]
+	mi := &file_notify_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -114,7 +174,7 @@ func (x *DidCallToolRequest) String() string {
 func (*DidCallToolRequest) ProtoMessage() {}
 
 func (x *DidCallToolRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_notify_service_proto_msgTypes[1]
+	mi := &file_notify_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -127,7 +187,7 @@ func (x *DidCallToolRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DidCallToolRequest.ProtoReflect.Descriptor instead.
 func (*DidCallToolRequest) Descriptor() ([]byte, []int) {
-	return file_notify_service_proto_rawDescGZIP(), []int{1}
+	return file_notify_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *DidCallToolRequest) GetApp() *Application {
@@ -169,7 +229,13 @@ var File_notify_service_proto protoreflect.FileDescriptor
 
 const file_notify_service_proto_rawDesc = "" +
 	"\n" +
-	"\x14notify_service.proto\x12\fmodelhawk.v0\x1a\x11application.proto\x1a\x1dservice_status_response.proto\x1a\rmessage.proto\x1a\x0ftool_info.proto\"\xbf\x02\n" +
+	"\x14notify_service.proto\x12\fmodelhawk.v0\x1a\x11application.proto\x1a\x1dservice_status_response.proto\x1a\rmessage.proto\x1a\x0ftool_info.proto\"\xc8\x01\n" +
+	"\x16DidSendResponseRequest\x120\n" +
+	"\x03app\x18\x01 \x01(\v2\x19.modelhawk.v0.ApplicationH\x00R\x03app\x88\x01\x01\x12/\n" +
+	"\acontext\x18\x02 \x03(\v2\x15.modelhawk.v0.MessageR\acontext\x126\n" +
+	"\bresponse\x18\x03 \x01(\v2\x15.modelhawk.v0.MessageH\x01R\bresponse\x88\x01\x01B\x06\n" +
+	"\x04_appB\v\n" +
+	"\t_response\"\xbf\x02\n" +
 	"\x13WillCallToolRequest\x120\n" +
 	"\x03app\x18\x01 \x01(\v2\x19.modelhawk.v0.ApplicationH\x00R\x03app\x88\x01\x01\x12/\n" +
 	"\x04tool\x18\x02 \x01(\v2\x16.modelhawk.v0.ToolInfoH\x01R\x04tool\x88\x01\x01\x12?\n" +
@@ -191,8 +257,9 @@ const file_notify_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x06\n" +
 	"\x04_appB\a\n" +
 	"\x05_toolB\t\n" +
-	"\a_result2\xbd\x01\n" +
-	"\rNotifyService\x12V\n" +
+	"\a_result2\x9b\x02\n" +
+	"\rNotifyService\x12\\\n" +
+	"\x0fDidSendResponse\x12$.modelhawk.v0.DidSendResponseRequest\x1a#.modelhawk.v0.ServiceStatusResponse\x12V\n" +
 	"\fWillCallTool\x12!.modelhawk.v0.WillCallToolRequest\x1a#.modelhawk.v0.ServiceStatusResponse\x12T\n" +
 	"\vDidCallTool\x12 .modelhawk.v0.DidCallToolRequest\x1a#.modelhawk.v0.ServiceStatusResponseB)Z'github.com/dshearer/modelhawk/gen/go/v0b\x06proto3"
 
@@ -208,35 +275,41 @@ func file_notify_service_proto_rawDescGZIP() []byte {
 	return file_notify_service_proto_rawDescData
 }
 
-var file_notify_service_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_notify_service_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_notify_service_proto_goTypes = []any{
-	(*WillCallToolRequest)(nil),   // 0: modelhawk.v0.WillCallToolRequest
-	(*DidCallToolRequest)(nil),    // 1: modelhawk.v0.DidCallToolRequest
-	nil,                           // 2: modelhawk.v0.WillCallToolRequest.ArgsEntry
-	nil,                           // 3: modelhawk.v0.DidCallToolRequest.ArgsEntry
-	(*Application)(nil),           // 4: modelhawk.v0.Application
-	(*ToolInfo)(nil),              // 5: modelhawk.v0.ToolInfo
-	(*Message)(nil),               // 6: modelhawk.v0.Message
-	(*ServiceStatusResponse)(nil), // 7: modelhawk.v0.ServiceStatusResponse
+	(*DidSendResponseRequest)(nil), // 0: modelhawk.v0.DidSendResponseRequest
+	(*WillCallToolRequest)(nil),    // 1: modelhawk.v0.WillCallToolRequest
+	(*DidCallToolRequest)(nil),     // 2: modelhawk.v0.DidCallToolRequest
+	nil,                            // 3: modelhawk.v0.WillCallToolRequest.ArgsEntry
+	nil,                            // 4: modelhawk.v0.DidCallToolRequest.ArgsEntry
+	(*Application)(nil),            // 5: modelhawk.v0.Application
+	(*Message)(nil),                // 6: modelhawk.v0.Message
+	(*ToolInfo)(nil),               // 7: modelhawk.v0.ToolInfo
+	(*ServiceStatusResponse)(nil),  // 8: modelhawk.v0.ServiceStatusResponse
 }
 var file_notify_service_proto_depIdxs = []int32{
-	4,  // 0: modelhawk.v0.WillCallToolRequest.app:type_name -> modelhawk.v0.Application
-	5,  // 1: modelhawk.v0.WillCallToolRequest.tool:type_name -> modelhawk.v0.ToolInfo
-	2,  // 2: modelhawk.v0.WillCallToolRequest.args:type_name -> modelhawk.v0.WillCallToolRequest.ArgsEntry
-	6,  // 3: modelhawk.v0.WillCallToolRequest.last_messages:type_name -> modelhawk.v0.Message
-	4,  // 4: modelhawk.v0.DidCallToolRequest.app:type_name -> modelhawk.v0.Application
-	5,  // 5: modelhawk.v0.DidCallToolRequest.tool:type_name -> modelhawk.v0.ToolInfo
-	3,  // 6: modelhawk.v0.DidCallToolRequest.args:type_name -> modelhawk.v0.DidCallToolRequest.ArgsEntry
-	6,  // 7: modelhawk.v0.DidCallToolRequest.last_messages:type_name -> modelhawk.v0.Message
-	0,  // 8: modelhawk.v0.NotifyService.WillCallTool:input_type -> modelhawk.v0.WillCallToolRequest
-	1,  // 9: modelhawk.v0.NotifyService.DidCallTool:input_type -> modelhawk.v0.DidCallToolRequest
-	7,  // 10: modelhawk.v0.NotifyService.WillCallTool:output_type -> modelhawk.v0.ServiceStatusResponse
-	7,  // 11: modelhawk.v0.NotifyService.DidCallTool:output_type -> modelhawk.v0.ServiceStatusResponse
-	10, // [10:12] is the sub-list for method output_type
-	8,  // [8:10] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	5,  // 0: modelhawk.v0.DidSendResponseRequest.app:type_name -> modelhawk.v0.Application
+	6,  // 1: modelhawk.v0.DidSendResponseRequest.context:type_name -> modelhawk.v0.Message
+	6,  // 2: modelhawk.v0.DidSendResponseRequest.response:type_name -> modelhawk.v0.Message
+	5,  // 3: modelhawk.v0.WillCallToolRequest.app:type_name -> modelhawk.v0.Application
+	7,  // 4: modelhawk.v0.WillCallToolRequest.tool:type_name -> modelhawk.v0.ToolInfo
+	3,  // 5: modelhawk.v0.WillCallToolRequest.args:type_name -> modelhawk.v0.WillCallToolRequest.ArgsEntry
+	6,  // 6: modelhawk.v0.WillCallToolRequest.last_messages:type_name -> modelhawk.v0.Message
+	5,  // 7: modelhawk.v0.DidCallToolRequest.app:type_name -> modelhawk.v0.Application
+	7,  // 8: modelhawk.v0.DidCallToolRequest.tool:type_name -> modelhawk.v0.ToolInfo
+	4,  // 9: modelhawk.v0.DidCallToolRequest.args:type_name -> modelhawk.v0.DidCallToolRequest.ArgsEntry
+	6,  // 10: modelhawk.v0.DidCallToolRequest.last_messages:type_name -> modelhawk.v0.Message
+	0,  // 11: modelhawk.v0.NotifyService.DidSendResponse:input_type -> modelhawk.v0.DidSendResponseRequest
+	1,  // 12: modelhawk.v0.NotifyService.WillCallTool:input_type -> modelhawk.v0.WillCallToolRequest
+	2,  // 13: modelhawk.v0.NotifyService.DidCallTool:input_type -> modelhawk.v0.DidCallToolRequest
+	8,  // 14: modelhawk.v0.NotifyService.DidSendResponse:output_type -> modelhawk.v0.ServiceStatusResponse
+	8,  // 15: modelhawk.v0.NotifyService.WillCallTool:output_type -> modelhawk.v0.ServiceStatusResponse
+	8,  // 16: modelhawk.v0.NotifyService.DidCallTool:output_type -> modelhawk.v0.ServiceStatusResponse
+	14, // [14:17] is the sub-list for method output_type
+	11, // [11:14] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_notify_service_proto_init() }
@@ -250,13 +323,14 @@ func file_notify_service_proto_init() {
 	file_tool_info_proto_init()
 	file_notify_service_proto_msgTypes[0].OneofWrappers = []any{}
 	file_notify_service_proto_msgTypes[1].OneofWrappers = []any{}
+	file_notify_service_proto_msgTypes[2].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_notify_service_proto_rawDesc), len(file_notify_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -12,6 +12,7 @@
 - [notify_service.proto](#notify_service-proto)
     - [DidCallToolRequest](#modelhawk-v0-DidCallToolRequest)
     - [DidCallToolRequest.ArgsEntry](#modelhawk-v0-DidCallToolRequest-ArgsEntry)
+    - [DidSendResponseRequest](#modelhawk-v0-DidSendResponseRequest)
     - [WillCallToolRequest](#modelhawk-v0-WillCallToolRequest)
     - [WillCallToolRequest.ArgsEntry](#modelhawk-v0-WillCallToolRequest-ArgsEntry)
   
@@ -146,6 +147,23 @@ A message sent from or to an AI model.
 
 
 
+<a name="modelhawk-v0-DidSendResponseRequest"></a>
+
+### DidSendResponseRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| app | [Application](#modelhawk-v0-Application) | optional |  |
+| context | [Message](#modelhawk-v0-Message) | repeated |  |
+| response | [Message](#modelhawk-v0-Message) | optional |  |
+
+
+
+
+
+
 <a name="modelhawk-v0-WillCallToolRequest"></a>
 
 ### WillCallToolRequest
@@ -193,6 +211,7 @@ NotifyService is a service for telling the security app about stuff that has hap
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
+| DidSendResponse | [DidSendResponseRequest](#modelhawk-v0-DidSendResponseRequest) | [ServiceStatusResponse](#modelhawk-v0-ServiceStatusResponse) | DidSendResponse can be called by the AI app to tell the security tool that the AI model returned a response. |
 | WillCallTool | [WillCallToolRequest](#modelhawk-v0-WillCallToolRequest) | [ServiceStatusResponse](#modelhawk-v0-ServiceStatusResponse) | WillCallTool can be called by the AI app to tell the security app that the AI model will call a tool. |
 | DidCallTool | [DidCallToolRequest](#modelhawk-v0-DidCallToolRequest) | [ServiceStatusResponse](#modelhawk-v0-ServiceStatusResponse) | DidCallTool can be called by the AI app to tell the security app that the AI model did call a tool. |
 

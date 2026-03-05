@@ -5,9 +5,10 @@ import type { RpcTransport } from "@protobuf-ts/runtime-rpc";
 import type { ServiceInfo } from "@protobuf-ts/runtime-rpc";
 import { NotifyService } from "./notify_service";
 import type { DidCallToolRequest } from "./notify_service";
+import type { WillCallToolRequest } from "./notify_service";
 import { stackIntercept } from "@protobuf-ts/runtime-rpc";
 import type { ServiceStatusResponse } from "./service_status_response";
-import type { WillCallToolRequest } from "./notify_service";
+import type { DidSendResponseRequest } from "./notify_service";
 import type { UnaryCall } from "@protobuf-ts/runtime-rpc";
 import type { RpcOptions } from "@protobuf-ts/runtime-rpc";
 /**
@@ -17,6 +18,12 @@ import type { RpcOptions } from "@protobuf-ts/runtime-rpc";
  * @generated from protobuf service modelhawk.v0.NotifyService
  */
 export interface INotifyServiceClient {
+    /**
+     * / DidSendResponse can be called by the AI app to tell the security tool that the AI model returned a response.
+     *
+     * @generated from protobuf rpc: DidSendResponse
+     */
+    didSendResponse(input: DidSendResponseRequest, options?: RpcOptions): UnaryCall<DidSendResponseRequest, ServiceStatusResponse>;
     /**
      * / WillCallTool can be called by the AI app to tell the security app that the AI model will call a tool.
      *
@@ -43,12 +50,21 @@ export class NotifyServiceClient implements INotifyServiceClient, ServiceInfo {
     constructor(private readonly _transport: RpcTransport) {
     }
     /**
+     * / DidSendResponse can be called by the AI app to tell the security tool that the AI model returned a response.
+     *
+     * @generated from protobuf rpc: DidSendResponse
+     */
+    didSendResponse(input: DidSendResponseRequest, options?: RpcOptions): UnaryCall<DidSendResponseRequest, ServiceStatusResponse> {
+        const method = this.methods[0], opt = this._transport.mergeOptions(options);
+        return stackIntercept<DidSendResponseRequest, ServiceStatusResponse>("unary", this._transport, method, opt, input);
+    }
+    /**
      * / WillCallTool can be called by the AI app to tell the security app that the AI model will call a tool.
      *
      * @generated from protobuf rpc: WillCallTool
      */
     willCallTool(input: WillCallToolRequest, options?: RpcOptions): UnaryCall<WillCallToolRequest, ServiceStatusResponse> {
-        const method = this.methods[0], opt = this._transport.mergeOptions(options);
+        const method = this.methods[1], opt = this._transport.mergeOptions(options);
         return stackIntercept<WillCallToolRequest, ServiceStatusResponse>("unary", this._transport, method, opt, input);
     }
     /**
@@ -57,7 +73,7 @@ export class NotifyServiceClient implements INotifyServiceClient, ServiceInfo {
      * @generated from protobuf rpc: DidCallTool
      */
     didCallTool(input: DidCallToolRequest, options?: RpcOptions): UnaryCall<DidCallToolRequest, ServiceStatusResponse> {
-        const method = this.methods[1], opt = this._transport.mergeOptions(options);
+        const method = this.methods[2], opt = this._transport.mergeOptions(options);
         return stackIntercept<DidCallToolRequest, ServiceStatusResponse>("unary", this._transport, method, opt, input);
     }
 }
