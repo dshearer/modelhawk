@@ -31,7 +31,7 @@ const (
 // *
 // NotifyService is a service for telling the security app about stuff that has happened in the AI app that's being monitored.
 type NotifyServiceClient interface {
-	// / DidSendResponse can be called by the AI app to tell the security tool that the AI model returned a response.
+	// / DidSendResponse can be called by the AI app to tell the security app that the AI model returned a response.
 	DidSendResponse(ctx context.Context, in *DidSendResponseRequest, opts ...grpc.CallOption) (*ServiceStatusResponse, error)
 	// / WillCallTool can be called by the AI app to tell the security app that the AI model will call a tool.
 	WillCallTool(ctx context.Context, in *WillCallToolRequest, opts ...grpc.CallOption) (*ServiceStatusResponse, error)
@@ -84,7 +84,7 @@ func (c *notifyServiceClient) DidCallTool(ctx context.Context, in *DidCallToolRe
 // *
 // NotifyService is a service for telling the security app about stuff that has happened in the AI app that's being monitored.
 type NotifyServiceServer interface {
-	// / DidSendResponse can be called by the AI app to tell the security tool that the AI model returned a response.
+	// / DidSendResponse can be called by the AI app to tell the security app that the AI model returned a response.
 	DidSendResponse(context.Context, *DidSendResponseRequest) (*ServiceStatusResponse, error)
 	// / WillCallTool can be called by the AI app to tell the security app that the AI model will call a tool.
 	WillCallTool(context.Context, *WillCallToolRequest) (*ServiceStatusResponse, error)

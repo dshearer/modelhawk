@@ -86,7 +86,6 @@ type WillCallToolRequest struct {
 	App           *Application           `protobuf:"bytes,1,opt,name=app,proto3,oneof" json:"app,omitempty"`
 	Tool          *ToolInfo              `protobuf:"bytes,2,opt,name=tool,proto3,oneof" json:"tool,omitempty"`
 	Args          map[string]string      `protobuf:"bytes,3,rep,name=args,proto3" json:"args,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	LastMessages  []*Message             `protobuf:"bytes,4,rep,name=last_messages,json=lastMessages,proto3" json:"last_messages,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -142,20 +141,12 @@ func (x *WillCallToolRequest) GetArgs() map[string]string {
 	return nil
 }
 
-func (x *WillCallToolRequest) GetLastMessages() []*Message {
-	if x != nil {
-		return x.LastMessages
-	}
-	return nil
-}
-
 type DidCallToolRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	App           *Application           `protobuf:"bytes,1,opt,name=app,proto3,oneof" json:"app,omitempty"`
 	Tool          *ToolInfo              `protobuf:"bytes,2,opt,name=tool,proto3,oneof" json:"tool,omitempty"`
 	Args          map[string]string      `protobuf:"bytes,3,rep,name=args,proto3" json:"args,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Result        *string                `protobuf:"bytes,4,opt,name=result,proto3,oneof" json:"result,omitempty"`
-	LastMessages  []*Message             `protobuf:"bytes,5,rep,name=last_messages,json=lastMessages,proto3" json:"last_messages,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -218,13 +209,6 @@ func (x *DidCallToolRequest) GetResult() string {
 	return ""
 }
 
-func (x *DidCallToolRequest) GetLastMessages() []*Message {
-	if x != nil {
-		return x.LastMessages
-	}
-	return nil
-}
-
 var File_notify_service_proto protoreflect.FileDescriptor
 
 const file_notify_service_proto_rawDesc = "" +
@@ -235,23 +219,21 @@ const file_notify_service_proto_rawDesc = "" +
 	"\acontext\x18\x02 \x03(\v2\x15.modelhawk.v0.MessageR\acontext\x126\n" +
 	"\bresponse\x18\x03 \x01(\v2\x15.modelhawk.v0.MessageH\x01R\bresponse\x88\x01\x01B\x06\n" +
 	"\x04_appB\v\n" +
-	"\t_response\"\xbf\x02\n" +
+	"\t_response\"\x83\x02\n" +
 	"\x13WillCallToolRequest\x120\n" +
 	"\x03app\x18\x01 \x01(\v2\x19.modelhawk.v0.ApplicationH\x00R\x03app\x88\x01\x01\x12/\n" +
 	"\x04tool\x18\x02 \x01(\v2\x16.modelhawk.v0.ToolInfoH\x01R\x04tool\x88\x01\x01\x12?\n" +
-	"\x04args\x18\x03 \x03(\v2+.modelhawk.v0.WillCallToolRequest.ArgsEntryR\x04args\x12:\n" +
-	"\rlast_messages\x18\x04 \x03(\v2\x15.modelhawk.v0.MessageR\flastMessages\x1a7\n" +
+	"\x04args\x18\x03 \x03(\v2+.modelhawk.v0.WillCallToolRequest.ArgsEntryR\x04args\x1a7\n" +
 	"\tArgsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x06\n" +
 	"\x04_appB\a\n" +
-	"\x05_tool\"\xe5\x02\n" +
+	"\x05_tool\"\xa9\x02\n" +
 	"\x12DidCallToolRequest\x120\n" +
 	"\x03app\x18\x01 \x01(\v2\x19.modelhawk.v0.ApplicationH\x00R\x03app\x88\x01\x01\x12/\n" +
 	"\x04tool\x18\x02 \x01(\v2\x16.modelhawk.v0.ToolInfoH\x01R\x04tool\x88\x01\x01\x12>\n" +
 	"\x04args\x18\x03 \x03(\v2*.modelhawk.v0.DidCallToolRequest.ArgsEntryR\x04args\x12\x1b\n" +
-	"\x06result\x18\x04 \x01(\tH\x02R\x06result\x88\x01\x01\x12:\n" +
-	"\rlast_messages\x18\x05 \x03(\v2\x15.modelhawk.v0.MessageR\flastMessages\x1a7\n" +
+	"\x06result\x18\x04 \x01(\tH\x02R\x06result\x88\x01\x01\x1a7\n" +
 	"\tArgsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x06\n" +
@@ -294,22 +276,20 @@ var file_notify_service_proto_depIdxs = []int32{
 	5,  // 3: modelhawk.v0.WillCallToolRequest.app:type_name -> modelhawk.v0.Application
 	7,  // 4: modelhawk.v0.WillCallToolRequest.tool:type_name -> modelhawk.v0.ToolInfo
 	3,  // 5: modelhawk.v0.WillCallToolRequest.args:type_name -> modelhawk.v0.WillCallToolRequest.ArgsEntry
-	6,  // 6: modelhawk.v0.WillCallToolRequest.last_messages:type_name -> modelhawk.v0.Message
-	5,  // 7: modelhawk.v0.DidCallToolRequest.app:type_name -> modelhawk.v0.Application
-	7,  // 8: modelhawk.v0.DidCallToolRequest.tool:type_name -> modelhawk.v0.ToolInfo
-	4,  // 9: modelhawk.v0.DidCallToolRequest.args:type_name -> modelhawk.v0.DidCallToolRequest.ArgsEntry
-	6,  // 10: modelhawk.v0.DidCallToolRequest.last_messages:type_name -> modelhawk.v0.Message
-	0,  // 11: modelhawk.v0.NotifyService.DidSendResponse:input_type -> modelhawk.v0.DidSendResponseRequest
-	1,  // 12: modelhawk.v0.NotifyService.WillCallTool:input_type -> modelhawk.v0.WillCallToolRequest
-	2,  // 13: modelhawk.v0.NotifyService.DidCallTool:input_type -> modelhawk.v0.DidCallToolRequest
-	8,  // 14: modelhawk.v0.NotifyService.DidSendResponse:output_type -> modelhawk.v0.ServiceStatusResponse
-	8,  // 15: modelhawk.v0.NotifyService.WillCallTool:output_type -> modelhawk.v0.ServiceStatusResponse
-	8,  // 16: modelhawk.v0.NotifyService.DidCallTool:output_type -> modelhawk.v0.ServiceStatusResponse
-	14, // [14:17] is the sub-list for method output_type
-	11, // [11:14] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	5,  // 6: modelhawk.v0.DidCallToolRequest.app:type_name -> modelhawk.v0.Application
+	7,  // 7: modelhawk.v0.DidCallToolRequest.tool:type_name -> modelhawk.v0.ToolInfo
+	4,  // 8: modelhawk.v0.DidCallToolRequest.args:type_name -> modelhawk.v0.DidCallToolRequest.ArgsEntry
+	0,  // 9: modelhawk.v0.NotifyService.DidSendResponse:input_type -> modelhawk.v0.DidSendResponseRequest
+	1,  // 10: modelhawk.v0.NotifyService.WillCallTool:input_type -> modelhawk.v0.WillCallToolRequest
+	2,  // 11: modelhawk.v0.NotifyService.DidCallTool:input_type -> modelhawk.v0.DidCallToolRequest
+	8,  // 12: modelhawk.v0.NotifyService.DidSendResponse:output_type -> modelhawk.v0.ServiceStatusResponse
+	8,  // 13: modelhawk.v0.NotifyService.WillCallTool:output_type -> modelhawk.v0.ServiceStatusResponse
+	8,  // 14: modelhawk.v0.NotifyService.DidCallTool:output_type -> modelhawk.v0.ServiceStatusResponse
+	12, // [12:15] is the sub-list for method output_type
+	9,  // [9:12] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_notify_service_proto_init() }

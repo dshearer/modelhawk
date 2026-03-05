@@ -50,10 +50,6 @@ export interface WillCallToolRequest {
     args: {
         [key: string]: string;
     };
-    /**
-     * @generated from protobuf field: repeated modelhawk.v0.Message last_messages = 4
-     */
-    lastMessages: Message[];
 }
 /**
  * @generated from protobuf message modelhawk.v0.DidCallToolRequest
@@ -77,10 +73,6 @@ export interface DidCallToolRequest {
      * @generated from protobuf field: optional string result = 4
      */
     result?: string;
-    /**
-     * @generated from protobuf field: repeated modelhawk.v0.Message last_messages = 5
-     */
-    lastMessages: Message[];
 }
 // @generated message type with reflection information, may provide speed optimized methods
 class DidSendResponseRequest$Type extends MessageType<DidSendResponseRequest> {
@@ -149,14 +141,12 @@ class WillCallToolRequest$Type extends MessageType<WillCallToolRequest> {
         super("modelhawk.v0.WillCallToolRequest", [
             { no: 1, name: "app", kind: "message", T: () => Application },
             { no: 2, name: "tool", kind: "message", T: () => ToolInfo },
-            { no: 3, name: "args", kind: "map", K: 9 /*ScalarType.STRING*/, V: { kind: "scalar", T: 9 /*ScalarType.STRING*/ } },
-            { no: 4, name: "last_messages", kind: "message", repeat: 2 /*RepeatType.UNPACKED*/, T: () => Message }
+            { no: 3, name: "args", kind: "map", K: 9 /*ScalarType.STRING*/, V: { kind: "scalar", T: 9 /*ScalarType.STRING*/ } }
         ]);
     }
     create(value?: PartialMessage<WillCallToolRequest>): WillCallToolRequest {
         const message = globalThis.Object.create((this.messagePrototype!));
         message.args = {};
-        message.lastMessages = [];
         if (value !== undefined)
             reflectionMergePartial<WillCallToolRequest>(this, message, value);
         return message;
@@ -174,9 +164,6 @@ class WillCallToolRequest$Type extends MessageType<WillCallToolRequest> {
                     break;
                 case /* map<string, string> args */ 3:
                     this.binaryReadMap3(message.args, reader, options);
-                    break;
-                case /* repeated modelhawk.v0.Message last_messages */ 4:
-                    message.lastMessages.push(Message.internalBinaryRead(reader, reader.uint32(), options));
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -215,9 +202,6 @@ class WillCallToolRequest$Type extends MessageType<WillCallToolRequest> {
         /* map<string, string> args = 3; */
         for (let k of globalThis.Object.keys(message.args))
             writer.tag(3, WireType.LengthDelimited).fork().tag(1, WireType.LengthDelimited).string(k).tag(2, WireType.LengthDelimited).string(message.args[k]).join();
-        /* repeated modelhawk.v0.Message last_messages = 4; */
-        for (let i = 0; i < message.lastMessages.length; i++)
-            Message.internalBinaryWrite(message.lastMessages[i], writer.tag(4, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -235,14 +219,12 @@ class DidCallToolRequest$Type extends MessageType<DidCallToolRequest> {
             { no: 1, name: "app", kind: "message", T: () => Application },
             { no: 2, name: "tool", kind: "message", T: () => ToolInfo },
             { no: 3, name: "args", kind: "map", K: 9 /*ScalarType.STRING*/, V: { kind: "scalar", T: 9 /*ScalarType.STRING*/ } },
-            { no: 4, name: "result", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 5, name: "last_messages", kind: "message", repeat: 2 /*RepeatType.UNPACKED*/, T: () => Message }
+            { no: 4, name: "result", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
         ]);
     }
     create(value?: PartialMessage<DidCallToolRequest>): DidCallToolRequest {
         const message = globalThis.Object.create((this.messagePrototype!));
         message.args = {};
-        message.lastMessages = [];
         if (value !== undefined)
             reflectionMergePartial<DidCallToolRequest>(this, message, value);
         return message;
@@ -263,9 +245,6 @@ class DidCallToolRequest$Type extends MessageType<DidCallToolRequest> {
                     break;
                 case /* optional string result */ 4:
                     message.result = reader.string();
-                    break;
-                case /* repeated modelhawk.v0.Message last_messages */ 5:
-                    message.lastMessages.push(Message.internalBinaryRead(reader, reader.uint32(), options));
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -307,9 +286,6 @@ class DidCallToolRequest$Type extends MessageType<DidCallToolRequest> {
         /* optional string result = 4; */
         if (message.result !== undefined)
             writer.tag(4, WireType.LengthDelimited).string(message.result);
-        /* repeated modelhawk.v0.Message last_messages = 5; */
-        for (let i = 0; i < message.lastMessages.length; i++)
-            Message.internalBinaryWrite(message.lastMessages[i], writer.tag(5, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

@@ -19,7 +19,7 @@ import type { RpcOptions } from "@protobuf-ts/runtime-rpc";
  */
 export interface INotifyServiceClient {
     /**
-     * / DidSendResponse can be called by the AI app to tell the security tool that the AI model returned a response.
+     * / DidSendResponse can be called by the AI app to tell the security app that the AI model returned a response.
      *
      * @generated from protobuf rpc: DidSendResponse
      */
@@ -50,7 +50,7 @@ export class NotifyServiceClient implements INotifyServiceClient, ServiceInfo {
     constructor(private readonly _transport: RpcTransport) {
     }
     /**
-     * / DidSendResponse can be called by the AI app to tell the security tool that the AI model returned a response.
+     * / DidSendResponse can be called by the AI app to tell the security app that the AI model returned a response.
      *
      * @generated from protobuf rpc: DidSendResponse
      */
