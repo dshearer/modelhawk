@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	NotifyService_WillCallTool_FullMethodName = "/modelhawk.v0.NotifyService/WillCallTool"
-	NotifyService_DidCallTool_FullMethodName  = "/modelhawk.v0.NotifyService/DidCallTool"
+	NotifyService_DidSendResponse_FullMethodName = "/modelhawk.v0.NotifyService/DidSendResponse"
+	NotifyService_WillCallTool_FullMethodName    = "/modelhawk.v0.NotifyService/WillCallTool"
+	NotifyService_DidCallTool_FullMethodName     = "/modelhawk.v0.NotifyService/DidCallTool"
 )
 
 // NotifyServiceClient is the client API for NotifyService service.
@@ -30,6 +31,8 @@ const (
 // *
 // NotifyService is a service for telling the security app about stuff that has happened in the AI app that's being monitored.
 type NotifyServiceClient interface {
+	// / DidSendResponse can be called by the AI app to tell the security app that the AI model returned a response.
+	DidSendResponse(ctx context.Context, in *DidSendResponseRequest, opts ...grpc.CallOption) (*ServiceStatusResponse, error)
 	// / WillCallTool can be called by the AI app to tell the security app that the AI model will call a tool.
 	WillCallTool(ctx context.Context, in *WillCallToolRequest, opts ...grpc.CallOption) (*ServiceStatusResponse, error)
 	// / DidCallTool can be called by the AI app to tell the security app that the AI model did call a tool.
@@ -42,6 +45,16 @@ type notifyServiceClient struct {
 
 func NewNotifyServiceClient(cc grpc.ClientConnInterface) NotifyServiceClient {
 	return &notifyServiceClient{cc}
+}
+
+func (c *notifyServiceClient) DidSendResponse(ctx context.Context, in *DidSendResponseRequest, opts ...grpc.CallOption) (*ServiceStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ServiceStatusResponse)
+	err := c.cc.Invoke(ctx, NotifyService_DidSendResponse_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *notifyServiceClient) WillCallTool(ctx context.Context, in *WillCallToolRequest, opts ...grpc.CallOption) (*ServiceStatusResponse, error) {
@@ -71,6 +84,8 @@ func (c *notifyServiceClient) DidCallTool(ctx context.Context, in *DidCallToolRe
 // *
 // NotifyService is a service for telling the security app about stuff that has happened in the AI app that's being monitored.
 type NotifyServiceServer interface {
+	// / DidSendResponse can be called by the AI app to tell the security app that the AI model returned a response.
+	DidSendResponse(context.Context, *DidSendResponseRequest) (*ServiceStatusResponse, error)
 	// / WillCallTool can be called by the AI app to tell the security app that the AI model will call a tool.
 	WillCallTool(context.Context, *WillCallToolRequest) (*ServiceStatusResponse, error)
 	// / DidCallTool can be called by the AI app to tell the security app that the AI model did call a tool.
@@ -85,6 +100,9 @@ type NotifyServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedNotifyServiceServer struct{}
 
+func (UnimplementedNotifyServiceServer) DidSendResponse(context.Context, *DidSendResponseRequest) (*ServiceStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DidSendResponse not implemented")
+}
 func (UnimplementedNotifyServiceServer) WillCallTool(context.Context, *WillCallToolRequest) (*ServiceStatusResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method WillCallTool not implemented")
 }
@@ -110,6 +128,24 @@ func RegisterNotifyServiceServer(s grpc.ServiceRegistrar, srv NotifyServiceServe
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&NotifyService_ServiceDesc, srv)
+}
+
+func _NotifyService_DidSendResponse_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DidSendResponseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotifyServiceServer).DidSendResponse(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotifyService_DidSendResponse_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotifyServiceServer).DidSendResponse(ctx, req.(*DidSendResponseRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _NotifyService_WillCallTool_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -155,6 +191,10 @@ var NotifyService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "modelhawk.v0.NotifyService",
 	HandlerType: (*NotifyServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "DidSendResponse",
+			Handler:    _NotifyService_DidSendResponse_Handler,
+		},
 		{
 			MethodName: "WillCallTool",
 			Handler:    _NotifyService_WillCallTool_Handler,
