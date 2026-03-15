@@ -6,7 +6,7 @@ export { ServiceStatusResponse } from "./src/service_status_response";
 
 export { ToolInfo, ToolParamInfo } from "./src/tool_info";
 
-export { WillCallToolRequest, DidCallToolRequest, NotifyService } from "./src/notify_service";
+export { WillCallToolRequest, DidCallToolRequest, DidSendResponseRequest, NotifyService } from "./src/notify_service";
 export { INotifyServiceClient, NotifyServiceClient } from "./src/notify_service.client";
 
 export { WantsToCallToolRequest, WantsToCallToolResponse, PermissionService } from "./src/permission_service";

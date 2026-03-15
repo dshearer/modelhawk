@@ -1,0 +1,58 @@
+#!/bin/sh
+#
+# check-ts-exports - Verify that package-config/ts/index.ts exports all types
+# corresponding to messages and services defined in proto/v0/*.proto.
+#
+# For each proto message Foo, expects an export named "Foo".
+# For each proto service Bar, expects exports: "Bar", "IBarClient", "BarClient".
+#
+# Usage: check-ts-exports
+#
+
+set -e
+
+REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+PROTO_DIR="$REPO_ROOT/proto/v0"
+INDEX_FILE="$REPO_ROOT/package-config/ts/index.ts"
+
+if [ ! -d "$PROTO_DIR" ]; then
+    echo "ERROR: Proto directory not found: $PROTO_DIR" >&2
+    exit 1
+fi
+
+if [ ! -f "$INDEX_FILE" ]; then
+    echo "ERROR: Index file not found: $INDEX_FILE" >&2
+    exit 1
+fi
+
+# Collect exported names from index.ts.
+# Matches "export { A, B, C } from ..." lines and extracts the names.
+exported=$(sed -n 's/^export {//p' "$INDEX_FILE" | sed 's/} from.*//' | tr ',' '\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | grep -v '^$' | sort -u)
+
+# Extract message and service names from proto files, check each one.
+output=$(grep -hE '^\s*(message|service)\s+\w+' "$PROTO_DIR"/*.proto | while read -r line; do
+    kind=$(echo "$line" | awk '{print $1}')
+    name=$(echo "$line" | awk '{print $2}')
+
+    if [ "$kind" = "message" ]; then
+        if ! echo "$exported" | grep -qx "$name"; then
+            echo "MISSING: message $name"
+        fi
+    elif [ "$kind" = "service" ]; then
+        for expected in "$name" "I${name}Client" "${name}Client"; do
+            if ! echo "$exported" | grep -qx "$expected"; then
+                echo "MISSING: service export $expected (from service $name)"
+            fi
+        done
+    fi
+done)
+
+if [ -n "$output" ]; then
+    echo "$output"
+    echo ""
+    echo "FAIL: package-config/ts/index.ts is missing exports."
+    exit 1
+else
+    echo "OK: All proto messages and services are exported."
+    exit 0
+fi

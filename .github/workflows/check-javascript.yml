@@ -11,6 +11,9 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
+            - name: Check for unexported types
+              run: script/check-ts-exports
+
             - uses: actions/setup-node@v4
               with:
                 node-version: "25.5.0"
@@ -18,7 +21,7 @@ jobs:
             - uses: oven-sh/setup-bun@v2
               with:
                 bun-version: "1.3.9"
-            
+
             - run: npm install
               working-directory: gen/ts
 
