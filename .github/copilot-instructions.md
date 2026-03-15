@@ -10,3 +10,5 @@ Make sure `README.md` is in sync with the code. In particular:
 
 Make sure `CONTRIBUTING.md` is in sync with the code. In particular:
 - Paths to files/folders in the repo should be correct
+
+Make sure `package-config/ts/index.ts` exports all the types in `gen/ts/src` that correspond to messages in the proto files in `proto/v0`.
