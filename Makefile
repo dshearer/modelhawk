@@ -9,7 +9,7 @@ DOCKER_RUN   := docker run --rm -v $(CURDIR):/workspace $(IMAGE)
 all: generate
 
 .PHONY: ref-impls
-ref-impls: server
+ref-impls: reference-impls/server/server
 
 
 # --- Docker ---
@@ -33,7 +33,7 @@ generate: docker-build
 
 # --- server ref impl ---
 
-reference-impls/server/server : generate-go
+reference-impls/server/server: generate
 	@cd reference-impls/server && go build .
 
 
