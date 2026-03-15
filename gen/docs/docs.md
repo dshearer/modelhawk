@@ -8,6 +8,11 @@
   
 - [message.proto](#message-proto)
     - [Message](#modelhawk-v0-Message)
+    - [TextContent](#modelhawk-v0-TextContent)
+    - [ThinkingContent](#modelhawk-v0-ThinkingContent)
+    - [ToolCallContent](#modelhawk-v0-ToolCallContent)
+    - [ToolCallContent.ArgsEntry](#modelhawk-v0-ToolCallContent-ArgsEntry)
+    - [ToolResultContent](#modelhawk-v0-ToolResultContent)
   
 - [notify_service.proto](#notify_service-proto)
     - [DidCallToolRequest](#modelhawk-v0-DidCallToolRequest)
@@ -89,7 +94,93 @@ A message sent from or to an AI model.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | role | [string](#string) | optional |  |
+| thinking | [ThinkingContent](#modelhawk-v0-ThinkingContent) |  |  |
+| tool_call | [ToolCallContent](#modelhawk-v0-ToolCallContent) |  |  |
+| tool_result | [ToolResultContent](#modelhawk-v0-ToolResultContent) |  |  |
+| text | [TextContent](#modelhawk-v0-TextContent) |  |  |
+
+
+
+
+
+
+<a name="modelhawk-v0-TextContent"></a>
+
+### TextContent
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| timestamp | google.protobuf.Timestamp | optional |  |
 | content | [string](#string) | optional |  |
+
+
+
+
+
+
+<a name="modelhawk-v0-ThinkingContent"></a>
+
+### ThinkingContent
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| timestamp | google.protobuf.Timestamp | optional |  |
+| content | [string](#string) | optional |  |
+
+
+
+
+
+
+<a name="modelhawk-v0-ToolCallContent"></a>
+
+### ToolCallContent
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| timestamp | google.protobuf.Timestamp | optional |  |
+| tool | [ToolInfo](#modelhawk-v0-ToolInfo) | optional |  |
+| args | [ToolCallContent.ArgsEntry](#modelhawk-v0-ToolCallContent-ArgsEntry) | repeated |  |
+
+
+
+
+
+
+<a name="modelhawk-v0-ToolCallContent-ArgsEntry"></a>
+
+### ToolCallContent.ArgsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="modelhawk-v0-ToolResultContent"></a>
+
+### ToolResultContent
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| timestamp | google.protobuf.Timestamp | optional |  |
+| tool_name | [string](#string) | optional |  |
+| result | [string](#string) | optional |  |
+| is_error | [bool](#bool) | optional |  |
 
 
 
