@@ -112,7 +112,7 @@ A message sent from or to an AI model.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) | optional |  |
+| timestamp | google.protobuf.Timestamp | optional |  |
 | content | [string](#string) | optional |  |
 
 
@@ -128,7 +128,7 @@ A message sent from or to an AI model.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) | optional |  |
+| timestamp | google.protobuf.Timestamp | optional |  |
 | content | [string](#string) | optional |  |
 
 
@@ -144,7 +144,7 @@ A message sent from or to an AI model.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) | optional |  |
+| timestamp | google.protobuf.Timestamp | optional |  |
 | tool | [ToolInfo](#modelhawk-v0-ToolInfo) | optional |  |
 | args | [ToolCallContent.ArgsEntry](#modelhawk-v0-ToolCallContent-ArgsEntry) | repeated |  |
 
@@ -177,7 +177,7 @@ A message sent from or to an AI model.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) | optional |  |
+| timestamp | google.protobuf.Timestamp | optional |  |
 | tool_name | [string](#string) | optional |  |
 | result | [string](#string) | optional |  |
 | is_error | [bool](#bool) | optional |  |

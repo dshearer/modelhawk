@@ -39,3 +39,4 @@ gen/go/%: package-config/go/%
 gen/docs/docs.md: $(PROTO_FILES)
 	@mkdir -p gen/docs
 	protoc -I "$(PROTO_DIR)" --doc_out=gen/docs --doc_opt=markdown,docs.md $(PROTO_FILES)
+	sed -i 's/\[google\.protobuf\.\([^]]*\)\](#google-protobuf-[^)]*)/google.protobuf.\1/g' gen/docs/docs.md
