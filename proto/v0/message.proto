@@ -11,11 +11,15 @@ option go_package = "github.com/dshearer/modelhawk/gen/go/v0";
  */
 message Message {
     optional string role = 1;
+    repeated MessageContent contents = 2;
+}
+
+message MessageContent {
     oneof content {
-        ThinkingContent thinking = 2;
-        ToolCallContent tool_call = 3;
-        ToolResultContent tool_result = 4;
-        TextContent text = 5;
+        ThinkingContent thinking = 1;
+        ToolCallContent tool_call = 2;
+        ToolResultContent tool_result = 3;
+        TextContent text = 4;
     }
 }
 

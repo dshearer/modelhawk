@@ -1,6 +1,6 @@
 // Re-export all generated protobuf types and service clients.
 export { Application } from "./src/application";
-export { Message, ThinkingContent, ToolCallContent, ToolResultContent, TextContent } from "./src/message";
+export { Message, MessageContent,ThinkingContent, ToolCallContent, ToolResultContent, TextContent } from "./src/message";
 export { ServiceStatusResponse } from "./src/service_status_response";
 
 export { ToolInfo, ToolParamInfo } from "./src/tool_info";

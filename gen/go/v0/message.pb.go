@@ -25,15 +25,9 @@ const (
 // *
 // A message sent from or to an AI model.
 type Message struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	Role  *string                `protobuf:"bytes,1,opt,name=role,proto3,oneof" json:"role,omitempty"`
-	// Types that are valid to be assigned to Content:
-	//
-	//	*Message_Thinking
-	//	*Message_ToolCall
-	//	*Message_ToolResult
-	//	*Message_Text
-	Content       isMessage_Content `protobuf_oneof:"content"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Role          *string                `protobuf:"bytes,1,opt,name=role,proto3,oneof" json:"role,omitempty"`
+	Contents      []*MessageContent      `protobuf:"bytes,2,rep,name=contents,proto3" json:"contents,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -75,76 +69,126 @@ func (x *Message) GetRole() string {
 	return ""
 }
 
-func (x *Message) GetContent() isMessage_Content {
+func (x *Message) GetContents() []*MessageContent {
+	if x != nil {
+		return x.Contents
+	}
+	return nil
+}
+
+type MessageContent struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Content:
+	//
+	//	*MessageContent_Thinking
+	//	*MessageContent_ToolCall
+	//	*MessageContent_ToolResult
+	//	*MessageContent_Text
+	Content       isMessageContent_Content `protobuf_oneof:"content"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MessageContent) Reset() {
+	*x = MessageContent{}
+	mi := &file_message_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MessageContent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MessageContent) ProtoMessage() {}
+
+func (x *MessageContent) ProtoReflect() protoreflect.Message {
+	mi := &file_message_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MessageContent.ProtoReflect.Descriptor instead.
+func (*MessageContent) Descriptor() ([]byte, []int) {
+	return file_message_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *MessageContent) GetContent() isMessageContent_Content {
 	if x != nil {
 		return x.Content
 	}
 	return nil
 }
 
-func (x *Message) GetThinking() *ThinkingContent {
+func (x *MessageContent) GetThinking() *ThinkingContent {
 	if x != nil {
-		if x, ok := x.Content.(*Message_Thinking); ok {
+		if x, ok := x.Content.(*MessageContent_Thinking); ok {
 			return x.Thinking
 		}
 	}
 	return nil
 }
 
-func (x *Message) GetToolCall() *ToolCallContent {
+func (x *MessageContent) GetToolCall() *ToolCallContent {
 	if x != nil {
-		if x, ok := x.Content.(*Message_ToolCall); ok {
+		if x, ok := x.Content.(*MessageContent_ToolCall); ok {
 			return x.ToolCall
 		}
 	}
 	return nil
 }
 
-func (x *Message) GetToolResult() *ToolResultContent {
+func (x *MessageContent) GetToolResult() *ToolResultContent {
 	if x != nil {
-		if x, ok := x.Content.(*Message_ToolResult); ok {
+		if x, ok := x.Content.(*MessageContent_ToolResult); ok {
 			return x.ToolResult
 		}
 	}
 	return nil
 }
 
-func (x *Message) GetText() *TextContent {
+func (x *MessageContent) GetText() *TextContent {
 	if x != nil {
-		if x, ok := x.Content.(*Message_Text); ok {
+		if x, ok := x.Content.(*MessageContent_Text); ok {
 			return x.Text
 		}
 	}
 	return nil
 }
 
-type isMessage_Content interface {
-	isMessage_Content()
+type isMessageContent_Content interface {
+	isMessageContent_Content()
 }
 
-type Message_Thinking struct {
-	Thinking *ThinkingContent `protobuf:"bytes,2,opt,name=thinking,proto3,oneof"`
+type MessageContent_Thinking struct {
+	Thinking *ThinkingContent `protobuf:"bytes,1,opt,name=thinking,proto3,oneof"`
 }
 
-type Message_ToolCall struct {
-	ToolCall *ToolCallContent `protobuf:"bytes,3,opt,name=tool_call,json=toolCall,proto3,oneof"`
+type MessageContent_ToolCall struct {
+	ToolCall *ToolCallContent `protobuf:"bytes,2,opt,name=tool_call,json=toolCall,proto3,oneof"`
 }
 
-type Message_ToolResult struct {
-	ToolResult *ToolResultContent `protobuf:"bytes,4,opt,name=tool_result,json=toolResult,proto3,oneof"`
+type MessageContent_ToolResult struct {
+	ToolResult *ToolResultContent `protobuf:"bytes,3,opt,name=tool_result,json=toolResult,proto3,oneof"`
 }
 
-type Message_Text struct {
-	Text *TextContent `protobuf:"bytes,5,opt,name=text,proto3,oneof"`
+type MessageContent_Text struct {
+	Text *TextContent `protobuf:"bytes,4,opt,name=text,proto3,oneof"`
 }
 
-func (*Message_Thinking) isMessage_Content() {}
+func (*MessageContent_Thinking) isMessageContent_Content() {}
 
-func (*Message_ToolCall) isMessage_Content() {}
+func (*MessageContent_ToolCall) isMessageContent_Content() {}
 
-func (*Message_ToolResult) isMessage_Content() {}
+func (*MessageContent_ToolResult) isMessageContent_Content() {}
 
-func (*Message_Text) isMessage_Content() {}
+func (*MessageContent_Text) isMessageContent_Content() {}
 
 type ThinkingContent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -156,7 +200,7 @@ type ThinkingContent struct {
 
 func (x *ThinkingContent) Reset() {
 	*x = ThinkingContent{}
-	mi := &file_message_proto_msgTypes[1]
+	mi := &file_message_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -168,7 +212,7 @@ func (x *ThinkingContent) String() string {
 func (*ThinkingContent) ProtoMessage() {}
 
 func (x *ThinkingContent) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[1]
+	mi := &file_message_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -181,7 +225,7 @@ func (x *ThinkingContent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ThinkingContent.ProtoReflect.Descriptor instead.
 func (*ThinkingContent) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{1}
+	return file_message_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ThinkingContent) GetTimestamp() *timestamppb.Timestamp {
@@ -209,7 +253,7 @@ type ToolCallContent struct {
 
 func (x *ToolCallContent) Reset() {
 	*x = ToolCallContent{}
-	mi := &file_message_proto_msgTypes[2]
+	mi := &file_message_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -221,7 +265,7 @@ func (x *ToolCallContent) String() string {
 func (*ToolCallContent) ProtoMessage() {}
 
 func (x *ToolCallContent) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[2]
+	mi := &file_message_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -234,7 +278,7 @@ func (x *ToolCallContent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ToolCallContent.ProtoReflect.Descriptor instead.
 func (*ToolCallContent) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{2}
+	return file_message_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ToolCallContent) GetTimestamp() *timestamppb.Timestamp {
@@ -270,7 +314,7 @@ type ToolResultContent struct {
 
 func (x *ToolResultContent) Reset() {
 	*x = ToolResultContent{}
-	mi := &file_message_proto_msgTypes[3]
+	mi := &file_message_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -282,7 +326,7 @@ func (x *ToolResultContent) String() string {
 func (*ToolResultContent) ProtoMessage() {}
 
 func (x *ToolResultContent) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[3]
+	mi := &file_message_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -295,7 +339,7 @@ func (x *ToolResultContent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ToolResultContent.ProtoReflect.Descriptor instead.
 func (*ToolResultContent) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{3}
+	return file_message_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ToolResultContent) GetTimestamp() *timestamppb.Timestamp {
@@ -336,7 +380,7 @@ type TextContent struct {
 
 func (x *TextContent) Reset() {
 	*x = TextContent{}
-	mi := &file_message_proto_msgTypes[4]
+	mi := &file_message_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -348,7 +392,7 @@ func (x *TextContent) String() string {
 func (*TextContent) ProtoMessage() {}
 
 func (x *TextContent) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[4]
+	mi := &file_message_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -361,7 +405,7 @@ func (x *TextContent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TextContent.ProtoReflect.Descriptor instead.
 func (*TextContent) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{4}
+	return file_message_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *TextContent) GetTimestamp() *timestamppb.Timestamp {
@@ -382,16 +426,18 @@ var File_message_proto protoreflect.FileDescriptor
 
 const file_message_proto_rawDesc = "" +
 	"\n" +
-	"\rmessage.proto\x12\fmodelhawk.v0\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x0ftool_info.proto\"\xa6\x02\n" +
+	"\rmessage.proto\x12\fmodelhawk.v0\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x0ftool_info.proto\"e\n" +
 	"\aMessage\x12\x17\n" +
-	"\x04role\x18\x01 \x01(\tH\x01R\x04role\x88\x01\x01\x12;\n" +
-	"\bthinking\x18\x02 \x01(\v2\x1d.modelhawk.v0.ThinkingContentH\x00R\bthinking\x12<\n" +
-	"\ttool_call\x18\x03 \x01(\v2\x1d.modelhawk.v0.ToolCallContentH\x00R\btoolCall\x12B\n" +
-	"\vtool_result\x18\x04 \x01(\v2\x1f.modelhawk.v0.ToolResultContentH\x00R\n" +
+	"\x04role\x18\x01 \x01(\tH\x00R\x04role\x88\x01\x01\x128\n" +
+	"\bcontents\x18\x02 \x03(\v2\x1c.modelhawk.v0.MessageContentR\bcontentsB\a\n" +
+	"\x05_role\"\x8b\x02\n" +
+	"\x0eMessageContent\x12;\n" +
+	"\bthinking\x18\x01 \x01(\v2\x1d.modelhawk.v0.ThinkingContentH\x00R\bthinking\x12<\n" +
+	"\ttool_call\x18\x02 \x01(\v2\x1d.modelhawk.v0.ToolCallContentH\x00R\btoolCall\x12B\n" +
+	"\vtool_result\x18\x03 \x01(\v2\x1f.modelhawk.v0.ToolResultContentH\x00R\n" +
 	"toolResult\x12/\n" +
-	"\x04text\x18\x05 \x01(\v2\x19.modelhawk.v0.TextContentH\x00R\x04textB\t\n" +
-	"\acontentB\a\n" +
-	"\x05_role\"\x89\x01\n" +
+	"\x04text\x18\x04 \x01(\v2\x19.modelhawk.v0.TextContentH\x00R\x04textB\t\n" +
+	"\acontent\"\x89\x01\n" +
 	"\x0fThinkingContent\x12=\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\ttimestamp\x88\x01\x01\x12\x1d\n" +
 	"\acontent\x18\x02 \x01(\tH\x01R\acontent\x88\x01\x01B\f\n" +
@@ -440,33 +486,35 @@ func file_message_proto_rawDescGZIP() []byte {
 	return file_message_proto_rawDescData
 }
 
-var file_message_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_message_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_message_proto_goTypes = []any{
 	(*Message)(nil),               // 0: modelhawk.v0.Message
-	(*ThinkingContent)(nil),       // 1: modelhawk.v0.ThinkingContent
-	(*ToolCallContent)(nil),       // 2: modelhawk.v0.ToolCallContent
-	(*ToolResultContent)(nil),     // 3: modelhawk.v0.ToolResultContent
-	(*TextContent)(nil),           // 4: modelhawk.v0.TextContent
-	nil,                           // 5: modelhawk.v0.ToolCallContent.ArgsEntry
-	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
-	(*ToolInfo)(nil),              // 7: modelhawk.v0.ToolInfo
+	(*MessageContent)(nil),        // 1: modelhawk.v0.MessageContent
+	(*ThinkingContent)(nil),       // 2: modelhawk.v0.ThinkingContent
+	(*ToolCallContent)(nil),       // 3: modelhawk.v0.ToolCallContent
+	(*ToolResultContent)(nil),     // 4: modelhawk.v0.ToolResultContent
+	(*TextContent)(nil),           // 5: modelhawk.v0.TextContent
+	nil,                           // 6: modelhawk.v0.ToolCallContent.ArgsEntry
+	(*timestamppb.Timestamp)(nil), // 7: google.protobuf.Timestamp
+	(*ToolInfo)(nil),              // 8: modelhawk.v0.ToolInfo
 }
 var file_message_proto_depIdxs = []int32{
-	1,  // 0: modelhawk.v0.Message.thinking:type_name -> modelhawk.v0.ThinkingContent
-	2,  // 1: modelhawk.v0.Message.tool_call:type_name -> modelhawk.v0.ToolCallContent
-	3,  // 2: modelhawk.v0.Message.tool_result:type_name -> modelhawk.v0.ToolResultContent
-	4,  // 3: modelhawk.v0.Message.text:type_name -> modelhawk.v0.TextContent
-	6,  // 4: modelhawk.v0.ThinkingContent.timestamp:type_name -> google.protobuf.Timestamp
-	6,  // 5: modelhawk.v0.ToolCallContent.timestamp:type_name -> google.protobuf.Timestamp
-	7,  // 6: modelhawk.v0.ToolCallContent.tool:type_name -> modelhawk.v0.ToolInfo
-	5,  // 7: modelhawk.v0.ToolCallContent.args:type_name -> modelhawk.v0.ToolCallContent.ArgsEntry
-	6,  // 8: modelhawk.v0.ToolResultContent.timestamp:type_name -> google.protobuf.Timestamp
-	6,  // 9: modelhawk.v0.TextContent.timestamp:type_name -> google.protobuf.Timestamp
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	1,  // 0: modelhawk.v0.Message.contents:type_name -> modelhawk.v0.MessageContent
+	2,  // 1: modelhawk.v0.MessageContent.thinking:type_name -> modelhawk.v0.ThinkingContent
+	3,  // 2: modelhawk.v0.MessageContent.tool_call:type_name -> modelhawk.v0.ToolCallContent
+	4,  // 3: modelhawk.v0.MessageContent.tool_result:type_name -> modelhawk.v0.ToolResultContent
+	5,  // 4: modelhawk.v0.MessageContent.text:type_name -> modelhawk.v0.TextContent
+	7,  // 5: modelhawk.v0.ThinkingContent.timestamp:type_name -> google.protobuf.Timestamp
+	7,  // 6: modelhawk.v0.ToolCallContent.timestamp:type_name -> google.protobuf.Timestamp
+	8,  // 7: modelhawk.v0.ToolCallContent.tool:type_name -> modelhawk.v0.ToolInfo
+	6,  // 8: modelhawk.v0.ToolCallContent.args:type_name -> modelhawk.v0.ToolCallContent.ArgsEntry
+	7,  // 9: modelhawk.v0.ToolResultContent.timestamp:type_name -> google.protobuf.Timestamp
+	7,  // 10: modelhawk.v0.TextContent.timestamp:type_name -> google.protobuf.Timestamp
+	11, // [11:11] is the sub-list for method output_type
+	11, // [11:11] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_message_proto_init() }
@@ -475,23 +523,24 @@ func file_message_proto_init() {
 		return
 	}
 	file_tool_info_proto_init()
-	file_message_proto_msgTypes[0].OneofWrappers = []any{
-		(*Message_Thinking)(nil),
-		(*Message_ToolCall)(nil),
-		(*Message_ToolResult)(nil),
-		(*Message_Text)(nil),
+	file_message_proto_msgTypes[0].OneofWrappers = []any{}
+	file_message_proto_msgTypes[1].OneofWrappers = []any{
+		(*MessageContent_Thinking)(nil),
+		(*MessageContent_ToolCall)(nil),
+		(*MessageContent_ToolResult)(nil),
+		(*MessageContent_Text)(nil),
 	}
-	file_message_proto_msgTypes[1].OneofWrappers = []any{}
 	file_message_proto_msgTypes[2].OneofWrappers = []any{}
 	file_message_proto_msgTypes[3].OneofWrappers = []any{}
 	file_message_proto_msgTypes[4].OneofWrappers = []any{}
+	file_message_proto_msgTypes[5].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_message_proto_rawDesc), len(file_message_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

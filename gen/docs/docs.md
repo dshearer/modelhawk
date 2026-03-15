@@ -8,6 +8,7 @@
   
 - [message.proto](#message-proto)
     - [Message](#modelhawk-v0-Message)
+    - [MessageContent](#modelhawk-v0-MessageContent)
     - [TextContent](#modelhawk-v0-TextContent)
     - [ThinkingContent](#modelhawk-v0-ThinkingContent)
     - [ToolCallContent](#modelhawk-v0-ToolCallContent)
@@ -94,6 +95,21 @@ A message sent from or to an AI model.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | role | [string](#string) | optional |  |
+| contents | [MessageContent](#modelhawk-v0-MessageContent) | repeated |  |
+
+
+
+
+
+
+<a name="modelhawk-v0-MessageContent"></a>
+
+### MessageContent
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
 | thinking | [ThinkingContent](#modelhawk-v0-ThinkingContent) |  |  |
 | tool_call | [ToolCallContent](#modelhawk-v0-ToolCallContent) |  |  |
 | tool_result | [ToolResultContent](#modelhawk-v0-ToolResultContent) |  |  |
