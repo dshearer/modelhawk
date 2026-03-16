@@ -3,12 +3,12 @@
 // tslint:disable
 import type { RpcTransport } from "@protobuf-ts/runtime-rpc";
 import type { ServiceInfo } from "@protobuf-ts/runtime-rpc";
-import { NotifyService } from "./notify_service";
-import type { DidCallToolRequest } from "./notify_service";
-import type { WillCallToolRequest } from "./notify_service";
+import { NotifyService } from "./notify_service.js";
+import type { DidCallToolRequest } from "./notify_service.js";
+import type { WillCallToolRequest } from "./notify_service.js";
 import { stackIntercept } from "@protobuf-ts/runtime-rpc";
-import type { ServiceStatusResponse } from "./service_status_response";
-import type { DidSendResponseRequest } from "./notify_service";
+import type { ServiceStatusResponse } from "./service_status_response.js";
+import type { DidSendResponseRequest } from "./notify_service.js";
 import type { UnaryCall } from "@protobuf-ts/runtime-rpc";
 import type { RpcOptions } from "@protobuf-ts/runtime-rpc";
 /**

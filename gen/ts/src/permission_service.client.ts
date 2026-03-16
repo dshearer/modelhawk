@@ -3,10 +3,10 @@
 // tslint:disable
 import type { RpcTransport } from "@protobuf-ts/runtime-rpc";
 import type { ServiceInfo } from "@protobuf-ts/runtime-rpc";
-import { PermissionService } from "./permission_service";
+import { PermissionService } from "./permission_service.js";
 import { stackIntercept } from "@protobuf-ts/runtime-rpc";
-import type { WantsToCallToolResponse } from "./permission_service";
-import type { WantsToCallToolRequest } from "./permission_service";
+import type { WantsToCallToolResponse } from "./permission_service.js";
+import type { WantsToCallToolRequest } from "./permission_service.js";
 import type { UnaryCall } from "@protobuf-ts/runtime-rpc";
 import type { RpcOptions } from "@protobuf-ts/runtime-rpc";
 /**
