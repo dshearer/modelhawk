@@ -1,12 +1,12 @@
 // Re-export all generated protobuf types and service clients.
-export { Application } from "./src/application";
-export { Message, MessageContent,ThinkingContent, ToolCallContent, ToolResultContent, TextContent } from "./src/message";
-export { ServiceStatusResponse } from "./src/service_status_response";
+export { Application } from "./src/application.js";
+export { Message, MessageContent,ThinkingContent, ToolCallContent, ToolResultContent, TextContent } from "./src/message.js";
+export { ServiceStatusResponse } from "./src/service_status_response.js";
 
-export { ToolInfo, ToolParamInfo } from "./src/tool_info";
+export { ToolInfo, ToolParamInfo } from "./src/tool_info.js";
 
-export { WillCallToolRequest, DidCallToolRequest, DidSendResponseRequest, NotifyService } from "./src/notify_service";
-export { INotifyServiceClient, NotifyServiceClient } from "./src/notify_service.client";
+export { WillCallToolRequest, DidCallToolRequest, DidSendResponseRequest, NotifyService } from "./src/notify_service.js";
+export { INotifyServiceClient, NotifyServiceClient } from "./src/notify_service.client.js";
 
-export { WantsToCallToolRequest, WantsToCallToolResponse, PermissionService } from "./src/permission_service";
-export { IPermissionServiceClient, PermissionServiceClient } from "./src/permission_service.client";
+export { WantsToCallToolRequest, WantsToCallToolResponse, PermissionService } from "./src/permission_service.js";
+export { IPermissionServiceClient, PermissionServiceClient } from "./src/permission_service.client.js";
