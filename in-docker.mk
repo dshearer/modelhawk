@@ -16,6 +16,8 @@ gen-ts:
 		-I "$(PROTO_DIR)" \
 		"--ts_out=gen/ts/src" \
 		$(PROTO_FILES)
+	# fix imports --- see github.com/timostamm/protobuf-ts/issues/644
+	./script/fix-ts-imports
 	cd gen/ts && npm install
 
 .PHONY: gen-go

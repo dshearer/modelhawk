@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+# fix-ts-imports - Append .js to relative import paths in generated TS files.
+#
+# Rewrites lines like:
+#   import { ToolInfo } from "./tool_info";
+# to:
+#   import { ToolInfo } from "./tool_info.js";
+#
+# Usage: fix-ts-imports
+#
+
+set -e
+
+REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+TS_DIR="$REPO_ROOT/gen/ts"
+
+find "$TS_DIR" -name '*.ts' -type f | while IFS= read -r file; do
+    # Add .js to all relative imports, then collapse any .js.js that were already correct.
+    sed -i.bak -E \
+        -e 's/(from "\.[^"]+)"/\1.js"/g' \
+        -e 's/\.js\.js"/.js"/g' \
+        "$file" && rm -f "$file.bak"
+done

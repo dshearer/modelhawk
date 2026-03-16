@@ -11,8 +11,8 @@ import { UnknownFieldHandler } from "@protobuf-ts/runtime";
 import type { PartialMessage } from "@protobuf-ts/runtime";
 import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
-import { Message } from "./message";
-import { Application } from "./application";
+import { Message } from "./message.js";
+import { Application } from "./application.js";
 /**
  * @generated from protobuf message modelhawk.v0.WantsToCallToolRequest
  */

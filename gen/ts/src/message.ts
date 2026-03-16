@@ -10,8 +10,8 @@ import { UnknownFieldHandler } from "@protobuf-ts/runtime";
 import type { PartialMessage } from "@protobuf-ts/runtime";
 import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
-import { ToolInfo } from "./tool_info";
-import { Timestamp } from "./google/protobuf/timestamp";
+import { ToolInfo } from "./tool_info.js";
+import { Timestamp } from "./google/protobuf/timestamp.js";
 /**
  * *
  * A message sent from or to an AI model.
