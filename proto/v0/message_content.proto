@@ -1,0 +1,27 @@
+syntax = "proto3";
+package modelhawk.v0;
+
+import "tool_info.proto";
+
+option go_package = "github.com/dshearer/modelhawk/gen/go/v0";
+
+message MessageContent {
+    oneof content {
+        ThinkingContent thinking = 1;
+        ToolCallContent tool_call = 2;
+        TextContent text = 3;
+    }
+}
+
+message ThinkingContent {
+    optional string content = 1;
+}
+
+message ToolCallContent {
+    optional ToolInfo tool = 1;
+    map<string, string> args = 2;
+}
+
+message TextContent {
+    optional string content = 1;
+}

@@ -9,16 +9,17 @@
 - [message.proto](#message-proto)
     - [AssistantMessage](#modelhawk-v0-AssistantMessage)
     - [Message](#modelhawk-v0-Message)
-    - [MessageContent](#modelhawk-v0-MessageContent)
     - [OtherMessage](#modelhawk-v0-OtherMessage)
     - [SystemMessage](#modelhawk-v0-SystemMessage)
+    - [ToolResultMessage](#modelhawk-v0-ToolResultMessage)
+    - [UserMessage](#modelhawk-v0-UserMessage)
+  
+- [message_content.proto](#message_content-proto)
+    - [MessageContent](#modelhawk-v0-MessageContent)
     - [TextContent](#modelhawk-v0-TextContent)
     - [ThinkingContent](#modelhawk-v0-ThinkingContent)
     - [ToolCallContent](#modelhawk-v0-ToolCallContent)
     - [ToolCallContent.ArgsEntry](#modelhawk-v0-ToolCallContent-ArgsEntry)
-    - [ToolResultContent](#modelhawk-v0-ToolResultContent)
-    - [ToolResultMessage](#modelhawk-v0-ToolResultMessage)
-    - [UserMessage](#modelhawk-v0-UserMessage)
   
 - [notify_service.proto](#notify_service-proto)
     - [DidCallToolRequest](#modelhawk-v0-DidCallToolRequest)
@@ -117,29 +118,11 @@ A message sent from or to an AI model.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| system_message | [SystemMessage](#modelhawk-v0-SystemMessage) |  |  |
-| user_message | [UserMessage](#modelhawk-v0-UserMessage) |  |  |
-| assistant_message | [AssistantMessage](#modelhawk-v0-AssistantMessage) |  |  |
-| tool_result_message | [ToolResultMessage](#modelhawk-v0-ToolResultMessage) |  |  |
+| system | [SystemMessage](#modelhawk-v0-SystemMessage) |  |  |
+| user | [UserMessage](#modelhawk-v0-UserMessage) |  |  |
+| assistant | [AssistantMessage](#modelhawk-v0-AssistantMessage) |  |  |
+| tool_result | [ToolResultMessage](#modelhawk-v0-ToolResultMessage) |  |  |
 | timestamp | google.protobuf.Timestamp | optional |  |
-
-
-
-
-
-
-<a name="modelhawk-v0-MessageContent"></a>
-
-### MessageContent
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| thinking | [ThinkingContent](#modelhawk-v0-ThinkingContent) |  |  |
-| tool_call | [ToolCallContent](#modelhawk-v0-ToolCallContent) |  |  |
-| tool_result | [ToolResultContent](#modelhawk-v0-ToolResultContent) |  |  |
-| text | [TextContent](#modelhawk-v0-TextContent) |  |  |
 
 
 
@@ -171,6 +154,71 @@ A message sent from or to an AI model.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | contents | [MessageContent](#modelhawk-v0-MessageContent) | repeated |  |
+
+
+
+
+
+
+<a name="modelhawk-v0-ToolResultMessage"></a>
+
+### ToolResultMessage
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| contents | [MessageContent](#modelhawk-v0-MessageContent) | repeated |  |
+| tool_name | [string](#string) | optional |  |
+| is_error | [bool](#bool) | optional |  |
+
+
+
+
+
+
+<a name="modelhawk-v0-UserMessage"></a>
+
+### UserMessage
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| contents | [MessageContent](#modelhawk-v0-MessageContent) | repeated |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="message_content-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## message_content.proto
+
+
+
+<a name="modelhawk-v0-MessageContent"></a>
+
+### MessageContent
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| thinking | [ThinkingContent](#modelhawk-v0-ThinkingContent) |  |  |
+| tool_call | [ToolCallContent](#modelhawk-v0-ToolCallContent) |  |  |
+| text | [TextContent](#modelhawk-v0-TextContent) |  |  |
 
 
 
@@ -233,55 +281,6 @@ A message sent from or to an AI model.
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
 | value | [string](#string) |  |  |
-
-
-
-
-
-
-<a name="modelhawk-v0-ToolResultContent"></a>
-
-### ToolResultContent
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| tool_name | [string](#string) | optional |  |
-| result | [string](#string) | optional |  |
-| is_error | [bool](#bool) | optional |  |
-
-
-
-
-
-
-<a name="modelhawk-v0-ToolResultMessage"></a>
-
-### ToolResultMessage
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| contents | [MessageContent](#modelhawk-v0-MessageContent) | repeated |  |
-| tool_name | [string](#string) | optional |  |
-| is_error | [bool](#bool) | optional |  |
-
-
-
-
-
-
-<a name="modelhawk-v0-UserMessage"></a>
-
-### UserMessage
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| contents | [MessageContent](#modelhawk-v0-MessageContent) | repeated |  |
 
 
 

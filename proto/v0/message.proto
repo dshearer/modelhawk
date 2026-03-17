@@ -2,7 +2,7 @@ syntax = "proto3";
 package modelhawk.v0;
 
 import "google/protobuf/timestamp.proto";
-import "tool_info.proto";
+import "message_content.proto";
 
 option go_package = "github.com/dshearer/modelhawk/gen/go/v0";
 
@@ -11,10 +11,10 @@ option go_package = "github.com/dshearer/modelhawk/gen/go/v0";
  */
 message Message {
     oneof msg {
-        SystemMessage system_message = 1;
-        UserMessage user_message = 2;
-        AssistantMessage assistant_message = 3;
-        ToolResultMessage tool_result_message = 4;
+        SystemMessage system = 1;
+        UserMessage user = 2;
+        AssistantMessage assistant = 3;
+        ToolResultMessage tool_result = 4;
     }
     optional google.protobuf.Timestamp timestamp = 5;
 }
@@ -43,32 +43,4 @@ message ToolResultMessage {
 message OtherMessage {
     optional string role = 1;
     repeated MessageContent contents = 2;
-}
-
-message MessageContent {
-    oneof content {
-        ThinkingContent thinking = 1;
-        ToolCallContent tool_call = 2;
-        ToolResultContent tool_result = 3;
-        TextContent text = 4;
-    }
-}
-
-message ThinkingContent {
-    optional string content = 1;
-}
-
-message ToolCallContent {
-    optional ToolInfo tool = 1;
-    map<string, string> args = 2;
-}
-
-message ToolResultContent {
-    optional string tool_name = 1;
-    optional string result = 2;
-    optional bool is_error = 3;
-}
-
-message TextContent {
-    optional string content = 1;
 }
