@@ -37,6 +37,9 @@
   
     - [PermissionService](#modelhawk-v0-PermissionService)
   
+- [ping_service.proto](#ping_service-proto)
+    - [PingService](#modelhawk-v0-PingService)
+  
 - [service_status_response.proto](#service_status_response-proto)
     - [ServiceStatusResponse](#modelhawk-v0-ServiceStatusResponse)
   
@@ -479,6 +482,32 @@ PermissionService is a service that AI apps can use to ask the security app for 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | WantsToCallTool | [WantsToCallToolRequest](#modelhawk-v0-WantsToCallToolRequest) | [WantsToCallToolResponse](#modelhawk-v0-WantsToCallToolResponse) | The AI app wants to call a tool. The security app can approve or deny it. |
+
+ 
+
+
+
+<a name="ping_service-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## ping_service.proto
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="modelhawk-v0-PingService"></a>
+
+### PingService
+PingService is a service for checking if the security app is alive.
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Ping | [.google.protobuf.Empty](#google-protobuf-Empty) | [.google.protobuf.Empty](#google-protobuf-Empty) | Ping can be called by the AI app to check if the security app is alive. |
 
  
 

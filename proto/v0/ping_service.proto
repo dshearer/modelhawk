@@ -1,0 +1,14 @@
+syntax = "proto3";
+package modelhawk.v0;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/dshearer/modelhawk/gen/go/v0";
+
+/**
+ * PingService is a service for checking if the security app is alive.
+ */
+service PingService {
+  /// Ping can be called by the AI app to check if the security app is alive.
+  rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
