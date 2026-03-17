@@ -12,3 +12,6 @@ export { INotifyServiceClient, NotifyServiceClient } from "./src/notify_service.
 
 export { WantsToCallToolRequest, WantsToCallToolResponse, PermissionService } from "./src/permission_service.js";
 export { IPermissionServiceClient, PermissionServiceClient } from "./src/permission_service.client.js";
+
+export { PingService } from "./src/ping_service.js";
+export { IPingServiceClient, PingServiceClient } from "./src/ping_service.client.js";
