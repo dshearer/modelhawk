@@ -10,7 +10,7 @@ import { UnknownFieldHandler } from "@protobuf-ts/runtime";
 import type { PartialMessage } from "@protobuf-ts/runtime";
 import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
-import { ToolInfo } from "./tool_info.js";
+import { MessageContent } from "./message_content.js";
 import { Timestamp } from "./google/protobuf/timestamp.js";
 /**
  * *
@@ -23,29 +23,29 @@ export interface Message {
      * @generated from protobuf oneof: msg
      */
     msg: {
-        oneofKind: "systemMessage";
+        oneofKind: "system";
         /**
-         * @generated from protobuf field: modelhawk.v0.SystemMessage system_message = 1
+         * @generated from protobuf field: modelhawk.v0.SystemMessage system = 1
          */
-        systemMessage: SystemMessage;
+        system: SystemMessage;
     } | {
-        oneofKind: "userMessage";
+        oneofKind: "user";
         /**
-         * @generated from protobuf field: modelhawk.v0.UserMessage user_message = 2
+         * @generated from protobuf field: modelhawk.v0.UserMessage user = 2
          */
-        userMessage: UserMessage;
+        user: UserMessage;
     } | {
-        oneofKind: "assistantMessage";
+        oneofKind: "assistant";
         /**
-         * @generated from protobuf field: modelhawk.v0.AssistantMessage assistant_message = 3
+         * @generated from protobuf field: modelhawk.v0.AssistantMessage assistant = 3
          */
-        assistantMessage: AssistantMessage;
+        assistant: AssistantMessage;
     } | {
-        oneofKind: "toolResultMessage";
+        oneofKind: "toolResult";
         /**
-         * @generated from protobuf field: modelhawk.v0.ToolResultMessage tool_result_message = 4
+         * @generated from protobuf field: modelhawk.v0.ToolResultMessage tool_result = 4
          */
-        toolResultMessage: ToolResultMessage;
+        toolResult: ToolResultMessage;
     } | {
         oneofKind: undefined;
     };
@@ -123,99 +123,14 @@ export interface OtherMessage {
      */
     contents: MessageContent[];
 }
-/**
- * @generated from protobuf message modelhawk.v0.MessageContent
- */
-export interface MessageContent {
-    /**
-     * @generated from protobuf oneof: content
-     */
-    content: {
-        oneofKind: "thinking";
-        /**
-         * @generated from protobuf field: modelhawk.v0.ThinkingContent thinking = 1
-         */
-        thinking: ThinkingContent;
-    } | {
-        oneofKind: "toolCall";
-        /**
-         * @generated from protobuf field: modelhawk.v0.ToolCallContent tool_call = 2
-         */
-        toolCall: ToolCallContent;
-    } | {
-        oneofKind: "toolResult";
-        /**
-         * @generated from protobuf field: modelhawk.v0.ToolResultContent tool_result = 3
-         */
-        toolResult: ToolResultContent;
-    } | {
-        oneofKind: "text";
-        /**
-         * @generated from protobuf field: modelhawk.v0.TextContent text = 4
-         */
-        text: TextContent;
-    } | {
-        oneofKind: undefined;
-    };
-}
-/**
- * @generated from protobuf message modelhawk.v0.ThinkingContent
- */
-export interface ThinkingContent {
-    /**
-     * @generated from protobuf field: optional string content = 1
-     */
-    content?: string;
-}
-/**
- * @generated from protobuf message modelhawk.v0.ToolCallContent
- */
-export interface ToolCallContent {
-    /**
-     * @generated from protobuf field: optional modelhawk.v0.ToolInfo tool = 1
-     */
-    tool?: ToolInfo;
-    /**
-     * @generated from protobuf field: map<string, string> args = 2
-     */
-    args: {
-        [key: string]: string;
-    };
-}
-/**
- * @generated from protobuf message modelhawk.v0.ToolResultContent
- */
-export interface ToolResultContent {
-    /**
-     * @generated from protobuf field: optional string tool_name = 1
-     */
-    toolName?: string;
-    /**
-     * @generated from protobuf field: optional string result = 2
-     */
-    result?: string;
-    /**
-     * @generated from protobuf field: optional bool is_error = 3
-     */
-    isError?: boolean;
-}
-/**
- * @generated from protobuf message modelhawk.v0.TextContent
- */
-export interface TextContent {
-    /**
-     * @generated from protobuf field: optional string content = 1
-     */
-    content?: string;
-}
 // @generated message type with reflection information, may provide speed optimized methods
 class Message$Type extends MessageType<Message> {
     constructor() {
         super("modelhawk.v0.Message", [
-            { no: 1, name: "system_message", kind: "message", oneof: "msg", T: () => SystemMessage },
-            { no: 2, name: "user_message", kind: "message", oneof: "msg", T: () => UserMessage },
-            { no: 3, name: "assistant_message", kind: "message", oneof: "msg", T: () => AssistantMessage },
-            { no: 4, name: "tool_result_message", kind: "message", oneof: "msg", T: () => ToolResultMessage },
+            { no: 1, name: "system", kind: "message", oneof: "msg", T: () => SystemMessage },
+            { no: 2, name: "user", kind: "message", oneof: "msg", T: () => UserMessage },
+            { no: 3, name: "assistant", kind: "message", oneof: "msg", T: () => AssistantMessage },
+            { no: 4, name: "tool_result", kind: "message", oneof: "msg", T: () => ToolResultMessage },
             { no: 5, name: "timestamp", kind: "message", T: () => Timestamp }
         ]);
     }
@@ -231,28 +146,28 @@ class Message$Type extends MessageType<Message> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* modelhawk.v0.SystemMessage system_message */ 1:
+                case /* modelhawk.v0.SystemMessage system */ 1:
                     message.msg = {
-                        oneofKind: "systemMessage",
-                        systemMessage: SystemMessage.internalBinaryRead(reader, reader.uint32(), options, (message.msg as any).systemMessage)
+                        oneofKind: "system",
+                        system: SystemMessage.internalBinaryRead(reader, reader.uint32(), options, (message.msg as any).system)
                     };
                     break;
-                case /* modelhawk.v0.UserMessage user_message */ 2:
+                case /* modelhawk.v0.UserMessage user */ 2:
                     message.msg = {
-                        oneofKind: "userMessage",
-                        userMessage: UserMessage.internalBinaryRead(reader, reader.uint32(), options, (message.msg as any).userMessage)
+                        oneofKind: "user",
+                        user: UserMessage.internalBinaryRead(reader, reader.uint32(), options, (message.msg as any).user)
                     };
                     break;
-                case /* modelhawk.v0.AssistantMessage assistant_message */ 3:
+                case /* modelhawk.v0.AssistantMessage assistant */ 3:
                     message.msg = {
-                        oneofKind: "assistantMessage",
-                        assistantMessage: AssistantMessage.internalBinaryRead(reader, reader.uint32(), options, (message.msg as any).assistantMessage)
+                        oneofKind: "assistant",
+                        assistant: AssistantMessage.internalBinaryRead(reader, reader.uint32(), options, (message.msg as any).assistant)
                     };
                     break;
-                case /* modelhawk.v0.ToolResultMessage tool_result_message */ 4:
+                case /* modelhawk.v0.ToolResultMessage tool_result */ 4:
                     message.msg = {
-                        oneofKind: "toolResultMessage",
-                        toolResultMessage: ToolResultMessage.internalBinaryRead(reader, reader.uint32(), options, (message.msg as any).toolResultMessage)
+                        oneofKind: "toolResult",
+                        toolResult: ToolResultMessage.internalBinaryRead(reader, reader.uint32(), options, (message.msg as any).toolResult)
                     };
                     break;
                 case /* optional google.protobuf.Timestamp timestamp */ 5:
@@ -270,18 +185,18 @@ class Message$Type extends MessageType<Message> {
         return message;
     }
     internalBinaryWrite(message: Message, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* modelhawk.v0.SystemMessage system_message = 1; */
-        if (message.msg.oneofKind === "systemMessage")
-            SystemMessage.internalBinaryWrite(message.msg.systemMessage, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
-        /* modelhawk.v0.UserMessage user_message = 2; */
-        if (message.msg.oneofKind === "userMessage")
-            UserMessage.internalBinaryWrite(message.msg.userMessage, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
-        /* modelhawk.v0.AssistantMessage assistant_message = 3; */
-        if (message.msg.oneofKind === "assistantMessage")
-            AssistantMessage.internalBinaryWrite(message.msg.assistantMessage, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
-        /* modelhawk.v0.ToolResultMessage tool_result_message = 4; */
-        if (message.msg.oneofKind === "toolResultMessage")
-            ToolResultMessage.internalBinaryWrite(message.msg.toolResultMessage, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
+        /* modelhawk.v0.SystemMessage system = 1; */
+        if (message.msg.oneofKind === "system")
+            SystemMessage.internalBinaryWrite(message.msg.system, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* modelhawk.v0.UserMessage user = 2; */
+        if (message.msg.oneofKind === "user")
+            UserMessage.internalBinaryWrite(message.msg.user, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* modelhawk.v0.AssistantMessage assistant = 3; */
+        if (message.msg.oneofKind === "assistant")
+            AssistantMessage.internalBinaryWrite(message.msg.assistant, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        /* modelhawk.v0.ToolResultMessage tool_result = 4; */
+        if (message.msg.oneofKind === "toolResult")
+            ToolResultMessage.internalBinaryWrite(message.msg.toolResult, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
         /* optional google.protobuf.Timestamp timestamp = 5; */
         if (message.timestamp)
             Timestamp.internalBinaryWrite(message.timestamp, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
@@ -572,305 +487,3 @@ class OtherMessage$Type extends MessageType<OtherMessage> {
  * @generated MessageType for protobuf message modelhawk.v0.OtherMessage
  */
 export const OtherMessage = new OtherMessage$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class MessageContent$Type extends MessageType<MessageContent> {
-    constructor() {
-        super("modelhawk.v0.MessageContent", [
-            { no: 1, name: "thinking", kind: "message", oneof: "content", T: () => ThinkingContent },
-            { no: 2, name: "tool_call", kind: "message", oneof: "content", T: () => ToolCallContent },
-            { no: 3, name: "tool_result", kind: "message", oneof: "content", T: () => ToolResultContent },
-            { no: 4, name: "text", kind: "message", oneof: "content", T: () => TextContent }
-        ]);
-    }
-    create(value?: PartialMessage<MessageContent>): MessageContent {
-        const message = globalThis.Object.create((this.messagePrototype!));
-        message.content = { oneofKind: undefined };
-        if (value !== undefined)
-            reflectionMergePartial<MessageContent>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: MessageContent): MessageContent {
-        let message = target ?? this.create(), end = reader.pos + length;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case /* modelhawk.v0.ThinkingContent thinking */ 1:
-                    message.content = {
-                        oneofKind: "thinking",
-                        thinking: ThinkingContent.internalBinaryRead(reader, reader.uint32(), options, (message.content as any).thinking)
-                    };
-                    break;
-                case /* modelhawk.v0.ToolCallContent tool_call */ 2:
-                    message.content = {
-                        oneofKind: "toolCall",
-                        toolCall: ToolCallContent.internalBinaryRead(reader, reader.uint32(), options, (message.content as any).toolCall)
-                    };
-                    break;
-                case /* modelhawk.v0.ToolResultContent tool_result */ 3:
-                    message.content = {
-                        oneofKind: "toolResult",
-                        toolResult: ToolResultContent.internalBinaryRead(reader, reader.uint32(), options, (message.content as any).toolResult)
-                    };
-                    break;
-                case /* modelhawk.v0.TextContent text */ 4:
-                    message.content = {
-                        oneofKind: "text",
-                        text: TextContent.internalBinaryRead(reader, reader.uint32(), options, (message.content as any).text)
-                    };
-                    break;
-                default:
-                    let u = options.readUnknownField;
-                    if (u === "throw")
-                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-                    let d = reader.skip(wireType);
-                    if (u !== false)
-                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-            }
-        }
-        return message;
-    }
-    internalBinaryWrite(message: MessageContent, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* modelhawk.v0.ThinkingContent thinking = 1; */
-        if (message.content.oneofKind === "thinking")
-            ThinkingContent.internalBinaryWrite(message.content.thinking, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
-        /* modelhawk.v0.ToolCallContent tool_call = 2; */
-        if (message.content.oneofKind === "toolCall")
-            ToolCallContent.internalBinaryWrite(message.content.toolCall, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
-        /* modelhawk.v0.ToolResultContent tool_result = 3; */
-        if (message.content.oneofKind === "toolResult")
-            ToolResultContent.internalBinaryWrite(message.content.toolResult, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
-        /* modelhawk.v0.TextContent text = 4; */
-        if (message.content.oneofKind === "text")
-            TextContent.internalBinaryWrite(message.content.text, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message modelhawk.v0.MessageContent
- */
-export const MessageContent = new MessageContent$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class ThinkingContent$Type extends MessageType<ThinkingContent> {
-    constructor() {
-        super("modelhawk.v0.ThinkingContent", [
-            { no: 1, name: "content", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
-        ]);
-    }
-    create(value?: PartialMessage<ThinkingContent>): ThinkingContent {
-        const message = globalThis.Object.create((this.messagePrototype!));
-        if (value !== undefined)
-            reflectionMergePartial<ThinkingContent>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: ThinkingContent): ThinkingContent {
-        let message = target ?? this.create(), end = reader.pos + length;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case /* optional string content */ 1:
-                    message.content = reader.string();
-                    break;
-                default:
-                    let u = options.readUnknownField;
-                    if (u === "throw")
-                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-                    let d = reader.skip(wireType);
-                    if (u !== false)
-                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-            }
-        }
-        return message;
-    }
-    internalBinaryWrite(message: ThinkingContent, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* optional string content = 1; */
-        if (message.content !== undefined)
-            writer.tag(1, WireType.LengthDelimited).string(message.content);
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message modelhawk.v0.ThinkingContent
- */
-export const ThinkingContent = new ThinkingContent$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class ToolCallContent$Type extends MessageType<ToolCallContent> {
-    constructor() {
-        super("modelhawk.v0.ToolCallContent", [
-            { no: 1, name: "tool", kind: "message", T: () => ToolInfo },
-            { no: 2, name: "args", kind: "map", K: 9 /*ScalarType.STRING*/, V: { kind: "scalar", T: 9 /*ScalarType.STRING*/ } }
-        ]);
-    }
-    create(value?: PartialMessage<ToolCallContent>): ToolCallContent {
-        const message = globalThis.Object.create((this.messagePrototype!));
-        message.args = {};
-        if (value !== undefined)
-            reflectionMergePartial<ToolCallContent>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: ToolCallContent): ToolCallContent {
-        let message = target ?? this.create(), end = reader.pos + length;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case /* optional modelhawk.v0.ToolInfo tool */ 1:
-                    message.tool = ToolInfo.internalBinaryRead(reader, reader.uint32(), options, message.tool);
-                    break;
-                case /* map<string, string> args */ 2:
-                    this.binaryReadMap2(message.args, reader, options);
-                    break;
-                default:
-                    let u = options.readUnknownField;
-                    if (u === "throw")
-                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-                    let d = reader.skip(wireType);
-                    if (u !== false)
-                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-            }
-        }
-        return message;
-    }
-    private binaryReadMap2(map: ToolCallContent["args"], reader: IBinaryReader, options: BinaryReadOptions): void {
-        let len = reader.uint32(), end = reader.pos + len, key: keyof ToolCallContent["args"] | undefined, val: ToolCallContent["args"][any] | undefined;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case 1:
-                    key = reader.string();
-                    break;
-                case 2:
-                    val = reader.string();
-                    break;
-                default: throw new globalThis.Error("unknown map entry field for modelhawk.v0.ToolCallContent.args");
-            }
-        }
-        map[key ?? ""] = val ?? "";
-    }
-    internalBinaryWrite(message: ToolCallContent, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* optional modelhawk.v0.ToolInfo tool = 1; */
-        if (message.tool)
-            ToolInfo.internalBinaryWrite(message.tool, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
-        /* map<string, string> args = 2; */
-        for (let k of globalThis.Object.keys(message.args))
-            writer.tag(2, WireType.LengthDelimited).fork().tag(1, WireType.LengthDelimited).string(k).tag(2, WireType.LengthDelimited).string(message.args[k]).join();
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message modelhawk.v0.ToolCallContent
- */
-export const ToolCallContent = new ToolCallContent$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class ToolResultContent$Type extends MessageType<ToolResultContent> {
-    constructor() {
-        super("modelhawk.v0.ToolResultContent", [
-            { no: 1, name: "tool_name", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "result", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "is_error", kind: "scalar", opt: true, T: 8 /*ScalarType.BOOL*/ }
-        ]);
-    }
-    create(value?: PartialMessage<ToolResultContent>): ToolResultContent {
-        const message = globalThis.Object.create((this.messagePrototype!));
-        if (value !== undefined)
-            reflectionMergePartial<ToolResultContent>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: ToolResultContent): ToolResultContent {
-        let message = target ?? this.create(), end = reader.pos + length;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case /* optional string tool_name */ 1:
-                    message.toolName = reader.string();
-                    break;
-                case /* optional string result */ 2:
-                    message.result = reader.string();
-                    break;
-                case /* optional bool is_error */ 3:
-                    message.isError = reader.bool();
-                    break;
-                default:
-                    let u = options.readUnknownField;
-                    if (u === "throw")
-                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-                    let d = reader.skip(wireType);
-                    if (u !== false)
-                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-            }
-        }
-        return message;
-    }
-    internalBinaryWrite(message: ToolResultContent, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* optional string tool_name = 1; */
-        if (message.toolName !== undefined)
-            writer.tag(1, WireType.LengthDelimited).string(message.toolName);
-        /* optional string result = 2; */
-        if (message.result !== undefined)
-            writer.tag(2, WireType.LengthDelimited).string(message.result);
-        /* optional bool is_error = 3; */
-        if (message.isError !== undefined)
-            writer.tag(3, WireType.Varint).bool(message.isError);
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message modelhawk.v0.ToolResultContent
- */
-export const ToolResultContent = new ToolResultContent$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class TextContent$Type extends MessageType<TextContent> {
-    constructor() {
-        super("modelhawk.v0.TextContent", [
-            { no: 1, name: "content", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
-        ]);
-    }
-    create(value?: PartialMessage<TextContent>): TextContent {
-        const message = globalThis.Object.create((this.messagePrototype!));
-        if (value !== undefined)
-            reflectionMergePartial<TextContent>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: TextContent): TextContent {
-        let message = target ?? this.create(), end = reader.pos + length;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case /* optional string content */ 1:
-                    message.content = reader.string();
-                    break;
-                default:
-                    let u = options.readUnknownField;
-                    if (u === "throw")
-                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-                    let d = reader.skip(wireType);
-                    if (u !== false)
-                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-            }
-        }
-        return message;
-    }
-    internalBinaryWrite(message: TextContent, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* optional string content = 1; */
-        if (message.content !== undefined)
-            writer.tag(1, WireType.LengthDelimited).string(message.content);
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message modelhawk.v0.TextContent
- */
-export const TextContent = new TextContent$Type();
