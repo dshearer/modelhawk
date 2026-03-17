@@ -7,13 +7,17 @@
     - [Application](#modelhawk-v0-Application)
   
 - [message.proto](#message-proto)
+    - [AssistantMessage](#modelhawk-v0-AssistantMessage)
     - [Message](#modelhawk-v0-Message)
     - [MessageContent](#modelhawk-v0-MessageContent)
+    - [SystemMessage](#modelhawk-v0-SystemMessage)
     - [TextContent](#modelhawk-v0-TextContent)
     - [ThinkingContent](#modelhawk-v0-ThinkingContent)
     - [ToolCallContent](#modelhawk-v0-ToolCallContent)
     - [ToolCallContent.ArgsEntry](#modelhawk-v0-ToolCallContent-ArgsEntry)
     - [ToolResultContent](#modelhawk-v0-ToolResultContent)
+    - [ToolResultMessage](#modelhawk-v0-ToolResultMessage)
+    - [UserMessage](#modelhawk-v0-UserMessage)
   
 - [notify_service.proto](#notify_service-proto)
     - [DidCallToolRequest](#modelhawk-v0-DidCallToolRequest)
@@ -86,6 +90,24 @@ The appropriate scope really depends on how you want to use the security app tha
 
 
 
+<a name="modelhawk-v0-AssistantMessage"></a>
+
+### AssistantMessage
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| contents | [MessageContent](#modelhawk-v0-MessageContent) | repeated |  |
+| provider | [string](#string) | optional |  |
+| model | [string](#string) | optional |  |
+| stop_reason | [string](#string) | optional |  |
+
+
+
+
+
+
 <a name="modelhawk-v0-Message"></a>
 
 ### Message
@@ -94,8 +116,10 @@ A message sent from or to an AI model.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| role | [string](#string) | optional |  |
-| contents | [MessageContent](#modelhawk-v0-MessageContent) | repeated |  |
+| system_message | [SystemMessage](#modelhawk-v0-SystemMessage) |  |  |
+| user_message | [UserMessage](#modelhawk-v0-UserMessage) |  |  |
+| assistant_message | [AssistantMessage](#modelhawk-v0-AssistantMessage) |  |  |
+| tool_result_message | [ToolResultMessage](#modelhawk-v0-ToolResultMessage) |  |  |
 
 
 
@@ -114,6 +138,21 @@ A message sent from or to an AI model.
 | tool_call | [ToolCallContent](#modelhawk-v0-ToolCallContent) |  |  |
 | tool_result | [ToolResultContent](#modelhawk-v0-ToolResultContent) |  |  |
 | text | [TextContent](#modelhawk-v0-TextContent) |  |  |
+
+
+
+
+
+
+<a name="modelhawk-v0-SystemMessage"></a>
+
+### SystemMessage
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| contents | [MessageContent](#modelhawk-v0-MessageContent) | repeated |  |
 
 
 
@@ -197,6 +236,38 @@ A message sent from or to an AI model.
 | tool_name | [string](#string) | optional |  |
 | result | [string](#string) | optional |  |
 | is_error | [bool](#bool) | optional |  |
+
+
+
+
+
+
+<a name="modelhawk-v0-ToolResultMessage"></a>
+
+### ToolResultMessage
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| contents | [MessageContent](#modelhawk-v0-MessageContent) | repeated |  |
+| tool_name | [string](#string) | optional |  |
+| is_error | [bool](#bool) | optional |  |
+
+
+
+
+
+
+<a name="modelhawk-v0-UserMessage"></a>
+
+### UserMessage
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| contents | [MessageContent](#modelhawk-v0-MessageContent) | repeated |  |
 
 
 
