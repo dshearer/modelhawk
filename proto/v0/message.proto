@@ -40,6 +40,11 @@ message ToolResultMessage {
     optional bool is_error = 3;
 }
 
+message OtherMessage {
+    optional string role = 1;
+    repeated MessageContent contents = 2;
+}
+
 message MessageContent {
     oneof content {
         ThinkingContent thinking = 1;

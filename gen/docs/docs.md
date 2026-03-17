@@ -10,6 +10,7 @@
     - [AssistantMessage](#modelhawk-v0-AssistantMessage)
     - [Message](#modelhawk-v0-Message)
     - [MessageContent](#modelhawk-v0-MessageContent)
+    - [OtherMessage](#modelhawk-v0-OtherMessage)
     - [SystemMessage](#modelhawk-v0-SystemMessage)
     - [TextContent](#modelhawk-v0-TextContent)
     - [ThinkingContent](#modelhawk-v0-ThinkingContent)
@@ -139,6 +140,22 @@ A message sent from or to an AI model.
 | tool_call | [ToolCallContent](#modelhawk-v0-ToolCallContent) |  |  |
 | tool_result | [ToolResultContent](#modelhawk-v0-ToolResultContent) |  |  |
 | text | [TextContent](#modelhawk-v0-TextContent) |  |  |
+
+
+
+
+
+
+<a name="modelhawk-v0-OtherMessage"></a>
+
+### OtherMessage
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| role | [string](#string) | optional |  |
+| contents | [MessageContent](#modelhawk-v0-MessageContent) | repeated |  |
 
 
 
