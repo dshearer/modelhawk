@@ -1,6 +1,7 @@
 // Re-export all generated protobuf types and service clients.
 export { Application } from "./src/application.js";
-export { Message, SystemMessage, UserMessage, AssistantMessage, ToolResultMessage, OtherMessage, MessageContent,ThinkingContent, ToolCallContent, TextContent } from "./src/message.js";
+export { Message, SystemMessage, UserMessage, AssistantMessage, ToolResultMessage, OtherMessage } from "./src/message.js";
+export { MessageContent,ThinkingContent, ToolCallContent, TextContent } from "./src/message_content.js";
 export { ServiceStatusResponse } from "./src/service_status_response.js";
 
 export { ToolInfo, ToolParamInfo } from "./src/tool_info.js";
