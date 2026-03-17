@@ -32,7 +32,8 @@ type Message struct {
 	//	*Message_UserMessage
 	//	*Message_AssistantMessage
 	//	*Message_ToolResultMessage
-	Msg           isMessage_Msg `protobuf_oneof:"msg"`
+	Msg           isMessage_Msg          `protobuf_oneof:"msg"`
+	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=timestamp,proto3,oneof" json:"timestamp,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -106,6 +107,13 @@ func (x *Message) GetToolResultMessage() *ToolResultMessage {
 		if x, ok := x.Msg.(*Message_ToolResultMessage); ok {
 			return x.ToolResultMessage
 		}
+	}
+	return nil
+}
+
+func (x *Message) GetTimestamp() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Timestamp
 	}
 	return nil
 }
@@ -470,8 +478,7 @@ func (*MessageContent_Text) isMessageContent_Content() {}
 
 type ThinkingContent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3,oneof" json:"timestamp,omitempty"`
-	Content       *string                `protobuf:"bytes,2,opt,name=content,proto3,oneof" json:"content,omitempty"`
+	Content       *string                `protobuf:"bytes,1,opt,name=content,proto3,oneof" json:"content,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -506,13 +513,6 @@ func (*ThinkingContent) Descriptor() ([]byte, []int) {
 	return file_message_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *ThinkingContent) GetTimestamp() *timestamppb.Timestamp {
-	if x != nil {
-		return x.Timestamp
-	}
-	return nil
-}
-
 func (x *ThinkingContent) GetContent() string {
 	if x != nil && x.Content != nil {
 		return *x.Content
@@ -522,9 +522,8 @@ func (x *ThinkingContent) GetContent() string {
 
 type ToolCallContent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3,oneof" json:"timestamp,omitempty"`
-	Tool          *ToolInfo              `protobuf:"bytes,2,opt,name=tool,proto3,oneof" json:"tool,omitempty"`
-	Args          map[string]string      `protobuf:"bytes,3,rep,name=args,proto3" json:"args,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Tool          *ToolInfo              `protobuf:"bytes,1,opt,name=tool,proto3,oneof" json:"tool,omitempty"`
+	Args          map[string]string      `protobuf:"bytes,2,rep,name=args,proto3" json:"args,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -559,13 +558,6 @@ func (*ToolCallContent) Descriptor() ([]byte, []int) {
 	return file_message_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *ToolCallContent) GetTimestamp() *timestamppb.Timestamp {
-	if x != nil {
-		return x.Timestamp
-	}
-	return nil
-}
-
 func (x *ToolCallContent) GetTool() *ToolInfo {
 	if x != nil {
 		return x.Tool
@@ -582,10 +574,9 @@ func (x *ToolCallContent) GetArgs() map[string]string {
 
 type ToolResultContent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3,oneof" json:"timestamp,omitempty"`
-	ToolName      *string                `protobuf:"bytes,2,opt,name=tool_name,json=toolName,proto3,oneof" json:"tool_name,omitempty"`
-	Result        *string                `protobuf:"bytes,3,opt,name=result,proto3,oneof" json:"result,omitempty"`
-	IsError       *bool                  `protobuf:"varint,4,opt,name=is_error,json=isError,proto3,oneof" json:"is_error,omitempty"`
+	ToolName      *string                `protobuf:"bytes,1,opt,name=tool_name,json=toolName,proto3,oneof" json:"tool_name,omitempty"`
+	Result        *string                `protobuf:"bytes,2,opt,name=result,proto3,oneof" json:"result,omitempty"`
+	IsError       *bool                  `protobuf:"varint,3,opt,name=is_error,json=isError,proto3,oneof" json:"is_error,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -620,13 +611,6 @@ func (*ToolResultContent) Descriptor() ([]byte, []int) {
 	return file_message_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *ToolResultContent) GetTimestamp() *timestamppb.Timestamp {
-	if x != nil {
-		return x.Timestamp
-	}
-	return nil
-}
-
 func (x *ToolResultContent) GetToolName() string {
 	if x != nil && x.ToolName != nil {
 		return *x.ToolName
@@ -650,8 +634,7 @@ func (x *ToolResultContent) GetIsError() bool {
 
 type TextContent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3,oneof" json:"timestamp,omitempty"`
-	Content       *string                `protobuf:"bytes,2,opt,name=content,proto3,oneof" json:"content,omitempty"`
+	Content       *string                `protobuf:"bytes,1,opt,name=content,proto3,oneof" json:"content,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -686,13 +669,6 @@ func (*TextContent) Descriptor() ([]byte, []int) {
 	return file_message_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *TextContent) GetTimestamp() *timestamppb.Timestamp {
-	if x != nil {
-		return x.Timestamp
-	}
-	return nil
-}
-
 func (x *TextContent) GetContent() string {
 	if x != nil && x.Content != nil {
 		return *x.Content
@@ -704,13 +680,16 @@ var File_message_proto protoreflect.FileDescriptor
 
 const file_message_proto_rawDesc = "" +
 	"\n" +
-	"\rmessage.proto\x12\fmodelhawk.v0\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x0ftool_info.proto\"\xb8\x02\n" +
+	"\rmessage.proto\x12\fmodelhawk.v0\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x0ftool_info.proto\"\x85\x03\n" +
 	"\aMessage\x12D\n" +
 	"\x0esystem_message\x18\x01 \x01(\v2\x1b.modelhawk.v0.SystemMessageH\x00R\rsystemMessage\x12>\n" +
 	"\fuser_message\x18\x02 \x01(\v2\x19.modelhawk.v0.UserMessageH\x00R\vuserMessage\x12M\n" +
 	"\x11assistant_message\x18\x03 \x01(\v2\x1e.modelhawk.v0.AssistantMessageH\x00R\x10assistantMessage\x12Q\n" +
-	"\x13tool_result_message\x18\x04 \x01(\v2\x1f.modelhawk.v0.ToolResultMessageH\x00R\x11toolResultMessageB\x05\n" +
-	"\x03msg\"I\n" +
+	"\x13tool_result_message\x18\x04 \x01(\v2\x1f.modelhawk.v0.ToolResultMessageH\x00R\x11toolResultMessage\x12=\n" +
+	"\ttimestamp\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\ttimestamp\x88\x01\x01B\x05\n" +
+	"\x03msgB\f\n" +
+	"\n" +
+	"_timestamp\"I\n" +
 	"\rSystemMessage\x128\n" +
 	"\bcontents\x18\x01 \x03(\v2\x1c.modelhawk.v0.MessageContentR\bcontents\"G\n" +
 	"\vUserMessage\x128\n" +
@@ -737,40 +716,28 @@ const file_message_proto_rawDesc = "" +
 	"\vtool_result\x18\x03 \x01(\v2\x1f.modelhawk.v0.ToolResultContentH\x00R\n" +
 	"toolResult\x12/\n" +
 	"\x04text\x18\x04 \x01(\v2\x19.modelhawk.v0.TextContentH\x00R\x04textB\t\n" +
-	"\acontent\"\x89\x01\n" +
-	"\x0fThinkingContent\x12=\n" +
-	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\ttimestamp\x88\x01\x01\x12\x1d\n" +
-	"\acontent\x18\x02 \x01(\tH\x01R\acontent\x88\x01\x01B\f\n" +
+	"\acontent\"<\n" +
+	"\x0fThinkingContent\x12\x1d\n" +
+	"\acontent\x18\x01 \x01(\tH\x00R\acontent\x88\x01\x01B\n" +
 	"\n" +
-	"_timestampB\n" +
-	"\n" +
-	"\b_content\"\x8e\x02\n" +
-	"\x0fToolCallContent\x12=\n" +
-	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\ttimestamp\x88\x01\x01\x12/\n" +
-	"\x04tool\x18\x02 \x01(\v2\x16.modelhawk.v0.ToolInfoH\x01R\x04tool\x88\x01\x01\x12;\n" +
-	"\x04args\x18\x03 \x03(\v2'.modelhawk.v0.ToolCallContent.ArgsEntryR\x04args\x1a7\n" +
+	"\b_content\"\xc1\x01\n" +
+	"\x0fToolCallContent\x12/\n" +
+	"\x04tool\x18\x01 \x01(\v2\x16.modelhawk.v0.ToolInfoH\x00R\x04tool\x88\x01\x01\x12;\n" +
+	"\x04args\x18\x02 \x03(\v2'.modelhawk.v0.ToolCallContent.ArgsEntryR\x04args\x1a7\n" +
 	"\tArgsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\f\n" +
-	"\n" +
-	"_timestampB\a\n" +
-	"\x05_tool\"\xe5\x01\n" +
-	"\x11ToolResultContent\x12=\n" +
-	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\ttimestamp\x88\x01\x01\x12 \n" +
-	"\ttool_name\x18\x02 \x01(\tH\x01R\btoolName\x88\x01\x01\x12\x1b\n" +
-	"\x06result\x18\x03 \x01(\tH\x02R\x06result\x88\x01\x01\x12\x1e\n" +
-	"\bis_error\x18\x04 \x01(\bH\x03R\aisError\x88\x01\x01B\f\n" +
-	"\n" +
-	"_timestampB\f\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\a\n" +
+	"\x05_tool\"\x98\x01\n" +
+	"\x11ToolResultContent\x12 \n" +
+	"\ttool_name\x18\x01 \x01(\tH\x00R\btoolName\x88\x01\x01\x12\x1b\n" +
+	"\x06result\x18\x02 \x01(\tH\x01R\x06result\x88\x01\x01\x12\x1e\n" +
+	"\bis_error\x18\x03 \x01(\bH\x02R\aisError\x88\x01\x01B\f\n" +
 	"\n" +
 	"_tool_nameB\t\n" +
 	"\a_resultB\v\n" +
-	"\t_is_error\"\x85\x01\n" +
-	"\vTextContent\x12=\n" +
-	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\ttimestamp\x88\x01\x01\x12\x1d\n" +
-	"\acontent\x18\x02 \x01(\tH\x01R\acontent\x88\x01\x01B\f\n" +
-	"\n" +
-	"_timestampB\n" +
+	"\t_is_error\"8\n" +
+	"\vTextContent\x12\x1d\n" +
+	"\acontent\x18\x01 \x01(\tH\x00R\acontent\x88\x01\x01B\n" +
 	"\n" +
 	"\b_contentB)Z'github.com/dshearer/modelhawk/gen/go/v0b\x06proto3"
 
@@ -807,25 +774,22 @@ var file_message_proto_depIdxs = []int32{
 	2,  // 1: modelhawk.v0.Message.user_message:type_name -> modelhawk.v0.UserMessage
 	3,  // 2: modelhawk.v0.Message.assistant_message:type_name -> modelhawk.v0.AssistantMessage
 	4,  // 3: modelhawk.v0.Message.tool_result_message:type_name -> modelhawk.v0.ToolResultMessage
-	5,  // 4: modelhawk.v0.SystemMessage.contents:type_name -> modelhawk.v0.MessageContent
-	5,  // 5: modelhawk.v0.UserMessage.contents:type_name -> modelhawk.v0.MessageContent
-	5,  // 6: modelhawk.v0.AssistantMessage.contents:type_name -> modelhawk.v0.MessageContent
-	5,  // 7: modelhawk.v0.ToolResultMessage.contents:type_name -> modelhawk.v0.MessageContent
-	6,  // 8: modelhawk.v0.MessageContent.thinking:type_name -> modelhawk.v0.ThinkingContent
-	7,  // 9: modelhawk.v0.MessageContent.tool_call:type_name -> modelhawk.v0.ToolCallContent
-	8,  // 10: modelhawk.v0.MessageContent.tool_result:type_name -> modelhawk.v0.ToolResultContent
-	9,  // 11: modelhawk.v0.MessageContent.text:type_name -> modelhawk.v0.TextContent
-	11, // 12: modelhawk.v0.ThinkingContent.timestamp:type_name -> google.protobuf.Timestamp
-	11, // 13: modelhawk.v0.ToolCallContent.timestamp:type_name -> google.protobuf.Timestamp
-	12, // 14: modelhawk.v0.ToolCallContent.tool:type_name -> modelhawk.v0.ToolInfo
-	10, // 15: modelhawk.v0.ToolCallContent.args:type_name -> modelhawk.v0.ToolCallContent.ArgsEntry
-	11, // 16: modelhawk.v0.ToolResultContent.timestamp:type_name -> google.protobuf.Timestamp
-	11, // 17: modelhawk.v0.TextContent.timestamp:type_name -> google.protobuf.Timestamp
-	18, // [18:18] is the sub-list for method output_type
-	18, // [18:18] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	11, // 4: modelhawk.v0.Message.timestamp:type_name -> google.protobuf.Timestamp
+	5,  // 5: modelhawk.v0.SystemMessage.contents:type_name -> modelhawk.v0.MessageContent
+	5,  // 6: modelhawk.v0.UserMessage.contents:type_name -> modelhawk.v0.MessageContent
+	5,  // 7: modelhawk.v0.AssistantMessage.contents:type_name -> modelhawk.v0.MessageContent
+	5,  // 8: modelhawk.v0.ToolResultMessage.contents:type_name -> modelhawk.v0.MessageContent
+	6,  // 9: modelhawk.v0.MessageContent.thinking:type_name -> modelhawk.v0.ThinkingContent
+	7,  // 10: modelhawk.v0.MessageContent.tool_call:type_name -> modelhawk.v0.ToolCallContent
+	8,  // 11: modelhawk.v0.MessageContent.tool_result:type_name -> modelhawk.v0.ToolResultContent
+	9,  // 12: modelhawk.v0.MessageContent.text:type_name -> modelhawk.v0.TextContent
+	12, // 13: modelhawk.v0.ToolCallContent.tool:type_name -> modelhawk.v0.ToolInfo
+	10, // 14: modelhawk.v0.ToolCallContent.args:type_name -> modelhawk.v0.ToolCallContent.ArgsEntry
+	15, // [15:15] is the sub-list for method output_type
+	15, // [15:15] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_message_proto_init() }
