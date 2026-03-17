@@ -42,10 +42,11 @@ jq --arg new_version "$NEW_VERSION" '.version = $new_version' "$PACKAGE_JSON_PAT
 make -j
 
 # commit changes
-# git add .
-# git commit -m "Bump version to $NEW_VERSION"
+git add .
+git commit -m "Bump version to $NEW_VERSION"
 
 # push branch to origin
-# git push origin "bump-version-$NEW_VERSION"
+git push origin "bump-version-$NEW_VERSION"
 
-echo "Version bumped to $NEW_VERSION and pushed to branch bump-version-$NEW_VERSION. Please create a pull request to merge this branch into main."
+CURRENT_VERSION=$(jq -r '.version' "$PACKAGE_JSON_PATH")
+echo "Version bumped from $CURRENT_VERSION to $NEW_VERSION and pushed to branch bump-version-$NEW_VERSION. Please create a pull request to merge this branch into main."
