@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # get current version from package-config/ts/package.json
-PACKAGE_JSON_PATH="package-config/ts/package.json"
+REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+PACKAGE_JSON_PATH="$REPO_ROOT/package-config/ts/package.json"
 if [ ! -f "$PACKAGE_JSON_PATH" ]; then
   echo "Could not find $PACKAGE_JSON_PATH. Please make sure you are running this script from the root of the repository."
   exit 1
