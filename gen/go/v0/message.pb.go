@@ -25,10 +25,15 @@ const (
 // *
 // A message sent from or to an AI model.
 type Message struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Role          *string                `protobuf:"bytes,1,opt,name=role,proto3,oneof" json:"role,omitempty"`
-	Contents      []*MessageContent      `protobuf:"bytes,2,rep,name=contents,proto3" json:"contents,omitempty"`
-	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=timestamp,proto3,oneof" json:"timestamp,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Msg:
+	//
+	//	*Message_SystemMessage
+	//	*Message_UserMessage
+	//	*Message_AssistantMessage
+	//	*Message_ToolResultMessage
+	Msg           isMessage_Msg          `protobuf_oneof:"msg"`
+	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=timestamp,proto3,oneof" json:"timestamp,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -63,16 +68,45 @@ func (*Message) Descriptor() ([]byte, []int) {
 	return file_message_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Message) GetRole() string {
-	if x != nil && x.Role != nil {
-		return *x.Role
+func (x *Message) GetMsg() isMessage_Msg {
+	if x != nil {
+		return x.Msg
 	}
-	return ""
+	return nil
 }
 
-func (x *Message) GetContents() []*MessageContent {
+func (x *Message) GetSystemMessage() *SystemMessage {
 	if x != nil {
-		return x.Contents
+		if x, ok := x.Msg.(*Message_SystemMessage); ok {
+			return x.SystemMessage
+		}
+	}
+	return nil
+}
+
+func (x *Message) GetUserMessage() *UserMessage {
+	if x != nil {
+		if x, ok := x.Msg.(*Message_UserMessage); ok {
+			return x.UserMessage
+		}
+	}
+	return nil
+}
+
+func (x *Message) GetAssistantMessage() *AssistantMessage {
+	if x != nil {
+		if x, ok := x.Msg.(*Message_AssistantMessage); ok {
+			return x.AssistantMessage
+		}
+	}
+	return nil
+}
+
+func (x *Message) GetToolResultMessage() *ToolResultMessage {
+	if x != nil {
+		if x, ok := x.Msg.(*Message_ToolResultMessage); ok {
+			return x.ToolResultMessage
+		}
 	}
 	return nil
 }
@@ -80,6 +114,302 @@ func (x *Message) GetContents() []*MessageContent {
 func (x *Message) GetTimestamp() *timestamppb.Timestamp {
 	if x != nil {
 		return x.Timestamp
+	}
+	return nil
+}
+
+type isMessage_Msg interface {
+	isMessage_Msg()
+}
+
+type Message_SystemMessage struct {
+	SystemMessage *SystemMessage `protobuf:"bytes,1,opt,name=system_message,json=systemMessage,proto3,oneof"`
+}
+
+type Message_UserMessage struct {
+	UserMessage *UserMessage `protobuf:"bytes,2,opt,name=user_message,json=userMessage,proto3,oneof"`
+}
+
+type Message_AssistantMessage struct {
+	AssistantMessage *AssistantMessage `protobuf:"bytes,3,opt,name=assistant_message,json=assistantMessage,proto3,oneof"`
+}
+
+type Message_ToolResultMessage struct {
+	ToolResultMessage *ToolResultMessage `protobuf:"bytes,4,opt,name=tool_result_message,json=toolResultMessage,proto3,oneof"`
+}
+
+func (*Message_SystemMessage) isMessage_Msg() {}
+
+func (*Message_UserMessage) isMessage_Msg() {}
+
+func (*Message_AssistantMessage) isMessage_Msg() {}
+
+func (*Message_ToolResultMessage) isMessage_Msg() {}
+
+type SystemMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Contents      []*MessageContent      `protobuf:"bytes,1,rep,name=contents,proto3" json:"contents,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SystemMessage) Reset() {
+	*x = SystemMessage{}
+	mi := &file_message_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SystemMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SystemMessage) ProtoMessage() {}
+
+func (x *SystemMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_message_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SystemMessage.ProtoReflect.Descriptor instead.
+func (*SystemMessage) Descriptor() ([]byte, []int) {
+	return file_message_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *SystemMessage) GetContents() []*MessageContent {
+	if x != nil {
+		return x.Contents
+	}
+	return nil
+}
+
+type UserMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Contents      []*MessageContent      `protobuf:"bytes,1,rep,name=contents,proto3" json:"contents,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserMessage) Reset() {
+	*x = UserMessage{}
+	mi := &file_message_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserMessage) ProtoMessage() {}
+
+func (x *UserMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_message_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserMessage.ProtoReflect.Descriptor instead.
+func (*UserMessage) Descriptor() ([]byte, []int) {
+	return file_message_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *UserMessage) GetContents() []*MessageContent {
+	if x != nil {
+		return x.Contents
+	}
+	return nil
+}
+
+type AssistantMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Contents      []*MessageContent      `protobuf:"bytes,1,rep,name=contents,proto3" json:"contents,omitempty"`
+	Provider      *string                `protobuf:"bytes,2,opt,name=provider,proto3,oneof" json:"provider,omitempty"`
+	Model         *string                `protobuf:"bytes,3,opt,name=model,proto3,oneof" json:"model,omitempty"`
+	StopReason    *string                `protobuf:"bytes,4,opt,name=stop_reason,json=stopReason,proto3,oneof" json:"stop_reason,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AssistantMessage) Reset() {
+	*x = AssistantMessage{}
+	mi := &file_message_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AssistantMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AssistantMessage) ProtoMessage() {}
+
+func (x *AssistantMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_message_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AssistantMessage.ProtoReflect.Descriptor instead.
+func (*AssistantMessage) Descriptor() ([]byte, []int) {
+	return file_message_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *AssistantMessage) GetContents() []*MessageContent {
+	if x != nil {
+		return x.Contents
+	}
+	return nil
+}
+
+func (x *AssistantMessage) GetProvider() string {
+	if x != nil && x.Provider != nil {
+		return *x.Provider
+	}
+	return ""
+}
+
+func (x *AssistantMessage) GetModel() string {
+	if x != nil && x.Model != nil {
+		return *x.Model
+	}
+	return ""
+}
+
+func (x *AssistantMessage) GetStopReason() string {
+	if x != nil && x.StopReason != nil {
+		return *x.StopReason
+	}
+	return ""
+}
+
+type ToolResultMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Contents      []*MessageContent      `protobuf:"bytes,1,rep,name=contents,proto3" json:"contents,omitempty"`
+	ToolName      *string                `protobuf:"bytes,2,opt,name=tool_name,json=toolName,proto3,oneof" json:"tool_name,omitempty"`
+	IsError       *bool                  `protobuf:"varint,3,opt,name=is_error,json=isError,proto3,oneof" json:"is_error,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToolResultMessage) Reset() {
+	*x = ToolResultMessage{}
+	mi := &file_message_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToolResultMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToolResultMessage) ProtoMessage() {}
+
+func (x *ToolResultMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_message_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToolResultMessage.ProtoReflect.Descriptor instead.
+func (*ToolResultMessage) Descriptor() ([]byte, []int) {
+	return file_message_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ToolResultMessage) GetContents() []*MessageContent {
+	if x != nil {
+		return x.Contents
+	}
+	return nil
+}
+
+func (x *ToolResultMessage) GetToolName() string {
+	if x != nil && x.ToolName != nil {
+		return *x.ToolName
+	}
+	return ""
+}
+
+func (x *ToolResultMessage) GetIsError() bool {
+	if x != nil && x.IsError != nil {
+		return *x.IsError
+	}
+	return false
+}
+
+type OtherMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Role          *string                `protobuf:"bytes,1,opt,name=role,proto3,oneof" json:"role,omitempty"`
+	Contents      []*MessageContent      `protobuf:"bytes,2,rep,name=contents,proto3" json:"contents,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OtherMessage) Reset() {
+	*x = OtherMessage{}
+	mi := &file_message_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OtherMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OtherMessage) ProtoMessage() {}
+
+func (x *OtherMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_message_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OtherMessage.ProtoReflect.Descriptor instead.
+func (*OtherMessage) Descriptor() ([]byte, []int) {
+	return file_message_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *OtherMessage) GetRole() string {
+	if x != nil && x.Role != nil {
+		return *x.Role
+	}
+	return ""
+}
+
+func (x *OtherMessage) GetContents() []*MessageContent {
+	if x != nil {
+		return x.Contents
 	}
 	return nil
 }
@@ -99,7 +429,7 @@ type MessageContent struct {
 
 func (x *MessageContent) Reset() {
 	*x = MessageContent{}
-	mi := &file_message_proto_msgTypes[1]
+	mi := &file_message_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -111,7 +441,7 @@ func (x *MessageContent) String() string {
 func (*MessageContent) ProtoMessage() {}
 
 func (x *MessageContent) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[1]
+	mi := &file_message_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -124,7 +454,7 @@ func (x *MessageContent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MessageContent.ProtoReflect.Descriptor instead.
 func (*MessageContent) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{1}
+	return file_message_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *MessageContent) GetContent() isMessageContent_Content {
@@ -207,7 +537,7 @@ type ThinkingContent struct {
 
 func (x *ThinkingContent) Reset() {
 	*x = ThinkingContent{}
-	mi := &file_message_proto_msgTypes[2]
+	mi := &file_message_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -219,7 +549,7 @@ func (x *ThinkingContent) String() string {
 func (*ThinkingContent) ProtoMessage() {}
 
 func (x *ThinkingContent) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[2]
+	mi := &file_message_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -232,7 +562,7 @@ func (x *ThinkingContent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ThinkingContent.ProtoReflect.Descriptor instead.
 func (*ThinkingContent) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{2}
+	return file_message_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ThinkingContent) GetContent() string {
@@ -252,7 +582,7 @@ type ToolCallContent struct {
 
 func (x *ToolCallContent) Reset() {
 	*x = ToolCallContent{}
-	mi := &file_message_proto_msgTypes[3]
+	mi := &file_message_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -264,7 +594,7 @@ func (x *ToolCallContent) String() string {
 func (*ToolCallContent) ProtoMessage() {}
 
 func (x *ToolCallContent) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[3]
+	mi := &file_message_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -277,7 +607,7 @@ func (x *ToolCallContent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ToolCallContent.ProtoReflect.Descriptor instead.
 func (*ToolCallContent) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{3}
+	return file_message_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ToolCallContent) GetTool() *ToolInfo {
@@ -305,7 +635,7 @@ type ToolResultContent struct {
 
 func (x *ToolResultContent) Reset() {
 	*x = ToolResultContent{}
-	mi := &file_message_proto_msgTypes[4]
+	mi := &file_message_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -317,7 +647,7 @@ func (x *ToolResultContent) String() string {
 func (*ToolResultContent) ProtoMessage() {}
 
 func (x *ToolResultContent) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[4]
+	mi := &file_message_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -330,7 +660,7 @@ func (x *ToolResultContent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ToolResultContent.ProtoReflect.Descriptor instead.
 func (*ToolResultContent) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{4}
+	return file_message_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ToolResultContent) GetToolName() string {
@@ -363,7 +693,7 @@ type TextContent struct {
 
 func (x *TextContent) Reset() {
 	*x = TextContent{}
-	mi := &file_message_proto_msgTypes[5]
+	mi := &file_message_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -375,7 +705,7 @@ func (x *TextContent) String() string {
 func (*TextContent) ProtoMessage() {}
 
 func (x *TextContent) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[5]
+	mi := &file_message_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -388,7 +718,7 @@ func (x *TextContent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TextContent.ProtoReflect.Descriptor instead.
 func (*TextContent) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{5}
+	return file_message_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *TextContent) GetContent() string {
@@ -402,14 +732,40 @@ var File_message_proto protoreflect.FileDescriptor
 
 const file_message_proto_rawDesc = "" +
 	"\n" +
-	"\rmessage.proto\x12\fmodelhawk.v0\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x0ftool_info.proto\"\xb2\x01\n" +
-	"\aMessage\x12\x17\n" +
-	"\x04role\x18\x01 \x01(\tH\x00R\x04role\x88\x01\x01\x128\n" +
-	"\bcontents\x18\x02 \x03(\v2\x1c.modelhawk.v0.MessageContentR\bcontents\x12=\n" +
-	"\ttimestamp\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\ttimestamp\x88\x01\x01B\a\n" +
-	"\x05_roleB\f\n" +
+	"\rmessage.proto\x12\fmodelhawk.v0\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x0ftool_info.proto\"\x85\x03\n" +
+	"\aMessage\x12D\n" +
+	"\x0esystem_message\x18\x01 \x01(\v2\x1b.modelhawk.v0.SystemMessageH\x00R\rsystemMessage\x12>\n" +
+	"\fuser_message\x18\x02 \x01(\v2\x19.modelhawk.v0.UserMessageH\x00R\vuserMessage\x12M\n" +
+	"\x11assistant_message\x18\x03 \x01(\v2\x1e.modelhawk.v0.AssistantMessageH\x00R\x10assistantMessage\x12Q\n" +
+	"\x13tool_result_message\x18\x04 \x01(\v2\x1f.modelhawk.v0.ToolResultMessageH\x00R\x11toolResultMessage\x12=\n" +
+	"\ttimestamp\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\ttimestamp\x88\x01\x01B\x05\n" +
+	"\x03msgB\f\n" +
 	"\n" +
-	"_timestamp\"\x8b\x02\n" +
+	"_timestamp\"I\n" +
+	"\rSystemMessage\x128\n" +
+	"\bcontents\x18\x01 \x03(\v2\x1c.modelhawk.v0.MessageContentR\bcontents\"G\n" +
+	"\vUserMessage\x128\n" +
+	"\bcontents\x18\x01 \x03(\v2\x1c.modelhawk.v0.MessageContentR\bcontents\"\xd5\x01\n" +
+	"\x10AssistantMessage\x128\n" +
+	"\bcontents\x18\x01 \x03(\v2\x1c.modelhawk.v0.MessageContentR\bcontents\x12\x1f\n" +
+	"\bprovider\x18\x02 \x01(\tH\x00R\bprovider\x88\x01\x01\x12\x19\n" +
+	"\x05model\x18\x03 \x01(\tH\x01R\x05model\x88\x01\x01\x12$\n" +
+	"\vstop_reason\x18\x04 \x01(\tH\x02R\n" +
+	"stopReason\x88\x01\x01B\v\n" +
+	"\t_providerB\b\n" +
+	"\x06_modelB\x0e\n" +
+	"\f_stop_reason\"\xaa\x01\n" +
+	"\x11ToolResultMessage\x128\n" +
+	"\bcontents\x18\x01 \x03(\v2\x1c.modelhawk.v0.MessageContentR\bcontents\x12 \n" +
+	"\ttool_name\x18\x02 \x01(\tH\x00R\btoolName\x88\x01\x01\x12\x1e\n" +
+	"\bis_error\x18\x03 \x01(\bH\x01R\aisError\x88\x01\x01B\f\n" +
+	"\n" +
+	"_tool_nameB\v\n" +
+	"\t_is_error\"j\n" +
+	"\fOtherMessage\x12\x17\n" +
+	"\x04role\x18\x01 \x01(\tH\x00R\x04role\x88\x01\x01\x128\n" +
+	"\bcontents\x18\x02 \x03(\v2\x1c.modelhawk.v0.MessageContentR\bcontentsB\a\n" +
+	"\x05_role\"\x8b\x02\n" +
 	"\x0eMessageContent\x12;\n" +
 	"\bthinking\x18\x01 \x01(\v2\x1d.modelhawk.v0.ThinkingContentH\x00R\bthinking\x12<\n" +
 	"\ttool_call\x18\x02 \x01(\v2\x1d.modelhawk.v0.ToolCallContentH\x00R\btoolCall\x12B\n" +
@@ -453,32 +809,45 @@ func file_message_proto_rawDescGZIP() []byte {
 	return file_message_proto_rawDescData
 }
 
-var file_message_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_message_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_message_proto_goTypes = []any{
 	(*Message)(nil),               // 0: modelhawk.v0.Message
-	(*MessageContent)(nil),        // 1: modelhawk.v0.MessageContent
-	(*ThinkingContent)(nil),       // 2: modelhawk.v0.ThinkingContent
-	(*ToolCallContent)(nil),       // 3: modelhawk.v0.ToolCallContent
-	(*ToolResultContent)(nil),     // 4: modelhawk.v0.ToolResultContent
-	(*TextContent)(nil),           // 5: modelhawk.v0.TextContent
-	nil,                           // 6: modelhawk.v0.ToolCallContent.ArgsEntry
-	(*timestamppb.Timestamp)(nil), // 7: google.protobuf.Timestamp
-	(*ToolInfo)(nil),              // 8: modelhawk.v0.ToolInfo
+	(*SystemMessage)(nil),         // 1: modelhawk.v0.SystemMessage
+	(*UserMessage)(nil),           // 2: modelhawk.v0.UserMessage
+	(*AssistantMessage)(nil),      // 3: modelhawk.v0.AssistantMessage
+	(*ToolResultMessage)(nil),     // 4: modelhawk.v0.ToolResultMessage
+	(*OtherMessage)(nil),          // 5: modelhawk.v0.OtherMessage
+	(*MessageContent)(nil),        // 6: modelhawk.v0.MessageContent
+	(*ThinkingContent)(nil),       // 7: modelhawk.v0.ThinkingContent
+	(*ToolCallContent)(nil),       // 8: modelhawk.v0.ToolCallContent
+	(*ToolResultContent)(nil),     // 9: modelhawk.v0.ToolResultContent
+	(*TextContent)(nil),           // 10: modelhawk.v0.TextContent
+	nil,                           // 11: modelhawk.v0.ToolCallContent.ArgsEntry
+	(*timestamppb.Timestamp)(nil), // 12: google.protobuf.Timestamp
+	(*ToolInfo)(nil),              // 13: modelhawk.v0.ToolInfo
 }
 var file_message_proto_depIdxs = []int32{
-	1, // 0: modelhawk.v0.Message.contents:type_name -> modelhawk.v0.MessageContent
-	7, // 1: modelhawk.v0.Message.timestamp:type_name -> google.protobuf.Timestamp
-	2, // 2: modelhawk.v0.MessageContent.thinking:type_name -> modelhawk.v0.ThinkingContent
-	3, // 3: modelhawk.v0.MessageContent.tool_call:type_name -> modelhawk.v0.ToolCallContent
-	4, // 4: modelhawk.v0.MessageContent.tool_result:type_name -> modelhawk.v0.ToolResultContent
-	5, // 5: modelhawk.v0.MessageContent.text:type_name -> modelhawk.v0.TextContent
-	8, // 6: modelhawk.v0.ToolCallContent.tool:type_name -> modelhawk.v0.ToolInfo
-	6, // 7: modelhawk.v0.ToolCallContent.args:type_name -> modelhawk.v0.ToolCallContent.ArgsEntry
-	8, // [8:8] is the sub-list for method output_type
-	8, // [8:8] is the sub-list for method input_type
-	8, // [8:8] is the sub-list for extension type_name
-	8, // [8:8] is the sub-list for extension extendee
-	0, // [0:8] is the sub-list for field type_name
+	1,  // 0: modelhawk.v0.Message.system_message:type_name -> modelhawk.v0.SystemMessage
+	2,  // 1: modelhawk.v0.Message.user_message:type_name -> modelhawk.v0.UserMessage
+	3,  // 2: modelhawk.v0.Message.assistant_message:type_name -> modelhawk.v0.AssistantMessage
+	4,  // 3: modelhawk.v0.Message.tool_result_message:type_name -> modelhawk.v0.ToolResultMessage
+	12, // 4: modelhawk.v0.Message.timestamp:type_name -> google.protobuf.Timestamp
+	6,  // 5: modelhawk.v0.SystemMessage.contents:type_name -> modelhawk.v0.MessageContent
+	6,  // 6: modelhawk.v0.UserMessage.contents:type_name -> modelhawk.v0.MessageContent
+	6,  // 7: modelhawk.v0.AssistantMessage.contents:type_name -> modelhawk.v0.MessageContent
+	6,  // 8: modelhawk.v0.ToolResultMessage.contents:type_name -> modelhawk.v0.MessageContent
+	6,  // 9: modelhawk.v0.OtherMessage.contents:type_name -> modelhawk.v0.MessageContent
+	7,  // 10: modelhawk.v0.MessageContent.thinking:type_name -> modelhawk.v0.ThinkingContent
+	8,  // 11: modelhawk.v0.MessageContent.tool_call:type_name -> modelhawk.v0.ToolCallContent
+	9,  // 12: modelhawk.v0.MessageContent.tool_result:type_name -> modelhawk.v0.ToolResultContent
+	10, // 13: modelhawk.v0.MessageContent.text:type_name -> modelhawk.v0.TextContent
+	13, // 14: modelhawk.v0.ToolCallContent.tool:type_name -> modelhawk.v0.ToolInfo
+	11, // 15: modelhawk.v0.ToolCallContent.args:type_name -> modelhawk.v0.ToolCallContent.ArgsEntry
+	16, // [16:16] is the sub-list for method output_type
+	16, // [16:16] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_message_proto_init() }
@@ -487,24 +856,32 @@ func file_message_proto_init() {
 		return
 	}
 	file_tool_info_proto_init()
-	file_message_proto_msgTypes[0].OneofWrappers = []any{}
-	file_message_proto_msgTypes[1].OneofWrappers = []any{
+	file_message_proto_msgTypes[0].OneofWrappers = []any{
+		(*Message_SystemMessage)(nil),
+		(*Message_UserMessage)(nil),
+		(*Message_AssistantMessage)(nil),
+		(*Message_ToolResultMessage)(nil),
+	}
+	file_message_proto_msgTypes[3].OneofWrappers = []any{}
+	file_message_proto_msgTypes[4].OneofWrappers = []any{}
+	file_message_proto_msgTypes[5].OneofWrappers = []any{}
+	file_message_proto_msgTypes[6].OneofWrappers = []any{
 		(*MessageContent_Thinking)(nil),
 		(*MessageContent_ToolCall)(nil),
 		(*MessageContent_ToolResult)(nil),
 		(*MessageContent_Text)(nil),
 	}
-	file_message_proto_msgTypes[2].OneofWrappers = []any{}
-	file_message_proto_msgTypes[3].OneofWrappers = []any{}
-	file_message_proto_msgTypes[4].OneofWrappers = []any{}
-	file_message_proto_msgTypes[5].OneofWrappers = []any{}
+	file_message_proto_msgTypes[7].OneofWrappers = []any{}
+	file_message_proto_msgTypes[8].OneofWrappers = []any{}
+	file_message_proto_msgTypes[9].OneofWrappers = []any{}
+	file_message_proto_msgTypes[10].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_message_proto_rawDesc), len(file_message_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
