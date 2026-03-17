@@ -120,17 +120,18 @@ end
 
 It's quite simple.
 
-Messages are serialized with Protocol Buffers. They are defined in `modelhawk/v1` ([docs](gen/docs/docs.md)).
+Messages are serialized with Protocol Buffers. They are defined in `proto/v0` ([docs](gen/docs/docs.md)).
 
 There are two roles:
     - **AI app:** This is the thing that uses AI and that we want to monitor for bad behavior. It implements a ModelHawk client.
     - **Security app:** This is the thing that monitors the AI app for bad behavior. It implements a ModelHawk server.
 
-The security app provides two services:
+The security app provides three services:
+    - [`PingService`](proto/v0/ping_service.proto)
     - [`NotifyService`](proto/v0/notify_service.proto)
     - [`PermissionService`](proto/v0/permission_service.proto)
 
-The AI app can use `NotifyService` to tell the security app about events --- e.g., the AI model used a tool. The AI app uses `PermissionService` to
+The AI app can use `PingService` to check if the security app is alive. It can use `NotifyService` to tell the security app about events --- e.g., the AI model used a tool. The AI app uses `PermissionService` to
 ask the security app for permission for the AI model to do something.
 
 That's it!
